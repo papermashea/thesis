@@ -30,4 +30,4 @@ S. Molloy MSDV 2022 Graduate thesis
     - ["A Garden that Cares for Itself" - Google Developers](https://medium.com/google-developers/building-a-garden-that-cares-for-itself-9918a3d3be7)
  <br>
  <br>
-[Bibliography - WIP](https://www.zotero.org/sheamolloy/items/WI9DEYME/library)
+[Bibliography - WIP](www.zotero.org/sheamolloy/items/WI9DEYME/library)
