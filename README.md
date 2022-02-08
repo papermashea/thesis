@@ -1,5 +1,6 @@
 # From the Ground Up
 S. Molloy MSDV 2022 Graduate thesis
+[Literature Review -WIP](https://docs.google.com/document/d/18BscTZwhw4MUk_qW2ByEmY9euuYRESVZOc-DmpSJ6pk)
 
 ![Horticultural Variables Problem Sketch](/MS2_Spring2022_ResearchProblem_Molloy.png)
  <br>
@@ -30,4 +31,4 @@ S. Molloy MSDV 2022 Graduate thesis
     - ["A Garden that Cares for Itself" - Google Developers](https://medium.com/google-developers/building-a-garden-that-cares-for-itself-9918a3d3be7)
  <br>
  <br>
- [Literature Review -WIP](https://docs.google.com/document/d/18BscTZwhw4MUk_qW2ByEmY9euuYRESVZOc-DmpSJ6pk)
+ 
