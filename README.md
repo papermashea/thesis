@@ -1,6 +1,7 @@
 # From the Ground Up
 S. Molloy MSDV 2022 Graduate thesis
-[Literature Review -WIP](https://docs.google.com/document/d/18BscTZwhw4MUk_qW2ByEmY9euuYRESVZOc-DmpSJ6pk)
+<br>
+[Literature Review - WIP](https://docs.google.com/document/d/18BscTZwhw4MUk_qW2ByEmY9euuYRESVZOc-DmpSJ6pk)
 
 ![Horticultural Variables Problem Sketch](/MS2_Spring2022_ResearchProblem_Molloy.png)
  <br>
