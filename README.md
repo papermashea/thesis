@@ -3,7 +3,7 @@ S. Molloy MSDV 2022 Graduate thesis
 <br>
 [Literature Review - WIP](https://docs.google.com/document/d/18BscTZwhw4MUk_qW2ByEmY9euuYRESVZOc-DmpSJ6pk)
 
-![Horticultural Variables Problem Sketch](/process/MS2_Spring2022_ResearchProblem_Molloy.png)
+![Horticultural Variables Problem Sketch](/process/MS2_Molloy_ResearchProblem.png)
  <br>
  <br>
 ### Horticultural Variables Problem Sketch
@@ -33,3 +33,5 @@ S. Molloy MSDV 2022 Graduate thesis
  <br>
  <br>
  
+ ![From the ground up wireframe](/process/MS2_Molloy_Wireframe)
+
