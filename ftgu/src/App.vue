@@ -1,16 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id ="app">
+      <Home />
+      <Nav :navLinks="navLinks" :navConfig="navConfig" :btnConfig="btnConfig">
+        <img class="img" src="../assets/logo.png" alt="" srcset="" />
+      </Nav>
+    <Home />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Home from './components/Home.vue'
+import Nav from "vue-nav-ui";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Home,
+    Nav,
+  },
 }
 </script>
 
