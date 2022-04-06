@@ -1,0 +1,18 @@
+{
+  "name": "ftgu",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 5050"
+  },
+  "dependencies": {
+    "d3": "^7.4.2",
+    "vue": "^3.2.31",
+    "vue-d3": "^0.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.1",
+    "vite": "^2.9.1"
+  }
+}
