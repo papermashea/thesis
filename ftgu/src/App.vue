@@ -1,63 +1,86 @@
 <template>
-  <nav></nav>
+    <navbar class="mainNav"></navbar>
   <div id="page">
-    <div class="wrapper">
-      <p class="intro">
+    <div class="wrapper" id="intro">
+      <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </p>
     </div>
     <card></card>
+    <hmap class="hardiness"></hmap>
+    <flowchart class="environment"></flowchart>
+    <filters class="inputs"></filters>
+    <subset class="collection"></subset>
+    <times class="time"></times>
+    <clusters class="numbers"></clusters>
   </div>
-  <!-- <map></map> -->
-  </template>
+</template>
 
 <script>
-import nav from './components/nav.vue'
-import card from './components/card.vue'
-// import map from './components/map.vue'
+import navbar from "./components/navbar.vue";
+import card from "./components/card.vue";
+import hmap from "./components/hmap.vue";
+import flowchart from "./components/flowchart.vue";
+import filters from "./components/filters.vue";
+import subset from "./components/subset.vue";
+import times from "./components/times.vue";
+import clusters from "./components/clusters.vue";
+import VueTree from "@ssthouse/vue3-tree-chart";
+import "@ssthouse/vue3-tree-chart/dist/vue3-tree-chart.css";
+
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    nav,
+    navbar,
     card,
-    // map,
+    hmap,
+    flowchart,
+    filters,
+    subset,
+    times,
+    clusters,
   },
-
-  data: () => ({
-    //
-  }),
-}
+};
 </script>
 
 <style>
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
+  margin: 0;
   font-weight: normal;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
   #page {
+    max-width: 1280px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 10px;
   }
 
-   .wrapper {
+  .mainNav {
+    grid-column: span 4;
+    grid-row: span 10;
+  }
+
+  #notecard {
+    box-shadow: -3px 0px 2px #D3D3D3;
+  }
+
+ .wrapper {
+    grid-row: span 10;
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
+    grid-column: span 2;
+    padding: 1rem;
   }
 
-}
+  .hardiness,
+  .environment,
+  .times {
+    grid-column: span 4;
+    width: 100%
+  }
 </style>
