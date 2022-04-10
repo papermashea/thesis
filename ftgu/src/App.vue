@@ -25,9 +25,6 @@ import filters from "./components/filters.vue";
 import subset from "./components/subset.vue";
 import times from "./components/times.vue";
 import clusters from "./components/clusters.vue";
-import VueTree from "@ssthouse/vue3-tree-chart";
-import "@ssthouse/vue3-tree-chart/dist/vue3-tree-chart.css";
-
 
 export default {
   name: "App",
