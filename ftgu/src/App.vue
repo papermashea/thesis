@@ -43,7 +43,6 @@ export default {
 </script>
 
 <style>
-
 #app {
   margin: 0;
   font-weight: normal;

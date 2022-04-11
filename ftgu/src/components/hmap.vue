@@ -9,17 +9,58 @@
         </a>
       </div>
       <div id="mapArea">
+      <svg ref="svg" height="300" width="500">
+        <path
+          v-for="state in stateData"
+          :key="state.feature.id"
+          :d="pathGenerator(state.feature)"
+          :style="{
+            fill: state.color,
+            stroke: 'darkslategray'
+          }"/>
+        </svg>
       </div>
     </div>
 </template>
 
 <script>
-import * as d3 from "d3";
 
 export default {
   name: 'hmap',
 }
 
+ computed: {
+    // Typical projection for showing all states scaled and positioned appropriately
+    projection () {
+      return d3.geoAlbersUsa().scale(600).translate([250, 150])
+    },
+
+    // Function for converting GPS coordinates into path coordinates
+    pathGenerator () {
+      return d3.geoPath().projection(this.projection)
+    },
+
+    // Combine the states GeoJSON with a rank-based gradient
+    stateData () {
+      return this.statesJson ? this.statesJson.features.map(feature => {
+        let state = this.happiestStates.find(state => state.state === feature.id)
+        return {
+          feature,
+          color: this.stateColor(state.rank)
+        }
+      }) : []
+    },
+
+    // On creation, get the GeoJSON
+  created () {
+    axios.get('https://api.github.com/gists/e0d1b7950ced31369c903bed0cead7b1')
+      .then(response => {
+      this.statesJson = JSON.parse(response.data.files['us_features.json'].content)
+    })
+      .catch(error => {
+      console.log(error)
+    })
+  }
 
 // var width = 960,
 //     height = 500;
