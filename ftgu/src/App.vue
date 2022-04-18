@@ -7,7 +7,6 @@
       </p>
     </div>
     <card></card>
-    <hmap class="hardiness"></hmap>
     <flowchart class="environment"></flowchart>
     <filters class="inputs"></filters>
     <subset class="collection"></subset>
@@ -19,7 +18,6 @@
 <script>
 import navbar from "./components/navbar.vue";
 import card from "./components/card.vue";
-import hmap from "./components/hmap.vue";
 import flowchart from "./components/flowchart.vue";
 import filters from "./components/filters.vue";
 import subset from "./components/subset.vue";
@@ -32,7 +30,6 @@ export default {
   components: {
     navbar,
     card,
-    hmap,
     flowchart,
     filters,
     subset,
