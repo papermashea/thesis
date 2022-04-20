@@ -1,12 +1,23 @@
-import * as VueRouter from "vue-router";
-import App from "./App.vue";
-import Table from "./Table.vue";
+import { createRouter, createWebHashHistory } from "vue-router";
+import Home from "./views/Home.vue";
+import Search from "./views/Search.vue";
 
 const routes = [
-  { path: "/", component: App },
-  { path: "/search", component: Table },
+  {
+    path: "/",
+    name: "Home",
+    component: Home,
+  },
+  {
+    path: "/search",
+    name: "Search",
+    component: Search,
+  },
 ];
-export const router = VueRouter.createRouter({
-  history: VueRouter.createWebHashHistory(),
+
+const router = createRouter({
+  history: createWebHashHistory(),
   routes,
 });
+
+export default router;

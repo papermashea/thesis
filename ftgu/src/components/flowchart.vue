@@ -7,7 +7,6 @@
           <p class="factor" id="nested">Sun</p>
               <p class="test">Every hour draw a rough line where the sun is shining or shadows are cast with a note as to the time. Make sure you mark where the structures are casting shadows. Repeat this every hour until the sun is past the area.</p>
                 <results></results>
-            <!-- <component :is="current"></component> -->
         </div>
       </li>
       <li>

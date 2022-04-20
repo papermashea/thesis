@@ -1,11 +1,11 @@
-import { createApp } from 'vue';
-// import App from './App.vue';
-import Table from './Table.vue';
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router.js";
+import BootstrapVue3 from 'bootstrap-vue-3'
 
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-// import { router } from "./router";
-// import * as d3 from "d3";
 
-createApp(Table).mount('#app')
-// createApp(App).mount('#app')
-// createApp(App).use(router).mount('#app')
+const app = createApp(App)
+
+app.use(router)
+app.mount("#app");
+
