@@ -1,25 +1,33 @@
 <template>
   <div>
-    <h3 class="plantName"></h3>
-    <img class="thumbnail"/>
-      <div class= "tab1">
-        <p class="tag1"></p>
-      </div>
-      <div class= "tab2">
-        <p class="tag2"></p>
-      </div>
-      <div class= "tab3">
-        <p class="tag3"></p>
-      </div>
-      <div class= "tab4">
-        <p class="tag4"></p>
-      </div>
+ <!--    <b-card
+      title="Card Title"
+      img-src="https://picsum.photos/600/300/?image=25"
+      img-alt="Image"
+      img-top
+      tag="article"
+      style="max-width: 20rem;"
+      class="mb-2"
+    >
+      <b-card-text>
+        Some quick example text to build on the card title and make up the bulk of the card's content.
+      </b-card-text>
+    </b-card> -->
   </div>
 </template>
 
 <script>
 export default {
   name: 'tableCard',
+  props: {
+    Latinname: String,
+    Commonname: String,
+    Type: String,
+    PropagationType: String,
+    SeedEndMonth: String,
+    EdibilityRating: Number,
+    ImgThb: String,
+  },
 }
 
 </script>

@@ -28,4 +28,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.results {
+  border-radius: 50%;
+}
+</style>

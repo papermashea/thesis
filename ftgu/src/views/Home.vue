@@ -7,28 +7,26 @@
       </p>
     </div>
     <preview></preview>
-    <flowchart class="environment"></flowchart>
-    <form class="inputs"></form>
+
+
+    <flowchart class="environment"></flowchart>    
     <subset class="collection"></subset>
-    <times class="time"></times>
     <clusters class="numbers"></clusters>
   </div>
 </template>
 
 <script>
-import plants from '@/assets/data/ftguTable_citations.json'
-import { FILTERS } from "../global.js";
+import plantData from '@/assets/data/ftguTable_citations.json'
 
 import navbar from "@/components/navbar.vue";
 import preview from "@/components/preview.vue";
 import flowchart from "@/components/flowchart.vue";
-import form from "@/components/form.vue";
+import filters from "@/components/filters.vue";
 import subset from "@/components/subset.vue";
-import times from "@/components/times.vue";
 import clusters from "@/components/clusters.vue";
 
-
-console.log(plants)
+// console.log(plantData)
+// console.log(Object.keys(plantData.plants).length)
 
 export default {
   name: "App",
@@ -37,57 +35,18 @@ export default {
     navbar,
     preview,
     flowchart,
-    form,
+    filters,
     subset,
-    times,
     clusters,
   },
   data() {
     return {
-      filters: FILTERS,
-    };
+      plantData: []
+    }
   },
-  mounted() {
-    this.populateFilters();
-    window.addEventListener("resize", this.onResize);
-    this.onResize();
+  computed: {  
   },
-  computed :{
-    filteredProjects() {
-      if (!this.plants.length) {
-        return [];
-      }
-      const { SUN } = this.filters;
-  }  
   methods: {
-    onFilterChange(id, selected) {
-      if (id === "SUN") {
-        this.filters = {
-          ...this.filters,
-          SUN: {
-            ...this.filters.SUN,
-            selected,
-          },
-        };
-      }
-      if (id === "SUN_TOGGLE") {
-        this.filters = {
-          ...this.filters,
-          SUN: {
-            ...this.filters.SUN,
-            selected: [...new Set([...this.filters.SUN.selected, selected])],
-          },
-        };
-      },
-    populateFilters() {
-      this.filters = {
-        ...this.filters,
-        SUN: {
-          ...this.filters.SUN,
-          options: [...new Set(allTags)].sort(),
-        },
-      };
-    },
   },
 };
 </script>

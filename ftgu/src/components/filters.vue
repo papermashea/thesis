@@ -1,50 +1,39 @@
 <template>
   <div class="wrapper" id="madLib">
-  
-
-      <div class="filter tag-filter">
-        <div class="label">Filter by tag</div>
-        <el-select
-          multiple
-          v-model="filterTag.selected"
-          @change="(options) => onFilterChange('TAG', options)"
-          placeholder="Select project tag(s)"
-        >
-          <el-option
-            v-for="item in filterTag.options"
-            :key="item"
-            :label="item"
-            :value="item"
-          />
-        </el-select>
-
+    <el-row>
+      <p class="copy">I have 
+<!--         <div class="filter sun-filter">
+          <el-select
+            multiple
+            v-model="filterSun.selected"
+            @change="(options) => onFilterChange('SUN', options)"
+            placeholder="partial"
+          >
+            <el-option
+              v-for="item in filterSun.options"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+        </div> -->
+      sun </p>
+</el-row>
 
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'input',
-  },
+  name: 'filters',
   props: {
-    filters: Object,
-    onFilterChange: Function,
+    // filters: Object,
+    // onFilterChange: Function,
   },
   computed: {
-    filterTag() {
-      return this.filters.SUN;
-    },
-    filterTag() {
-      return this.filters.SOIL;
-    },
-    filterTag() {
-      return this.filters.MOISTURE;
-    },
-    filterTag() {
-      return this.filters.PH;
-    },
-    filterSearch() {
-      return this.filters.SEARCH;
+    // filterSun() {
+    //   return this.filters.SUN;
     },
 }
 
