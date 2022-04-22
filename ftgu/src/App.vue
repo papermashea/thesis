@@ -20,19 +20,16 @@
     grid-row: span 10;
   }
 
-  #notecard {
-    box-shadow: -3px 0px 2px #D3D3D3;
-  }
-
  .wrapper {
-    grid-row: span 10;
+    grid-row: span 100;
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
-    grid-column: span 2;
     padding: 1rem;
+    text-align: center;
   }
 
+  .wrapper,
   .hardiness,
   .environment,
   .times {

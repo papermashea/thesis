@@ -26,7 +26,7 @@
 <script>
 
 export default {
-  name: 'filters',
+  name: 'input',
   props: {
     // filters: Object,
     // onFilterChange: Function,

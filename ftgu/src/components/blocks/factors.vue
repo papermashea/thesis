@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style>
-.results {
-  border-radius: 50%;
+.btn-secondary {
+  border-color: none!important;
 }
 </style>

@@ -1,6 +1,8 @@
 <template>
   <navbar class="mainNav"></navbar>
   <div id="page">
+
+
    <b-card
       v-for="plant in plants"
       v-bind:img-src="plant.ImgThb"
@@ -11,6 +13,15 @@
       <b-card-text>
         {{plant.Commonname}} | {{plant.Latinname}}
       </b-card-text>
+      <div class="flag">
+        <p class="type">{{plant.Type}}</p>
+      </div>
+      <div class="flag">
+        <p class="seed">{{plant.PropagationType}}</p>
+      </div>
+      <div class="flag">
+        <p class="edibe">{{plant.EdibilityRating}}/5 Ediblity</p>
+      </div>
     </b-card>
 
   </div>
@@ -49,9 +60,6 @@ export default {
 
   #page {
     max-width: 1280px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 10px;
   }
 
   .mainNav {
@@ -59,15 +67,22 @@ export default {
     grid-row: span 10;
   }
 
-.plantCard {
-  grid-row: span 1/**/;
-  height: 400px;
-}
+  img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+  }
 
-img {
-  width: 300px;
-  height: 200px;
-  object-fit: cover;
-}
+  .b-card {
+    font-size: 1em;
+  }
+
+  .flag {
+    width: 30%;
+    height: 10px;
+    float: left;
+    font-size: .8em;
+    marging: 0 1%;
+  }
 
 </style>
