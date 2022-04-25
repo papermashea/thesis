@@ -1,36 +1,44 @@
 <template>
   <navbar class="mainNav"></navbar>
-  <div id="page">
+    <div id="page">
+<!--       <Filters
+        :filters="filters"
+        :params="params"
+        :onFilterChange="onFilterChange"
+        :nProjects="{
+          filtered: filteredProjects.length,
+          all: projects.length,
+        }"
+        :yearData="yearData"
+      /> -->
 
 
-   <b-card
-      v-for="plant in plants"
-      v-bind:img-src="plant.ImgThb"
-      img-top
-      style="max-width: 20rem;"
-      class="mb-2"
-    >
-      <b-card-text>
-        {{plant.Commonname}} | {{plant.Latinname}}
-      </b-card-text>
-      <div class="flag">
-        <p class="type">{{plant.Type}}</p>
-      </div>
-      <div class="flag">
-        <p class="seed">{{plant.PropagationType}}</p>
-      </div>
-      <div class="flag">
-        <p class="edibe">{{plant.EdibilityRating}}/5 Ediblity</p>
-      </div>
-    </b-card>
+    <div class="plantCards">
+      <b-card-group>
+        <span v-for="p in plants">
+          <plantCard 
+            :latinname="p.latinname"
+            :commonname="p.commonname"
+            :synonyms="p.synonyms"
+            :imgthb="p.imgthb"
+            :type="p.type"
+            :proptype="p.proptype"
+            :edibilityrating="p.edibilityrating"
+          >
+          </plantCard>
+        </span>
+      </b-card-group>
+    </div>
 
   </div>
+<!--   <footbar></footbar> -->
 </template>
 
 <script>
+import plantData from '@/assets/data/plants.json';
 import navbar from "@/components/navbar.vue";
-import plantData from '@/assets/data/plants.json'
-// import card from '@/components/blocks/card.vue'
+import plantCard from '@/components/blocks/plantCard.vue';
+import footbar from "@/components/footbar.vue";
 
 console.log(plantData)
 // console.log(Object.keys(plantData.plants).length)
@@ -41,11 +49,17 @@ export default {
 
   components: {
     navbar,
+    plantCard,
+    footbar,
   },
 
   data(){
     return {
       plants: plantData,
+      showModal: false,
+    }
+    computed: {
+
     }
   }
 
@@ -53,36 +67,9 @@ export default {
 </script>
 
 <style>
-#app {
-  margin: 0;
-  font-weight: normal;
+.plantCards {
+  margin-top: 20%;  
+  grid-column: span 4;
 }
-
-  #page {
-    max-width: 1280px;
-  }
-
-  .mainNav {
-    grid-column: span 4;
-    grid-row: span 10;
-  }
-
-  img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-  }
-
-  .b-card {
-    font-size: 1em;
-  }
-
-  .flag {
-    width: 30%;
-    height: 10px;
-    float: left;
-    font-size: .8em;
-    marging: 0 1%;
-  }
 
 </style>

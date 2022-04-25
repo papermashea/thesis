@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="nav">
     <nav class="navbar sticky-top">
-      <a class="navbar-home" href="#">From the Ground Up</a>
+      <a class="nav-links" href="#">From the ground up</a>
     </nav>
   </div>
 </template>
@@ -14,17 +14,8 @@
 </script>
 
 <style>
-  .navbar {
-    background-color: #000;
+  .nav {
+   text-align: left;
+   padding: 1% 1% 1% 3%; 
   }
-
-  .navbar-home {
-    color: #fff;
-  }
-
-  .navbar-home:hover {
-    color: #fff;
-    text-decoration: underline;
-  }  
-
 </style>
