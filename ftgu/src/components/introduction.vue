@@ -11,3 +11,7 @@ export default {
   name: "introduction",
 };
 </script>
+
+<style>
+
+</style>

@@ -1,8 +1,10 @@
 <template>
-  <information></information>
-  <PlantToggles class="sides"></PlantToggles>
-  <PlantPack></PlantPack>
-  <div class="sides"></div>
+  <div class="wrapper">
+    <information></information>
+    <PlantToggles class="sides"></PlantToggles>
+    <PlantPack></PlantPack>
+    <PlantToggles class="sides"></PlantToggles>
+  </div>
 </template>
 
 <script>
@@ -28,10 +30,8 @@ export default {
 <style>
 .sides {
   grid-column: span 1;
-  width: 25%;
 }
 .circles {
   grid-column: span 2;
-  width: 50%;
 }
 </style>

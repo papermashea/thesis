@@ -1,15 +1,8 @@
 <template>
-  <div class="container py-5">
-    <div class="jumbotron text-white jumbotron-image shadow" style="background-image: url(https://images.unsplash.com/photo-1552152974-19b9caf99137?fit=crop&w=1350&q=80);">
-      <h2 class="mb-4">
-        Jumbotron with background image
-      </h2>
-      <p class="mb-4">
-        Hey, check this out.
-      </p>
-      <a href="https://bootstrapious.com/snippets" class="btn btn-primary">More Bootstrap Snippets</a>
-    </div>
-  </div>
+  <b-jumbotron lead="Bootstrap v4 Components for Vue.js 2">
+    <p>For more information visit website</p>
+    <b-button variant="primary" href="#">More Info</b-button>
+  </b-jumbotron>
 </template>
 
 <script>
@@ -20,3 +13,9 @@ export default {
 	}
 };
 </script>
+
+<style>
+.jumbotron {
+    background-image: url('@/assets/mapPreview.png') no-repeat center center;
+}
+</style>

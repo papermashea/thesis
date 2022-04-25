@@ -1,19 +1,18 @@
 <template>
   <navbar></navbar>
-  <communities></communities>
   <div id="page">
-    <introduction></introduction>
+    <introduction class="intro-img" id="overlay"></introduction>
     <test></test>
     <segment class="segment-collection"></segment>
-    <patterns></patterns>
+    <patterns class="collection-vis"></patterns>
   </div>
   <footbar></footbar>
 </template>
 
 <script>
 import navbar from "@/components/navbar.vue";
-import communities from "@/components/communities.vue";
 import introduction from "@/components/introduction.vue";
+import introImage from "@/assets/mapPreview.png"
 import test from "@/components/test.vue";
 import segment from "@/components/segment.vue";
 import patterns from "@/components/patterns.vue";
@@ -27,7 +26,6 @@ export default {
 
   components: {
     navbar,
-    communities,
     introduction,
     test,
     segment,
@@ -43,10 +41,12 @@ export default {
 </script>
 
 <style>
-.jumbotron-image {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.intro-img {
+  box-shadow: inset 0 0 0 1000px rgba(255,255,255,0.6);
+  width: 100%;
+  height: 300px;
+  background: url(@/assets/mapPreview.png);
+  background-repeat: no-repeat, repeat;
 }
 
 .notShown {
@@ -208,5 +208,10 @@ ol {
   margin: 2em 0;
   width: 100%;
   height: 200px;
+}
+
+.collection-vis {
+  margin: 2em 0;
+  width: 100%;
 }
 </style>

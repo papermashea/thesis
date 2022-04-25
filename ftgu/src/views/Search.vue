@@ -1,18 +1,9 @@
 <template>
   <navbar class="mainNav"></navbar>
     <div id="page">
-<!--       <Filters
-        :filters="filters"
-        :params="params"
-        :onFilterChange="onFilterChange"
-        :nProjects="{
-          filtered: filteredProjects.length,
-          all: projects.length,
-        }"
-        :yearData="yearData"
-      /> -->
-
-
+    <div class="searchFilters">
+      <Filters></Filters>
+    </div>
     <div class="plantCards">
       <b-card-group>
         <span v-for="p in plants">
@@ -37,6 +28,7 @@
 <script>
 import plantData from '@/assets/data/plants.json';
 import navbar from "@/components/navbar.vue";
+import Filters from "@/components/Filters.vue";
 import plantCard from '@/components/plantCard.vue';
 import footbar from "@/components/footbar.vue";
 
@@ -49,6 +41,7 @@ export default {
 
   components: {
     navbar,
+    Filters,
     plantCard,
     footbar,
   },

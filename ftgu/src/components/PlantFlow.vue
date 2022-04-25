@@ -81,6 +81,7 @@ export default {
   height: 150px;
   text-align: center;
   display:block;
+  margin-bottom: 100px;
 }
 
 .cat {

@@ -1,7 +1,7 @@
 <template>
 <tooltip />
   <div :class="$style.cluster">
-    <circlepack
+    <Circlepack
       v-bind="{ data: pack, width, height }"
     />
   </div>
@@ -40,7 +40,7 @@ export default {
       let i = -1
       let colors = this.colors
       let h = d3.hierarchy(this.nestedData, v => v.values)
-      console.log(h)
+      // console.log(h)
 
       // totals used for usefulness
       h.sum(v => v.value)
