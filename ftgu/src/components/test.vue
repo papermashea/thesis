@@ -1,14 +1,14 @@
 <template>
-    <flowchart class="environment"></flowchart>
+    <PlantFlow class="environment"></PlantFlow>
 </template>
 
 <script>
-import flowchart from "@/components/flowchart.vue";
+import PlantFlow from "@/components/PlantFlow.vue";
 
 export default {
   name: "test",
   components: {
-    flowchart,
+    PlantFlow,
   },
   data(){
     return {

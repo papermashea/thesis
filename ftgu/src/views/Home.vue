@@ -1,9 +1,10 @@
 <template>
   <navbar></navbar>
+  <communities></communities>
   <div id="page">
     <introduction></introduction>
-    <test></test>    
-    <segment class="collection"></segment>
+    <test></test>
+    <segment class="segment-collection"></segment>
     <patterns></patterns>
   </div>
   <footbar></footbar>
@@ -11,9 +12,10 @@
 
 <script>
 import navbar from "@/components/navbar.vue";
+import communities from "@/components/communities.vue";
 import introduction from "@/components/introduction.vue";
 import test from "@/components/test.vue";
-import segment from "@/components/subset.vue";
+import segment from "@/components/segment.vue";
 import patterns from "@/components/patterns.vue";
 import footbar from "@/components/footbar.vue";
 
@@ -25,6 +27,7 @@ export default {
 
   components: {
     navbar,
+    communities,
     introduction,
     test,
     segment,
@@ -40,6 +43,11 @@ export default {
 </script>
 
 <style>
+.jumbotron-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 .notShown {
   visibility: hidden !important;
@@ -194,5 +202,11 @@ ol {
   .level-2-wrapper > li:not(:first-child) {
     margin-top: 50px;
   }
+}
+
+.segment-collection {
+  margin: 2em 0;
+  width: 100%;
+  height: 200px;
 }
 </style>

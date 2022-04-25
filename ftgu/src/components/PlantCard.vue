@@ -11,7 +11,7 @@
           <p class="scientific-name">
             {{ this.latinname }} 
 
-                <button id="show-modal" @click="showModal = true">Show Modal</button>
+                <button id="show-modal" @click="showModal = true">+</button>
                 <!-- use the modal component -->
                 <transition name="modal">
                   <modal v-if="showModal" @close="showModal = false">
@@ -48,13 +48,14 @@
 </template>
 
 <script>
-import plantOverlay from '@/components/plantOverlay.vue'
+import PlantOverlay from '@/components/PlantOverlay.vue';
+
 
 export default {
-  name: 'plantCard',
+  name: 'PlantCard',
 
   components: {
-    plantOverlay,
+    PlantOverlay,
   },
 
   props: {

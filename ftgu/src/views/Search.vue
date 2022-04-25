@@ -37,7 +37,7 @@
 <script>
 import plantData from '@/assets/data/plants.json';
 import navbar from "@/components/navbar.vue";
-import plantCard from '@/components/blocks/plantCard.vue';
+import plantCard from '@/components/plantCard.vue';
 import footbar from "@/components/footbar.vue";
 
 console.log(plantData)

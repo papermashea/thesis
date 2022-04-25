@@ -10,14 +10,14 @@
 <script>
 import * as d3 from 'd3'
 import * as d3Collection from 'd3-collection';
-import tooltip from '@/components/tooltip.vue'
-import circlepack from '@/components/circlepack.vue'
+import Tooltip from '@/components/tooltip.vue'
+import Circlepack from '@/components/circlepack.vue'
 
 export default {
-  name: "plantpack",
+  name: "PlantPack",
   components: {
-    tooltip,
-    circlepack,
+    Tooltip,
+    Circlepack,
   },
   data() {
     return {

@@ -1,22 +1,22 @@
 <template>
   <information></information>
-  <plantToggles class="sides"></plantToggles>
-  <plantpack></plantpack>
+  <PlantToggles class="sides"></PlantToggles>
+  <PlantPack></PlantPack>
   <div class="sides"></div>
 </template>
 
 <script>
 import information from "@/components/information.vue";
-import plantToggles from "@/components/plantToggles.vue";
-import plantpack from "@/components/plantpack.vue";
+import PlantToggles from "@/components/plantToggles.vue";
+import PlantPack from "@/components/plantpack.vue";
 
 export default {
   name: "patterns",
 
   components: {
     information,
-    plantToggles,
-    plantpack,
+    PlantToggles,
+    PlantPack,
   },
   data(){
     return {

@@ -55,12 +55,12 @@
 
 <script>
 import environmentData from "@/assets/data/environment.json";
-import results from "@/components/blocks/results.vue";
+import results from "@/components/results.vue";
 
 // console.log(environmentData)
 
 export default {
-  name: 'flowchart',
+  name: 'PlantFlow',
   components: {
     results,
   },

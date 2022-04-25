@@ -7,7 +7,7 @@
 import plants from "@/assets/data/plants.json";
 
 export default {
-  name: "plantToggles",
+  name: "PlantToggles",
 
   components: {
   },

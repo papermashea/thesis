@@ -15,7 +15,7 @@ import mitt from 'mitt';
 const emitter = mitt();
 
 export default {
-  name: "tooltip",
+  name: "Tooltip",
   data(){
     return {
       item: {},

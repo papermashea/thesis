@@ -3,7 +3,7 @@ import mitt from 'mitt';
 const emitter = mitt();
 
 export default {
-  name: "circlepack",
+  name: "Circlepack",
   props: {
     data: { type: Object, required: true },
     width: { type: Number, required: true },

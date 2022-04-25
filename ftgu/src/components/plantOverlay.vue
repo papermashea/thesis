@@ -30,7 +30,7 @@
 
 <script>
   export default {
-    name: "modal-template"
+    name: "PlantOverlay"
   }
 </script>
 

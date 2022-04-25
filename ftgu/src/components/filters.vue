@@ -5,9 +5,10 @@
 			placeholder="Filter pokémon..."
 			v-model="filterText"
 		/>
-	<p v-if="filteredPokemon.length" class="poke-count">
-		{{ filteredPokemon.length }} Pokémon
+	<p v-if="filteredPlants.length" class="plant-count">
+		{{ filteredPlants.length }} Pokémon
 	</p>
+</div>
 </template>
 
 <script>

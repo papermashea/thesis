@@ -1,3 +1,8 @@
+//// ORDER OF OPERATIONS
+// export csv from ftgu_plantsTable.xlxs ==> plantsTable.csv
+// (optional) convert csv to json ==> plantsTable.json
+// run node cleanup.js for cleaned plants ==> plants.json
+
 var fs = require('fs');
 
 var plants = [];
