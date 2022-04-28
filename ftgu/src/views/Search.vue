@@ -2,12 +2,15 @@
   <navbar class="mainNav"></navbar>
     <div id="page">
     <div class="searchFilters">
+      <p class="filter-group">Environment:</p>
       <Filters></Filters>
     </div>
     <div class="plantCards">
       <b-card-group>
         <span v-for="p in plants">
           <plantCard 
+            class="plant-card"
+            :id="p.id"
             :latinname="p.latinname"
             :commonname="p.commonname"
             :synonyms="p.synonyms"
@@ -60,9 +63,19 @@ export default {
 </script>
 
 <style>
+.searchFilters {
+  grid-column: span 4;  
+  display: block;
+  height: 600px;
+  width: 100%;
+  margin: 0 10%;
+}
+
 .plantCards {
-  margin-top: 20%;  
-  grid-column: span 4;
+  display: block;
+  grid-column: span 4;  
+  width: 100%;
+  margin: 10%;
 }
 
 </style>

@@ -5,20 +5,28 @@
       :width="width"
       :height="height"
     >
-      <g
+      <a
+        v-on:click="clickChildren"
         v-for="(item, i) in parents"
         :key="`c${i}`"
         :class="$style.parent"
         :fill="item.color"
         :style="{transform: `translate(${item.x}px, ${item.y}px)`}"
+        id="item.parent"
+      > 
+      <text
+      v-bind:class="item.parent"
       >
+      {{ this.parent }}  
+      </text>
         <circle
           :r="item.r"
           @mouseover="openTooltip(item, $event)"
           @mouseout="closeTooltip($event)"
         />
-      </g>
-      <g
+      </a>
+      <a
+        v-on:click="clickChildren"
         v-for="(item, i) in data.descendants().filter(d => d.depth >= 2)"
         :key="`s${i}`"
         :class="$style.child"
@@ -29,7 +37,7 @@
           @mouseover="mouseOverChildren(item, $event)"
           @mouseout="mouseOutChildren($event)"
         />
-      </g>
+      </a>
     </svg>
   </div>
 </template>
@@ -48,8 +56,8 @@ export default {
   computed: {
     parents() {
       return this.data.descendants().filter(d => d.depth === 1)
-    },
-  },
+    }, 
+  }, //close computed
   methods: {
     openTooltip(h, event) {
       const label = 'Edible uses: '
@@ -58,7 +66,7 @@ export default {
         current: h.data.key,
         value: h.value,      
       }
-    // console.log(item)
+      // console.log(item.parent)
       this.emitter.emit('openTooltip', { item, event, label })
     },
     closeTooltip(event) {
@@ -74,8 +82,8 @@ export default {
       event.target.style.fill = 'rgba(0, 0, 0, 0)'
       event.target.style.stroke = 'rgba(255, 255, 255, .5)'
     }
-  }
-}
+  }, // close methods
+};
 </script>
 
 <style module>

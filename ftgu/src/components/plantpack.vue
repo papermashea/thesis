@@ -13,6 +13,7 @@ import * as d3Collection from 'd3-collection';
 import Tooltip from '@/components/tooltip.vue'
 import Circlepack from '@/components/circlepack.vue'
 
+
 export default {
   name: "PlantPack",
   components: {
@@ -81,7 +82,6 @@ export default {
     this.data = Object.freeze(url)
     // console.log(this.data)
   }
-}
 </script>
 
 <style module>

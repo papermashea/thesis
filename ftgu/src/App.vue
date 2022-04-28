@@ -11,7 +11,6 @@ const emitter = mitt();
 <style>
 #app {
   margin: 0;
-  font-weight: normal;
   font-family: Helvetica Neue;
   font-weight: 200;
 }
@@ -44,25 +43,52 @@ const emitter = mitt();
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
-    padding: 1rem;
+    padding: 4rem;
     text-align: center;
   }
 
   .wrapper,
   .environment,
-  .plantCards {
+  .plantCards, 
+  .searchFilters {
     grid-column: span 4;
-    width: 100%
+    width: 100%;
+    content-align: center;
   }
 
   :root {
-    --sun-yellow: rgba(242, 222, 44, 1);
-    --moist-blue: rgba(61, 90, 128, 1);
-    --soil-sienna: rgba(190, 110, 70, 1);
-    --ph-lav: rgba(178, 171, 191, 1);
+    --sun: rgba(242, 222, 44, 1);
+    --moisture: rgba(61, 90, 128, 1);
+    --soil: rgba(190, 110, 70, 1);
+    --ph: rgba(178, 171, 191, 1);
     --low-edible: rgba(61, 112, 104, 1);
     --med-edible: rgba(32, 195, 135, 1);
     --high-edible: rgba(112, 211, 28, 1);
   }
+
+a {
+  color: var(--low-edible);
+  font-family: Helvetica Neue;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--low-edible);
+  background-color: var(--high-edible);
+  text-decoration: underline;
+}
+
+
+#external:hover {
+  color: var(--low-edible);
+  background-color: rgba(0,0,0,0);
+}
+
+.btn {
+  font-size: .7em;
+  margin: 5px;
+}
+
 
 </style>

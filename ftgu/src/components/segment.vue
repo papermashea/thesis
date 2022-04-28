@@ -5,13 +5,13 @@
     >
     </Form>
     <Graph 
-      class="madLibRes"
-      v-bind="{ data: count, total, filtered, med, width, height }"
+      class="madLib"
+      v-bind="{ data: collections, counts, filtered, med, width, height }"
     >
     </Graph>
     <Numbers 
       class="madLibRes"
-      v-bind="{ data: count, total, filtered, med, width, height }">
+      v-bind="{ data: collections, counts, filtered, med}">
     </Numbers>
   </div>
 </template>
@@ -32,13 +32,13 @@ export default {
   components: {
     Form,
     Graph,
-    Numbers
+    Numbers,
   },
   data() {
     return {
       plants: plantData,
-      height: 200,
-      width: 200,
+      height: 300,
+      width: 300,
     }
   },
   computed: {
@@ -47,17 +47,23 @@ export default {
     //   return count;
     //   console.log(count)
     // },
-    total() {
+    counts(){
       let total = plantData.length
+      // var filtered = plantData.length/2
+
+      // const collections = {
+      //   total: total,
+      //   filtered: filtered,
+      //   } 
+
       return total;
-      // console.log(total)
     },
-    filtered() {
+    filtered(){
       let filtered = plantData.length/2
       return filtered;
       // console.log(filtered)
     },
-    med() {      
+    med(){      
       let med = plantData.filter(item => item.medcinalrating > '0').length
       console.log(med)
       return med
@@ -68,12 +74,10 @@ export default {
 
 <style>
 .madLib {
-  grid-column: span 2;
-  width: 50%;
+  width: 40%;
 }
 
 .madLibRes {
-  grid-column: span 1;
-  width: 25%;
+  width: 20%;
 }
 </style>

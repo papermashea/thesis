@@ -1,6 +1,6 @@
 <template>
   <div class="foot">
-      <p class="footer">Source: <a class="nav-links" href="https://pfaf.org/user/Default.aspx">Plants for a Future</a></p>
+      <p class="footer">Source: <a class="nav-links" href="https://pfaf.org/user/Default.aspx" target="_blank">Plants for a Future</a></p>
   </div>
 </template>
 

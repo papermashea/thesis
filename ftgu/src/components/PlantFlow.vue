@@ -31,8 +31,9 @@
                 data-bs-parent="#accordionExample"
                 v-bind:id="'accordion-'+factor.name+res.id"
                 :aria-labelledby="'heading-'+factor.name+res.id"
+                style="{background-color: var(--+factor.name}"
                 >
-                  <results 
+                  <Results 
                   :name="factor.name"
                   :id="res.id"
                   :type="res.type"
@@ -40,8 +41,9 @@
                   :details="res.details"
                   :infolink="res.infolink"
                   :testlink="res.testlink"
+                  style="{background-color: var(--+factor.name}"
                   >
-                  </results>
+                  </Results>
               </b-collapse>
             </div>
           </div>
@@ -55,14 +57,14 @@
 
 <script>
 import environmentData from "@/assets/data/environment.json";
-import results from "@/components/results.vue";
+import Results from "@/components/Results.vue";
 
 // console.log(environmentData)
 
 export default {
   name: 'PlantFlow',
   components: {
-    results,
+    Results,
   },
   data(){
     return {
@@ -122,22 +124,22 @@ h6,
 
 #sun .btn-secondary,
 .band#sun {
-    background-color: var(--sun-yellow);
+    background-color: var(--sun);
 }
 
 #moisture .btn-secondary, 
 .band#moisture {
-    background-color: var(--moist-blue);
+    background-color: var(--moisture);
 }
 
 #soil .btn-secondary,
 .band#soil {
-    background-color: var(--soil-sienna);
+    background-color: var(--soil);
 }
 
 #ph .btn-secondary, 
 .band#ph {
-    background-color: var(--ph-lav);
+    background-color: var(--ph);
 }
 
 .notShown {

@@ -1,7 +1,9 @@
 <template>
   <navbar></navbar>
   <div id="page">
-    <introduction class="intro-img" id="overlay"></introduction>
+    <introduction class="intro-img" id="overlay">
+      <div class="wrapper" id="intro"></div>
+    </introduction>
     <test></test>
     <segment class="segment-collection"></segment>
     <patterns class="collection-vis"></patterns>
@@ -202,16 +204,5 @@ ol {
   .level-2-wrapper > li:not(:first-child) {
     margin-top: 50px;
   }
-}
-
-.segment-collection {
-  margin: 2em 0;
-  width: 100%;
-  height: 200px;
-}
-
-.collection-vis {
-  margin: 2em 0;
-  width: 100%;
 }
 </style>

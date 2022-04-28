@@ -1,15 +1,47 @@
 <template>
     <div class="wrapper">
      <p class="level-1A" id="top">Find Plant Patterns</p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <p class="container">
+        Learn about plant <a href="/#/search" class="definition"> types</a>, <a href="/#/search" class="definition"> tolerances</a> and <a href="/#/search" class="definition">uses</a> by exploring patterns within these groups. You can see for yourself what kinds of plants you'd like to see in your garden, and download more information on each plant to take with you out into the world.
       </p>
-
+      <div class="legend">
+        <div class="gradient"></div>
+        <p class="color-key" id="low">Useful</p><p class="color-key" id="high">Most useful</p>
+      </div>
     </div>
 </template>
 
 <script>
+import * as d3 from 'd3'
+
 export default {
   name: "information",
 };
 </script>
+
+<style>
+.legend {
+  margin: 5% 0 0 0;
+}
+.gradient {
+  width: 200px;
+  height: 50px;
+  background-image: linear-gradient(to right, var(--low-edible), var(--med-edible), var(--high-edible));
+}
+
+.color-key {
+  width: 50%;
+  font-size: .7em;
+  font-weight: 600;
+  float: left;
+}
+
+#low {
+  text-align: left;
+}
+
+#high {
+  text-align: right;
+}
+
+</style>
