@@ -6,7 +6,7 @@
     </introduction>
     <test></test>
     <segment class="segment-collection"></segment>
-    <patterns class="collection-vis"></patterns>
+    <!-- <patterns class="collection-vis"></patterns> -->
   </div>
   <footbar></footbar>
 </template>
@@ -17,7 +17,7 @@ import introduction from "@/components/introduction.vue";
 import introImage from "@/assets/mapPreview.png"
 import test from "@/components/test.vue";
 import segment from "@/components/segment.vue";
-import patterns from "@/components/patterns.vue";
+// import patterns from "@/components/patterns.vue";
 import footbar from "@/components/footbar.vue";
 
 // console.log(plantData)
@@ -31,7 +31,7 @@ export default {
     introduction,
     test,
     segment,
-    patterns,
+    // patterns,
     footbar,
   },
   data(){

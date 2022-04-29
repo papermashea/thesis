@@ -11,21 +11,6 @@
         <b-card-text>
           <p class="scientific-name">
             {{ this.latinname }} 
-
-                <button id="show-modal" @click="showModal = true">+</button>
-                <!-- use the modal component -->
-                <transition name="modal">
-                  <modal v-if="showModal" @close="showModal = false">
-                    <!--
-                      you can use custom content here to overwrite
-                      default content
-                    -->
-                    <template v-slot:header>
-                      <h3>custom header</h3>
-                    </template>
-                  </modal>
-                </transition>
-
           </p>
           <p class="other-names">
             aka {{ this.commonname }}
@@ -49,14 +34,14 @@
 </template>
 
 <script>
-import PlantOverlay from '@/components/PlantOverlay.vue';
+// import PlantOverlay from '@/components/PlantOverlay.vue';
 
 
 export default {
   name: 'PlantCard',
 
   components: {
-    PlantOverlay,
+    // PlantOverlay,
   },
 
   props: {

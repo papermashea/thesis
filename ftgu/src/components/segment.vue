@@ -18,21 +18,22 @@
 
 <script>
 import plantData from "@/assets/data/plants.json";
+
 import Form from "@/components/Form.vue";
-import Graph from "@/components/Graph.vue";
-import Numbers from "@/components/Numbers.vue";
+// import Graph from "@/components/Graph.vue";
+// import Numbers from "@/components/Numbers.vue";
 
 import mitt from 'mitt';
 const emitter = mitt();
 
-console.log(plantData)
+// console.log(plantData)
 
 export default {
   name: 'segment',
   components: {
     Form,
-    Graph,
-    Numbers,
+    // Graph,
+    // Numbers,
   },
   data() {
     return {
@@ -42,11 +43,6 @@ export default {
     }
   },
   computed: {
-    // count() {
-    //   let count = plantData.length
-    //   return count;
-    //   console.log(count)
-    // },
     counts(){
       let total = plantData.length
       // var filtered = plantData.length/2
@@ -58,11 +54,11 @@ export default {
 
       return total;
     },
-    filtered(){
-      let filtered = plantData.length/2
-      return filtered;
-      // console.log(filtered)
-    },
+    // filtered(){
+    //   let filtered = plantData.length/2
+    //   return filtered;
+    //   // console.log(filtered)
+    // },
     med(){      
       let med = plantData.filter(item => item.medcinalrating > '0').length
       console.log(med)

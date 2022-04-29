@@ -1,5 +1,9 @@
 <template>
-    <b-form-select v-model="selected" id=id size="sm" class="mt-3"></b-form-select>
+  <div class="dropdown-select">
+    <b-form-select v-model="selected" :options="options"></b-form-select>
+    <b-form-select v-model="selected" :options="options" size="sm" class="mt-3"></b-form-select>
+    <div class="mt-3">Selected: <strong>{{ selected }}</strong></div>
+  </div>
 </template>
 
 
@@ -7,7 +11,23 @@
   export default {
     name: 'Dropdown',
     props: {
-     id: String,
+      // id: String,
+      filters: Object,
+      params: Object,
+      onFilterChange: Function,
+      nProjects: Object,
+      yearData: Object,
     },
+    data() {
+      return {
+        filterHeight: FILTER_HEIGHT,
+      };
+    },
+    computed: {
+      filterTag() {
+        return this.filters.TAG;
+      }
+    }//close computed
+
   }
 </script>

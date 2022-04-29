@@ -2,53 +2,31 @@
   <div class="container">
     <p class="level-1 rectangle" id="top">Test Your Environment</p>
     <ol class="level-2-wrapper">
-      <li v-for="(factor, index) in factors">
+      <li v-for="factor in factors">
         <div 
         class="level-2 rectangle" 
         v-bind:id="factor.name">
           <p class="factor" id="nested">{{ factor.name}} </p>
             <p class="test"> {{ factor.test }} </p>
             <p class="cat"> {{ factor.name}} categories: </p>
-
-            <div class="accordion" id="accordionExample" role="tablist">
-              <div class="loop" v-for="(res, index) in factor.results">
-                <h6 
-                class="accordion-header" 
-                :id="'heading-'+factor.name+res.id"
-                >
-                  <b-button 
-                  role="tab" 
-                  v-b-toggle="'accordion-'+factor.name+res.id"
-                  :data-bs-target="'#collapse'+factor.name+res.id"
-                  >+
-                  </b-button>
-                </h6>
-              </div>
-              <div v-for="(res, index) in factor.results">
+              <div class="accordion" role="tablist">  
+                <b-button 
+                class="loop"
+                v-for="(res, index) in factor.results"
+                v-b-toggle="'accordion' + '_' + factor.name + '_'+res.id"
+                style="{background-color: var(--${factor.name}}"
+                >+
+                </b-button>
                 <b-collapse 
-                role="tabpanel" 
-                accordian="my-accordion"
-                data-bs-parent="#accordionExample"
-                v-bind:id="'accordion-'+factor.name+res.id"
-                :aria-labelledby="'heading-'+factor.name+res.id"
-                style="{background-color: var(--+factor.name}"
+                  v-for="(res, index) in factor.results"
+                  :id="'accordion' + '_' + factor.name + '_'+res.id"
                 >
-                  <Results 
-                  :name="factor.name"
-                  :id="res.id"
-                  :type="res.type"
-                  :description="res.description"
-                  :details="res.details"
-                  :infolink="res.infolink"
-                  :testlink="res.testlink"
-                  style="{background-color: var(--+factor.name}"
-                  >
-                  </Results>
-              </b-collapse>
-            </div>
+<!--                   <Results
+                    resArray="{data: factors, resArray}"
+                  /> -->
+                </b-collapse>
+              </div>
           </div>
-
-        </div>
       </li>
     </ol>
   <!-- <div v-for="(factor, index) in factors" class="band" v-bind:id="factor.name"></div> -->
@@ -57,18 +35,19 @@
 
 <script>
 import environmentData from "@/assets/data/environment.json";
-import Results from "@/components/Results.vue";
+// import Results from "@/components/Results.vue";
 
 // console.log(environmentData)
 
 export default {
   name: 'PlantFlow',
   components: {
-    Results,
+    // Results,
   },
   data(){
     return {
       factors: environmentData,
+      resArray: environmentData.results,
     }
   }
 };
@@ -94,7 +73,6 @@ export default {
   text-transform: capitalize;
 }
 
-h6,
 .loop {
   width: 30%;
   display: inline;
@@ -104,7 +82,7 @@ h6,
   border-radius: 50%;
   color: white;
   margin: 6% 2%;
-  padding: 8px 14px;
+  padding: 14px;
   border: none;
 }
 
@@ -122,7 +100,8 @@ h6,
   margin-right: -120px;
 }
 
-#sun .btn-secondary,
+
+#sun .btn-secondary, 
 .band#sun {
     background-color: var(--sun);
 }
