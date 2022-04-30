@@ -1,5 +1,20 @@
-export const FILTERS = {
+export const ENVFILTERS = {
   SUN: {
+    type: "MULTI_SELECT",
+    options: [],
+    selected: [],
+  },
+  SOIL: {
+    type: "MULTI_SELECT",
+    options: [],
+    selected: [],
+  },
+  MOISTURE: {
+    type: "MULTI_SELECT",
+    options: [],
+    selected: [],
+  },
+  PH: {
     type: "MULTI_SELECT",
     options: [],
     selected: [],
@@ -8,6 +23,10 @@ export const FILTERS = {
     type: "RANGE",
     options: [],
     selected: [],
+  },
+  SEARCH: {
+    type: "TEXT",
+    selected: "",
   },
 };
 

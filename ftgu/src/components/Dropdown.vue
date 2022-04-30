@@ -2,7 +2,7 @@
   <div class="dropdown-select">
     <b-form-select v-model="selected" :options="options"></b-form-select>
     <b-form-select v-model="selected" :options="options" size="sm" class="mt-3"></b-form-select>
-    <div class="mt-3">Selected: <strong>{{ selected }}</strong></div>
+    <div class="mt-3">{{ this.filter }} </div>
   </div>
 </template>
 
@@ -20,12 +20,11 @@
     },
     data() {
       return {
-        filterHeight: FILTER_HEIGHT,
       };
     },
     computed: {
       filterTag() {
-        return this.filters.TAG;
+        // return this.filters.TAG;
       }
     }//close computed
 

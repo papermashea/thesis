@@ -2,7 +2,6 @@
   <div>
      <b-card
       :img-src=imgthb
-      :id="id"
       img-top
       style="width: 20rem;"
       class="mb-2"
@@ -45,6 +44,7 @@ export default {
   },
 
   props: {
+    id: String,
     latinname: String,
     commonname: String,
     synonyms: String,
