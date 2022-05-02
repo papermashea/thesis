@@ -1,5 +1,5 @@
 <template>
-<tooltip />
+<Tooltip />
   <div :class="$style.cluster">
     <Circlepack
       v-bind="{ data: pack, width, height }"
@@ -10,13 +10,19 @@
 <script>
 import * as d3 from 'd3'
 import * as d3Collection from 'd3-collection';
-import Tooltip from '@/components/tooltip.vue'
-import Circlepack from '@/components/circlepack.vue'
+import Tooltip from '@/components/Tooltip.vue'
+import Circlepack from '@/components/Circlepack.vue'
+
 export default {
   name: "PlantPack",
   components: {
     Tooltip,
     Circlepack,
+  },
+  props: {
+    filters: Object,
+    onFilterChange: Function,
+    nPlants: Object,
   },
   data() {
     return {
@@ -27,7 +33,7 @@ export default {
       height: 600,
       width: 600,
     }
-  },
+  },//close data
   computed: {
     colors() {
       let petri = ["#3C6962", "#309172","#20C387", "#4BDA45", "#73F009"];
@@ -71,12 +77,13 @@ export default {
         .size([this.width, this.height])
         .padding(2)
     }
-  },
+  },//close computed
   async mounted() {
     const url = await d3.json('src/assets/data/plants.json')
     this.data = Object.freeze(url)
     // console.log(this.data)
-  }
+  }//close mounted
+};
 </script>
 <style module>
 .cluster {

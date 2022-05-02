@@ -4,9 +4,17 @@
 </template>
 
 <script>
-  export default {
-    name: "Toggles",
+
+export default {
+  name: "Toggles",
+
+  components: {
+  },
+  data(){
+    return {
+    }
   }
+};
 
 </script>
 

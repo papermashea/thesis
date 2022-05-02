@@ -16,7 +16,7 @@ import "element-plus/theme-chalk/index.css";
 // import "bootstrap-vue/dist/bootstrap-vue.css";
 
 ////components
-// import Multiselect from 'vue-multiselect';
+import Multiselect from 'vue-multiselect';
 
 import App from "./App.vue";
 
@@ -30,7 +30,7 @@ app.use(BootstrapVue3)
 app.use(BootstrapIconsPlugin)
 app.use(ElementPlus)
 app.component("Popper", Popper)
-// app.component('multiselect', Multiselect)
+app.component('multiselect', Multiselect)
 app.config.globalProperties.emitter = emitter
 app.mount("#app")
 

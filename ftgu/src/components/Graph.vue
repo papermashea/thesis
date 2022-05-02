@@ -1,5 +1,6 @@
 <template>
-  <div class="total">
+  <div class="plant-form-subset">
+   <div class="graphCol">
     <svg 
       :viewBox="`0, 0 ${width} ${height}`"
       :width="width"
@@ -14,50 +15,58 @@
       </g>
       <g>
         <circle
-        :r="filtered*(height/2)/counts"
-        :cy="height-(filtered*(height/2)/counts)"
+        :r="nPlants.filtered*(height/2)/nPlants.all"
+        :cy="height-(nPlants.filtered*(height/2)/nPlants.all)"
         class="collection"
         id="filtered-form"
         />
       </g>
       <g>
         <circle
-        :r="(filtered*(height/2)/counts)-10"
-        :cy="height-((filtered*(height/2)/counts)-10)"
+        :r="nPlants.med*(height/2)/nPlants.all"
+        :cy="height-(nPlants.med*(height/2)/nPlants.all)"
         class="collection"
         id="filtered-med"
         />
       </g>
     </svg>    
+   </div>
+   <div class="numCol">
+      <div class="num-block">
+        <p class="num2">{{ nPlants.all }}</p>
+        <p class="num-label">plants suited for temperate zones have edible properties</p>
+        <a class="num-link" href="/#/search" target="_blank"><div class="label-line"></div>see all plants ></a>
+      </div>
+      <div class="num-block">
+        <p class="num1">{{ nPlants.filtered }}</p>
+        <p class="num-label">edible plants compatible with your environment</p>
+        <a class="num-link" href="/#/search" target="_blank"><div class="label-line"></div>see filtered plants ></a>
+      </div>
+      <div class="num-block">
+        <p class="num2">{{ nPlants.med }}</p>
+        <p class="num-label">of these have additional medicinal properties</p>
+        <a class="num-link"  href="/#/search" target="_blank"><div class="label-line"></div>see these plants ></a>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import * as d3 from 'd3'
-import mitt from 'mitt';
-const emitter = mitt();
-// console.log(data)
 
 export default {
   name: 'Graph',
-
   props: {
-    counts: { type: Number, required: true },
-    filtered: { type: Number, required: true },
-    med: { type: Number, required: true },
-    width: { type: Number, required: true },
-    height: { type: Number, required: true },
-
+    filters: Object,
+    onFilterChange: Function,
+    nPlants: Object,
   },
-  computed: {
-    scaled() {
-      const totalR = height/2
-      const filterR = filtered*(height/2)/counts;
-      const medR = med*(height/2)/counts;
-      
-      return this.filterR
-    },
-  } // close computed
+  data() {
+    return {
+      width: 300,
+      height: 300,
+    }
+  }
   // methods: {
     // openGraphTooltip(h, event) {
     //   const label = 'Edible uses: '
@@ -90,5 +99,43 @@ export default {
   cx: 50%;
 }
 
+.graphCol,
+.numCol {
+  width: 50%;
+  display: block;
+  float: left;
+}
+
+.num-block{
+  margin: 0 0 10% 10%;
+  height: 30%;
+  text-align: right;
+}
+
+.num1,
+.num2 {
+  margin: 0;
+}
+
+.num-label {
+  font-size: .7em;
+  margin: 0;
+  width: 100%;
+  text-align: right;
+}
+
+.label-line {
+  width: 135%;
+  border-bottom: 1px dotted black;
+  margin: 0 0 0 -75%;
+  padding: 15px 10px 0 0;
+  float: left;
+}
+
+.num-link {
+  font-weight: bold;
+  font-style: italic;
+  font-size: .8em;
+}
 
 </style>
