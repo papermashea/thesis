@@ -20,7 +20,8 @@
       />
 	      <g
 	      v-for="(node, n) in item.children"
-	      :id="node.data.id"
+	      @click="drawer = true"
+        :id="node.data.id"
 				:style="{
 	        transform: `translate(${node.x}px, ${node.y}px)`
 	      }"
@@ -30,7 +31,6 @@
 		      :name="node.data.latinname"
 		      :value="node.data.ediblerating"
 		      :r="node.data.usefulness/1.5"
-          @click="drawer = true"
           @mouseover="mouseOverChildren(node, $event)"
           @mouseout="mouseOutChildren($event)"
 		      />
