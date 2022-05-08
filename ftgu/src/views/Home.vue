@@ -29,13 +29,17 @@
       />
     </div>
 
-    <Information />
+    <Information 
+      :filters="filters"
+      :onFilterChange="onFilterChange"
+    />
     <Tooltip />
     <PlantPack 
       class="collection-vis"
       :onFilterChange="onFilterChange"
       v-bind="{ data: group }"
      />  
+
   </div>  
   <Footbar></Footbar>
 </template>

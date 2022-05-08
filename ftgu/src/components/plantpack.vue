@@ -18,9 +18,8 @@
 			        transform: `translate(${item.x}px, ${item.y}px)`
 			      }"
       />
-	      <a
+	      <g
 	      v-for="(node, n) in item.children"
-	      :href="node.data.id"
 	      :id="node.data.id"
 				:style="{
 	        transform: `translate(${node.x}px, ${node.y}px)`
@@ -29,13 +28,19 @@
 		      <circle
 		      class="plant-node"
 		      :name="node.data.latinname"
-		      :value="node.data.value"
-		      :fill="useColor"
-		      :r="node.value*1.7"
+		      :value="node.data.ediblerating"
+		      :r="node.data.usefulness/1.5"
+          @click="drawer = true"
           @mouseover="mouseOverChildren(node, $event)"
           @mouseout="mouseOutChildren($event)"
 		      />
-			</a>
+          <el-drawer
+            v-model="drawer"
+            title="I am the title"
+            direction="rtl"
+          ><span>Hi, there!</span>
+          </el-drawer>
+			</g>
       <rect class="label"
       	fill="rgba(255,255,255,.8)"
       	height= "30"
@@ -60,12 +65,20 @@
 <script>
 import * as d3 from 'd3';
 import { hierarchy, pack } from 'd3-hierarchy'
+import { ref } from 'vue'
+import { ElMessageBox } from 'element-plus'
 import mitt from 'mitt';
 const emitter = mitt();
 
+// import PlantOverlay from '@/components/PlantOverlay.vue'
+
+const drawer = ref(false)
 
 export default {
   name: 'PlantPack',
+  components: {
+    // PlantOverlay
+  },
   props: {
     onFilterChange: Function,
     nPlants: Object,
@@ -76,39 +89,42 @@ export default {
     return {
       width: 1200,
       height: 1200,
+      // value: this.data.value,
     }
   }, //close data
   computed: {
   	useColor() {
-      // let petri = ["#3C6962", "#309172","#20C387", "#4BDA45", "#73F009"];
+      let petri = ["#3C6962", "#309172","#20C387", "#4BDA45", "#73F009"];
+      let values = [1, 2, 3, 4, 5];
 			// return d3.quantize(d3.interpolateDiscrete(petri), petri.length)
 			
 			// const color = d3.scaleLinear()
 			//     .domain([1, 2, 3, 4, 5])
 			//     .range([ "#3C6962", "#309172","#20C387", "#4BDA45", "#73F009"]);
 			
-			const color = d3.scaleOrdinal()
-			    .domain([1, 2, 3, 4, 5])
-			    .range([ "#3C6962", "#309172","#20C387", "#4BDA45", "#73F009"]);
+			// const color = d3.scaleOrdinal()
+			//     .domain([1, 2, 3, 4, 5])
+			//     .range([ "#3C6962", "#309172","#20C387", "#4BDA45", "#73F009"]);
 
-				return color(this.value);
+			// const color = d3.quantize(d3.interpolateDiscrete(petri), 5)
+			
+			// const color = d3.quantize(d3.interpolateCool, values.length)
+			
+			// const colorInterpolator = d3.quantize(d3.interpolateHcl("#3C6962", "#73F009"), 5)
+			const colorInt = d3.interpolateDiscrete(petri)
+
+			const colorScale = d3.scaleQuantize()
+			.domain([1, 5])
+			.range(d3.quantize(colorInt, 5))
+
+			return colorScale(this.value)
 	    },
     layoutData() {
-      // Generate a D3 hierarchy
       const rootHierarchy = hierarchy(this.data)
-        .sum(d => d.value)
+        .sum(d => d.usefulness)
         .sort((a, b) => {
-          return b.value - a.value
+          return b.usefulness - a.usefulness
         })
-       //  .each(function(d) {
-	      //   if (d.depth >= 1) {
-	      //     d.color = colors[i]
-	      //   }
-	      //   i++
-      	// })
-        console.log(rootHierarchy)
-
-      // Pack the circles inside the viewbox
       return pack()
         .size([1200, 1200])
         .padding(1)(rootHierarchy)
@@ -146,5 +162,19 @@ export default {
 </script>
 
 <style>
-
+circle[value="1"] {
+	fill: var(--low-edible);
+}
+circle[value="2"] {
+	fill: var(--lowmed-edible);
+}
+circle[value="3"] {
+	fill: var(--med-edible);
+}
+circle[value="4"] {
+	fill: var(--medhigh-edible);
+}
+circle[value="5"] {
+	fill: var(--high-edible);
+}
 </style>

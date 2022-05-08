@@ -53,7 +53,7 @@ export default {
 
       tooltip
         .select('.tt-ed')
-        .text(`${format(this.details.value)}`+` edible uses`)
+        .text(`${format(this.details.edible)}`+` edible uses`)
 
       tooltip
         .select('.tt-med')

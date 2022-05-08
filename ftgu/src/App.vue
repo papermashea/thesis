@@ -62,8 +62,10 @@ const emitter = mitt();
     --soil: rgba(190, 110, 70, 1);
     --ph: rgba(178, 171, 191, 1);
     --low-edible: rgba(61, 112, 104, 1);
+    --lowmed-edible: rgba(48, 145, 114, 1);
     --med-edible: rgba(32, 195, 135, 1);
-    --high-edible: rgba(112, 211, 28, 1);
+    --medhigh-edible: rgba(75, 218, 69, 1);
+    --high-edible: rgba(115, 240, 9, 1);
   }
 
 a {
