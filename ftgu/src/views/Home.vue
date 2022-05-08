@@ -30,25 +30,21 @@
     </div>
 
     <Information />
+    <Tooltip />
     <PlantPack 
       class="collection-vis"
-      :filters="filters"
       :onFilterChange="onFilterChange"
-      :nPlants="{
-        all: plants.length,
-        filtered: filteredPlants.length,
-        med: filteredMed.length,
-      }"      
-
-     />
-  
+      v-bind="{ data: group }"
+     />  
   </div>  
   <Footbar></Footbar>
 </template>
 
 <script>
 import plants from '@/assets/data/plants.json';
-import { rollup, ascending, descending } from "d3-array";
+import * as d3 from 'd3';
+import { rollup, group, flatGroup, index, ascending, descending } from "d3-array";
+import { hierarchy, pack } from 'd3-hierarchy'
 import { FILTERS, PARAMS } from "../global";
 
 import Navbar from "@/components/Navbar.vue";
@@ -58,8 +54,12 @@ import PlantFlow from "@/components/PlantFlow.vue";
 import Form from "@/components/Form.vue";
 import Graph from "@/components/Graph.vue";
 import Information from "@/components/Information.vue";
+import Tooltip from '@/components/Tooltip.vue'
 import PlantPack from "@/components/PlantPack.vue";
 import Footbar from "@/components/Footbar.vue";
+
+// console.log(plants)
+// console.log(Array.isArray(plants))
 
 export default {
   name: "App",
@@ -72,6 +72,7 @@ export default {
     Graph,
     Information,
     PlantPack,
+    Tooltip,
     Footbar,
   },
   data() {
@@ -94,7 +95,7 @@ export default {
       if (!this.plants.length) {
         return [];
       }
-      const { SUN, SOIL, MOISTURE, PH, HARDINESSUSE, HARDINESS, GROUP, SIZE, PROP, GROWTH, SCENT, POLLINATORS, SEARCH } = this.filters;
+      const { SUN, SOIL, MOISTURE, PH, HARDINESSUSE, HARDINESS, GROUP, SEARCH } = this.filters;
       const { SORT } = this.params;
       const sortParam = SORT.selected;
       const isSortAsc = SORT.asc;
@@ -117,23 +118,13 @@ export default {
               HARDINESSUSE.selected.some((huseOpt) => p.hardinessuse.includes(huseOpt))) &&
             (!GROUP.selected.length ||
               GROUP.selected.some((groupOpt) => p.group.includes(groupOpt))) &&
-            (!SIZE.selected.length ||
-              SIZE.selected.some((sizeOpt) => p.size.includes(sizeOpt))) &&
-            (!PROP.selected.length ||
-              PROP.selected.some((propOpt) => p.prop.includes(propOpt))) &&
-            (!GROWTH.selected.length ||
-              GROWTH.selected.some((growthOpt) => p.growth.includes(growthOpt))) &&
-            (!SCENT.selected.length ||
-              SCENT.selected.some((scentOpt) => p.aromatic.includes(scentOpt))) &&
-            (!POLLINATORS.selected.length ||
-              POLLINATORS.selected.some((pollinOpt) => p.pollinators.includes(pollinOpt))) &&
             (!searchTerm || p.searchTarget.indexOf(searchTerm) !== -1)
         )
         .sort((a, b) =>
           isSortAsc
             ? ascending(a[sortParam], b[sortParam])
             : descending(a[sortParam], b[sortParam])
-        );
+        )
     },
     hardyData() {
       if (!this.plants.length) {
@@ -154,7 +145,7 @@ export default {
         (values) => values.length,
         (p) => p.hardiness
       );
-      // left join on unfiltered so every year has an entry, even if count is 0
+      // left join on unfiltered so every range has an entry, even if count is 0
       const filteredHardyData = unfilteredHardyData.map(([hardiness]) => [
         hardiness,
         filteredHardyMap.get(hardiness) || 0,
@@ -170,6 +161,17 @@ export default {
       }
       return this.filteredPlants.filter(m => m.medicinalrating > 0);
     },
+    group(){
+      if (!this.filteredPlants.length) {
+        return [];
+      }
+      const gPlants = group(
+        this.filteredPlants,
+          p => p.type,
+      )
+       return gPlants
+        // console.log(gPlants)
+    }
   }, //close computed
   methods: {
     onFilterChange(id, selected) {
@@ -236,51 +238,6 @@ export default {
           },
         };
       }
-      if (id === "SIZE") {
-        this.filters = {
-          ...this.filters,
-          SIZE: {
-            ...this.filters.SIZE,
-            selected,
-          },
-        };
-      }
-      if (id === "PROP") {
-        this.filters = {
-          ...this.filters,
-          PROP: {
-            ...this.filters.PROP,
-            selected,
-          },
-        };
-      }
-      if (id === "GROWTH") {
-        this.filters = {
-          ...this.filters,
-          GROWTH: {
-            ...this.filters.GROWTH,
-            selected,
-          },
-        };
-      }
-      if (id === "SCENT") {
-        this.filters = {
-          ...this.filters,
-          SCENT: {
-            ...this.filters.SCENT,
-            selected,
-          },
-        };
-      }
-      if (id === "POLLINATORS") {
-        this.filters = {
-          ...this.filters,
-          POLLINATORS: {
-            ...this.filters.POLLINATORS,
-            selected,
-          },
-        };
-      }
       if (id === "SEARCH") {
         this.filters = {
           ...this.filters,
@@ -322,15 +279,9 @@ export default {
       let hardyRange = [Infinity, -Infinity];
 
       let groupOpts = [];
-      let sizeOpts = [];
-      let propOpts = [];
-      let growthOpts = [];
-      let scentOpts = [];
-      let pollinOpts = [];
-
 
       for (let i = 0; i < this.plants.length; i++) {
-        const { sun, soil, moisture, ph, hardinessuse, hardiness, group, size, prop, growth, aromatic, pollinators } = this.plants[i];
+        const { sun, soil, moisture, ph, hardinessuse, hardiness, group } = this.plants[i];
           sunOpts = [...sunOpts, ...sun];
           soilOpts = [...soilOpts, ...soil];
           moistureOpts = [...moistureOpts, ...moisture];
@@ -342,11 +293,6 @@ export default {
           ];
 
           groupOpts = [...groupOpts, ...group];
-          sizeOpts = [...sizeOpts, size];
-          propOpts = [...propOpts, prop];
-          growthOpts = [...growthOpts, growth];
-          scentOpts = [...scentOpts, aromatic];
-          pollinOpts = [...pollinOpts, ...pollinators];
 
       }
       this.filters = {
@@ -379,26 +325,6 @@ export default {
         GROUP: {
           ...this.filters.GROUP,
           options: [...new Set(groupOpts)].sort(),
-        },
-        SIZE: {
-          ...this.filters.SIZE,
-          options: [...new Set(sizeOpts)],
-        },
-        PROP: {
-          ...this.filters.PROP,
-          options: [...new Set(propOpts)].sort(),
-        },
-        GROWTH: {
-          ...this.filters.GROWTH,
-          options: [...new Set(growthOpts)].sort(),
-        },
-        SCENT: {
-          ...this.filters.SCENT,
-          options: [...new Set(scentOpts)].sort(),
-        },
-        POLLINATORS: {
-          ...this.filters.POLLINATORS,
-          options: [...new Set(pollinOpts)].sort(),
         },
       };
     }//close function
@@ -595,5 +521,11 @@ ol {
   .level-2-wrapper > li:not(:first-child) {
     margin-top: 50px;
   }
+}
+.cluster {
+  max-width: 950px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 </style>

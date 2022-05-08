@@ -55,10 +55,45 @@ function createPlants() {
 
 	var cleanData = plantData.map( function (cData){
 
+		var nonvasc = {
+			fern: "fern/moss/lichen",
+			lichen: "fern/moss/lichen",
+			moss: "fern/moss/lichen"
+		}
+
+		var bulb = {
+			bulb: "bulb/corm",
+			corm: "bulb/corm"
+		}
+
+		var grass = {
+			grass: "grass/bamboo",
+			bamboo: "grass/bamboo"
+		}
+
+		var lepidoptera = {
+			butterflies: "butterflies/moths",
+			lepidoptera: "butterflies/moths",
+			moths: "butterflies/moths"
+		}
+
 		var ace = {
 			cleistogamy: "asexual/self",
+			cleistogamous: "asexual/self",
+			cleistogomous: "asexual/self",
+			cleistogamy: "asexual/self",
 			apomixis: "asexual/self",
-			self: "asexual/self"
+			apomixy: "asexual/self",
+			apomictic: "asexual/self",
+			self: "asexual/self",
+			dryoptera: "asexual/self"
+		}
+		
+		var insects = {
+			midges: "insects",
+			hoverflies: "insects",
+			diptera: "insects",
+			hymenoptera: "insects"
 		}
 
 		var plantObject = {
@@ -69,16 +104,23 @@ function createPlants() {
 			commonname: cData.commonname,
 			synonyms: cData.synonyms,
 			range: cData.range.replace(/ *\[[^\]]*]/g, '').replace(/(\r\n|\n|\r)/gm, ""),
-			group: cData.type.toLowerCase().replaceAll('annual climber', 'climber').replaceAll('perennial climber', 'climber').replaceAll('bulb', 'bulb/corm').replaceAll('corm', 'bulb/corm').replaceAll('fern', 'fern/moss/lichen').replaceAll('lichen', 'fern/moss/lichen').replaceAll('moss', 'fern/moss/lichen').replaceAll('bamboo', 'bamboo/grass').replaceAll('grass', 'bamboo/grass').split("+"),
+			type: cData.type.toLowerCase().replace('+', '/').replaceAll('annual climber', 'climber').replace('perennial climber', 'climber').replace(/bulb|corm/gi, function(matched){
+      			return bulb[matched];}).replace(/fern|lichen|moss/gi, function(matched){
+      			return nonvasc[matched];}).replace(/grass|bamboo/gi, function(matched){
+      			return grass[matched];}),
+			group: cData.type.toLowerCase().replaceAll('annual climber', 'climber').replace('perennial climber', 'climber').replace(/bulb|corm/gi, function(matched){
+      			return bulb[matched];}).replace(/fern|lichen|moss/gi, function(matched){
+      			return nonvasc[matched];}).replace(/grass|bamboo/gi, function(matched){
+      			return grass[matched];}).split("+"),
 			season: cData.timeframe,
 			leaftype: cData.leaftype,
 			height: cData.height,
 			width: cData.width,
 			size: cData.size.toLowerCase().replaceAll('#n/a', ""),
-			hardniess: cData.hardinessmap,
+			hardiness: parseInt(cData.hardinessmap),
 			hardinessuse: cData.hardinessuse.toLowerCase(),
 			habitat: cData.habitat.toLowerCase().replace(/ *\[[^\]]*]/g, '').replace(/(\r\n|\n|\r)/gm, ""),
-			growth: cData.growth.toLowerCase(),
+			growth: cData.growth.toLowerCase().replaceAll('unknown', "").trim(),
 			flowerstart: cData.flowerstart,
 			flowerstartMonth: cData.flowerstartmonth.toLowerCase(),
 			flowerend: cData.flowerend,
@@ -87,11 +129,13 @@ function createPlants() {
 			seedstartmonth: cData.seedstartmonth.toLowerCase(),
 			seedend: cData.seedend,
 			seedendmonth: cData.seedendmonth.toLowerCase(),
-			prop: cData.proptype.toLowerCase().trim().replaceAll('stratified seed', 'pretreated seed').replaceAll('scarify seed', 'pretreated seed').replaceAll('cold frame', 'pretreated seed').replaceAll('presoaked seed', 'pretreated seed'),
+			proptype: cData.proptype.toLowerCase().trim().replaceAll('stratified seed', 'pretreated seed').replaceAll('scarify seed', 'pretreated seed').replaceAll('cold frame', 'pretreated seed').replaceAll('presoaked seed', 'pretreated seed'),
 			propdetails: cData.propdetails.toLowerCase().replace(/ *\[[^\]]*]/g, '').replace(/(\r\n|\n|\r)/gm, ""),
 			cultivationdetails: cData.cultivationdetails.replace(/ *\[[^\]]*]/g, '').replace(/(\r\n|\n|\r)/gm, ""),
-			pollinators: cData.pollinators.toLowerCase().replaceAll('carrion insects','insects').replaceAll('diptera','insects').replaceAll('midges','insects').replaceAll('cleistogamous','cleistogamy').replaceAll('apomixy','apomixis').replaceAll('lepidoptera','butterflies/moths').replaceAll('moths','butterflies/moths').replaceAll('butterflies','butterflies/moths').replace(/cleistogamy|apomixis|self/gi, function(matched){
-      			return ace[matched];}).split(", "),
+			pollinators: cData.pollinators.toLowerCase().replaceAll('5 - 6',"").replaceAll('7',"").replaceAll('?',"").replaceAll("bumblebees","bees").replaceAll("wasps","bees").replaceAll('carrion',"").replaceAll('s,b','s, b').replaceAll(' flies',' insects').replaceAll('hover-flies','insects').replace(/cleistogamy|cleistogomy|cleistogamous|cleistogomous|apomictic|apomixy|apomixis|dryoptera|self/gi, function(matched){
+      			return ace[matched];}).replace(/butterflies|moths|lepidoptera/gi, function(matched){
+      			return lepidoptera[matched];}).replace(/midges|hymenoptera|hoverflies|diptera/gi, function(matched){
+      			return insects[matched];}).trim().split(", "),
 			flowertype: cData.flowertype.toLowerCase(),
 			scent: cData.scented.toLowerCase(),
 			aromatic: cData.aromatic,
@@ -117,7 +161,8 @@ function createPlants() {
 			medicinaluses: cData.medicinal.replace(/ *\[[^\]]*]/g, '').replace(/(\r\n|\n|\r)/gm, ""),
 			medicinalrating: cData.medicinalrating,
 			indigenoususe: cData.indigenoususe,
-			knownhazards: cData.knownhazards.replace(/ *\[[^\]]*]/g, ''),
+			knownhazards: cData.knownhazards.toLowerCase().replace(/ *\[[^\]]*]/g, ''),
+			img: cData.imgthb,
 			imgthb: cData.imgthb,
 			imglink: cData.imgid,
 			imgcreator: cData.imgcreator,

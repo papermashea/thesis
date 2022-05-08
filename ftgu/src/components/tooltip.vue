@@ -3,9 +3,12 @@
     id="tooltip"
     class="tooltip"
   >
-    <div class="tt-parent" />
     <div class="tt-current" />
-    <div class="tt-value" />
+    <div class="tt-over" />
+    
+    <div class="tt-ed" />
+    <div class="tt-med" />
+    <div class="tt-mat" />
   </div>
 </template>
 
@@ -18,16 +21,15 @@ export default {
   name: "Tooltip",
   data(){
     return {
-      item: {},
+      details: {},
       event: {},
       label: ''
     }
   },
   created(){
     this.emitter.on('openTooltip', (data) => {
-      this.item = data.item
+      this.details = data.details
       this.event = data.event
-      this.label = data.label
       this.openTooltip()
     })
 
@@ -42,14 +44,24 @@ export default {
       const format = d3.format(",");
 
       tooltip
-        .select('.tt-parent')
-        .text(this.item.parent)
-      tooltip
         .select('.tt-current')
-        .text(this.item.current)
+        .text(`${this.details.name} / `+`${this.details.cname}`)
+
       tooltip
-        .select('.tt-value')
-        .text(`${this.label}${format(this.item.value)}`)
+        .select('.tt-over')
+        .text(`mostly `+`${this.details.hardinessuse}`)
+
+      tooltip
+        .select('.tt-ed')
+        .text(`${format(this.details.value)}`+` edible uses`)
+
+      tooltip
+        .select('.tt-med')
+        .text(`${format(this.details.medicinal)}`+` medicinal uses`)
+
+      tooltip
+        .select('.tt-mat')
+        .text(`${format(this.details.material)}`+` material uses`)
 
       const tooltipElement = tooltip.node().getBoundingClientRect()
       const { height } = tooltipElement
@@ -80,17 +92,20 @@ export default {
   box-shadow: 0 1px 5px rgba(51, 51, 51, 0.5);
   padding: 1rem;
 }
-.tt-parent,
+
 .tt-current,
-.tt-value {
+.tt-over,
+.tt-ed,
+.tt-med, 
+.tt-mat {
   margin: 0;
 }
-.tt-parent,
-.tt-current {
-  padding-bottom: 3px;
+
+.tt-over {
+  padding-bottom: 2px;
 }
 .tt-current {
-  font-size: 18px;
+  font-size: 1.2em;
   font-weight: bold;
 }
 </style>

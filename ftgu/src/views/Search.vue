@@ -44,7 +44,6 @@
     </div>
     <div class="plantCards">
       <b-card-group>
-        <!-- <span v-for="p in searchedPlants"> -->
         <span v-for="p in filteredPlants">
           <plantCard 
             class="plant-card"
@@ -52,7 +51,7 @@
             :commonname="p.commonname"
             :synonyms="p.synonyms"
             :imgthb="p.imgthb"
-            :type="p.type"
+            :group="p.type"
             :proptype="p.proptype"
             :edibilityrating="p.edibilityrating"
             :onFilterChange="onFilterChange"
@@ -66,6 +65,7 @@
 </template>
 
 <script>
+// import plants from '@/assets/data/plants_test.json';
 import plants from '@/assets/data/plants.json';
 import { rollup, ascending, descending } from "d3-array";
 import { FILTERS, PARAMS } from "../global";
@@ -80,7 +80,7 @@ import Footbar from "@/components/Footbar.vue";
 
 // console.log(plantData)
   // console.log(Object.keys(plantData.plants).length)
-console.log(plants)
+// console.log(filteredPlants)
 
 const FILTER_HEIGHT = 40;
 

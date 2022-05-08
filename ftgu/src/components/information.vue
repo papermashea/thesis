@@ -6,7 +6,7 @@
       </p>
       <div class="legend">
         <div class="gradient"></div>
-        <p class="color-key" id="low">Useful</p><p class="color-key" id="high">Most useful</p>
+        <p class="color-key" id="low">Few uses</p><p class="color-key" id="high">Most uses</p>
       </div>
     </div>
 </template>

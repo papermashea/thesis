@@ -12,7 +12,7 @@
             {{ this.latinname }} 
           </p>
           <p class="other-names">
-            aka {{ this.commonname }}
+            {{ this.commonname }} | {{ this.synonyms }}
           </p>
         </b-card-text>
         <div class="flag1">
