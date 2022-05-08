@@ -1,6 +1,6 @@
 <template>
   <div class="filters">
-    <el-row>
+    <el-col>
       <!-- SEARCH FILTER -->
       <div class="filter search-filter">
         <el-input
@@ -10,12 +10,12 @@
           @change="(text) => onFilterChange('SEARCH', text)"
         />
       </div>
-    </el-row>
-    <el-row>
+    </el-col>
+    <el-col>
       <div class="plant-counts">
          {{ nPlants.filtered }} potential plants
       </div>
-    </el-row>
+    </el-col>
 
   </div>
 </template>

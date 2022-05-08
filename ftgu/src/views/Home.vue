@@ -286,17 +286,17 @@ export default {
 
       for (let i = 0; i < this.plants.length; i++) {
         const { sun, soil, moisture, ph, hardinessuse, hardiness, group } = this.plants[i];
-          sunOpts = [...sunOpts, ...sun];
-          soilOpts = [...soilOpts, ...soil];
-          moistureOpts = [...moistureOpts, ...moisture];
-          phOpts = [...phOpts, ...ph];
-          huseOpts = [...huseOpts, hardinessuse];
+          sunOpts = [...sunOpts, ...sun].filter(Boolean);
+          soilOpts = [...soilOpts, ...soil].filter(Boolean);
+          moistureOpts = [...moistureOpts, ...moisture].filter(Boolean);
+          phOpts = [...phOpts, ...ph].filter(Boolean);
+          huseOpts = [...huseOpts, hardinessuse].filter(Boolean);
           hardyRange = [
             Math.min(hardiness, hardyRange[0]),
             Math.max(hardiness, hardyRange[1]),
           ];
 
-          groupOpts = [...groupOpts, ...group];
+          groupOpts = [...groupOpts, ...group].filter(Boolean);
 
       }
       this.filters = {

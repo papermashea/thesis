@@ -18,14 +18,20 @@
 			        transform: `translate(${item.x}px, ${item.y}px)`
 			      }"
       />
-	      <g
-	      v-for="(node, n) in item.children"
-	      @click="drawer = true"
+	     <g
+        v-for="(node, n) in item.children"
         :id="node.data.id"
-				:style="{
-	        transform: `translate(${node.x}px, ${node.y}px)`
-	      }"
-	      >
+        :style="{
+          transform: `translate(${node.x}px, ${node.y}px)`
+        }"
+        >
+          <el-drawer
+            v-model="drawer"
+            title="I am the title"
+            direction="rtl"
+          ><span>Hi, there!</span>
+          </el-drawer>
+
 		      <circle
 		      class="plant-node"
 		      :name="node.data.latinname"
@@ -33,13 +39,8 @@
 		      :r="node.data.usefulness/1.5"
           @mouseover="mouseOverChildren(node, $event)"
           @mouseout="mouseOutChildren($event)"
+          @click="drawer = true"
 		      />
-          <el-drawer
-            v-model="drawer"
-            title="I am the title"
-            direction="rtl"
-          ><span>Hi, there!</span>
-          </el-drawer>
 			</g>
       <rect class="label"
       	fill="rgba(255,255,255,.8)"
@@ -63,16 +64,18 @@
 </template>
 
 <script>
-import * as d3 from 'd3';
-import { hierarchy, pack } from 'd3-hierarchy'
 import { ref } from 'vue'
 import { ElMessageBox } from 'element-plus'
+
+import * as d3 from 'd3';
+import { hierarchy, pack } from 'd3-hierarchy'
+
 import mitt from 'mitt';
 const emitter = mitt();
 
-// import PlantOverlay from '@/components/PlantOverlay.vue'
+const drawer = ref(false);
 
-const drawer = ref(false)
+// import PlantOverlay from '@/components/PlantOverlay.vue'
 
 export default {
   name: 'PlantPack',

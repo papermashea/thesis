@@ -1,35 +1,37 @@
 <template>
   <div>
-     <b-card
-      :img-src=imgthb
-      img-top
-      style="width: 20rem;"
-      class="mb-2"
-      >
-      <!-- <b-card-img-lazy :src=imgthb top></b-card-img-lazy> -->
-        <b-card-text>
-          <p class="scientific-name">
-            {{ this.latinname }} 
-          </p>
-          <p class="other-names">
-            {{ this.commonname }} | {{ this.synonyms }}
-          </p>
-        </b-card-text>
-        <div class="flag1">
-          <p class="type">{{ this.type }}</p>
-        </div>
-        <div class="flag2">
-          <p class="seed">{{ this.proptype }}</p>
-        </div>
-        <div class="flag2">
-          <p class="edible">{{ this.edibilityrating }}/5 Ediblity</p>
-        </div>
-      </b-card>
-
-
+<!--     <el-row>
+      <el-col> -->
+        <el-card 
+        :body-style="{ padding: '0px' }"
+        shadow="hover">
+            <img
+              :src=imgthb
+              class="image"
+            />
+            <div style="padding: 14px">
+              <p class="scientific-name">
+                {{ this.latinname }} 
+              </p>
+              <p class="other-names">
+                {{ this.commonname }} | {{ this.synonyms }}
+              </p>
+              <div class="bottom">
+                <div class="flag1">
+                  <p class="type">{{ this.type }}</p>
+                </div>
+                <div class="flag2">
+                  <p class="seed">{{ this.proptype }}</p>
+                </div>
+                <div class="flag2">
+                  <p class="edible">{{ this.ediblerating }}/5 Ediblity</p>
+                </div>
+              </div>
+            </div>
+        </el-card>
+<!--       </el-col>
+    </el-row> -->
   </div>
-
-
 </template>
 
 <script>
@@ -50,7 +52,7 @@ export default {
     synonyms: String,
     type: String,
     proptype: String,
-    edibilityrating: Number,
+    ediblerating: Number,
     imgthb: String,
   },
 }

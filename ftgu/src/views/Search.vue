@@ -1,8 +1,8 @@
 <template>
   <navbar class="mainNav"></navbar>
   <div id="page">
-    <div class="search-filters">
-      <div class="filter-group">
+    <el-row class="search-filters">
+      <el-row class="filter-group">
         <p class="group-label">Environment:</p>
           <FilterEnv
             :filters="filters"
@@ -14,8 +14,8 @@
             }"
           :hardyData="hardyData"
           />
-      </div>
-      <div class="filter-group">
+      </el-row>
+      <el-row class="filter-group">
         <p class="group-label">Ecology:</p>
           <FilterEco
             :filters="filters"
@@ -27,8 +27,8 @@
             }"
           :hardyData="hardyData"
           />
-      </div>
-      <div class="filter-group">
+      </el-row>
+      <el-row class="filter-group">
         <p class="search-label">Search for names, uses, cultivation details, or origins:</p>
           <FilterSearch
             :filters="filters"
@@ -40,25 +40,22 @@
             }"
           :hardyData="hardyData"
           />
-      </div>
-    </div>
-    <div class="plantCards">
-      <b-card-group>
-        <span v-for="p in filteredPlants">
-          <plantCard 
-            class="plant-card"
-            :latinname="p.latinname"
-            :commonname="p.commonname"
-            :synonyms="p.synonyms"
-            :imgthb="p.imgthb"
-            :group="p.type"
-            :proptype="p.proptype"
-            :edibilityrating="p.edibilityrating"
-            :onFilterChange="onFilterChange"
-          >
-          </plantCard>
-        </span>
-      </b-card-group>
+      </el-row>
+    </el-row>
+    <div class="plant-cards">
+      <PlantCard 
+        class="plant-card"
+        v-for="p in filteredPlants"
+        :latinname="p.latinname"
+        :commonname="p.commonname"
+        :synonyms="p.synonyms"
+        :imgthb="p.imgthb"
+        :group="p.type"
+        :proptype="p.proptype"
+        :ediblerating="p.ediblerating"
+        :onFilterChange="onFilterChange"
+      >
+      </PlantCard>
     </div>
   </div>
   <!--   <footbar></footbar> -->
@@ -74,7 +71,7 @@ import Navbar from "@/components/Navbar.vue";
 import FilterEnv from "@/components/Filterenv.vue";
 import FilterEco from "@/components/Filtereco.vue";
 import FilterSearch from "@/components/Filtersearch.vue";
-import plantCard from '@/components/plantCard.vue';
+import PlantCard from '@/components/PlantCard.vue';
 import Footbar from "@/components/Footbar.vue";
 
 
@@ -91,7 +88,7 @@ export default {
     FilterEnv,
     FilterEco,
     FilterSearch,
-    plantCard,
+    PlantCard,
     Footbar,
   },
   data() {
@@ -345,23 +342,23 @@ export default {
 
 
       for (let i = 0; i < this.plants.length; i++) {
-        const { sun, soil, moisture, ph, hardinessuse, hardiness, group, size, prop, growth, aromatic, pollinators } = this.plants[i];
-          sunOpts = [...sunOpts, ...sun];
-          soilOpts = [...soilOpts, ...soil];
-          moistureOpts = [...moistureOpts, ...moisture];
-          phOpts = [...phOpts, ...ph];
-          huseOpts = [...huseOpts, hardinessuse];
+        const { sun, soil, moisture, ph, hardinessuse, hardiness, group, size, proptype, growth, aromatic, pollinators } = this.plants[i];
+          sunOpts = [...sunOpts, ...sun].filter(Boolean);
+          soilOpts = [...soilOpts, ...soil].filter(Boolean);
+          moistureOpts = [...moistureOpts, ...moisture].filter(Boolean);
+          phOpts = [...phOpts, ...ph].filter(Boolean);
+          huseOpts = [...huseOpts, hardinessuse].filter(Boolean);
           hardyRange = [
             Math.min(hardiness, hardyRange[0]),
             Math.max(hardiness, hardyRange[1]),
           ];
 
-          groupOpts = [...groupOpts, ...group];
-          sizeOpts = [...sizeOpts, size];
-          propOpts = [...propOpts, prop];
-          growthOpts = [...growthOpts, growth];
+          groupOpts = [...groupOpts, ...group].filter(Boolean);
+          sizeOpts = [...sizeOpts, size].filter(Boolean);
+          propOpts = [...propOpts, proptype].filter(Boolean);
+          growthOpts = [...growthOpts, growth].filter(Boolean);
           scentOpts = [...scentOpts, aromatic];
-          pollinOpts = [...pollinOpts, ...pollinators];
+          pollinOpts = [...pollinOpts, ...pollinators].filter(Boolean);
 
       }
       this.filters = {
@@ -417,6 +414,19 @@ export default {
         },
       };
     }//close function
+    // plantDetails(p) {
+    //   const details = {
+    //     name: h.data.latinname,
+    //     cname: h.data.commonname,
+    //     sname: h.data.synonyms,
+    //     growth: h.data.growth,
+    //     hardinessuse: h.data.hardinessuse,
+    //     edible: h.data.ediblerating,
+    //     medicinal: h.data.medicinalrating,
+    //     material: h.data.materialrating,
+    //     value: h.value,
+    //   }
+    // }
   }//close methods
 };//close export
 </script>
@@ -424,13 +434,16 @@ export default {
 <style>
 .search-filters {
   grid-column: span 4;
-  display: block;
-  height: 600px;
-  width: 100%;
+  position: relative;
+  display: flex;
+  height: 20%;
   margin: 0 10%;
 }
 
 .filter-group {
+  position: relative;
+  display: flex;
+  width: 100%;
   vertical-align: middle;
   margin: 10px 0px;
 }
@@ -450,8 +463,7 @@ export default {
 }
 
 .filters {
-  width: 80%;
-  margin: 0px 10% 0px 10%;
+  width: 90%;
   position: relative;
 }
 
@@ -463,20 +475,13 @@ export default {
 }
 
 .tag-filter {
-  width: 170px;
+  display: flex;
+  width: 15%;
   margin-top: 20px;
 }
 
 .tag-filter .el-select {
   width: 98%;
-}
-
-.search-filter {
-  width: 100%;
-  margin-top: 20px;
-}
-.search-filter input {
-  width: 100%;
 }
 
 .plant-counts {
@@ -485,11 +490,22 @@ export default {
   text-align: right;
 }
 
-.plantCards {
-  display: block;
+.plant-cards {
+  position: relative;
+  display: flex;
   grid-column: span 4;
   width: 100%;
   margin: 20% 10%;
+}
+
+.plant-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  column-gap: 20px;
+  row-gap: 20px;
+  min-width: 0;
 }
 
 @media (max-width: 399px) {
@@ -499,8 +515,7 @@ export default {
   }
 
   .search-filter,
-  .tag-filter,
-  .sort-param {
+  .tag-filter {
     width: 100%;
   }
 }
