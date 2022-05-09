@@ -1,22 +1,17 @@
 <template>
-  <div class="filters">
-    <el-col>
+  <div class="search-field">
+    <div class="filter search-filter">
       <!-- SEARCH FILTER -->
-      <div class="filter search-filter">
         <el-input
           placeholder="i.e. vegetable"
           clearable
           v-model="filterSearch.selected"
           @change="(text) => onFilterChange('SEARCH', text)"
         />
-      </div>
-    </el-col>
-    <el-col>
-      <div class="plant-counts">
-         {{ nPlants.filtered }} potential plants
-      </div>
-    </el-col>
-
+    </div>
+  </div>
+  <div class="plant-counts">
+         <p class="count-label">Showing {{ nPlants.show }} of {{ nPlants.filtered }} potential plants</p>
   </div>
 </template>
 

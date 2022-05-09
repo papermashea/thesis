@@ -1,85 +1,65 @@
 <template>
   <navbar class="mainNav"></navbar>
   <div id="page">
-    <el-row class="search-filters">
+    <div class="search-filters">
       <el-row class="filter-group">
         <p class="group-label">Environment:</p>
-          <FilterEnv
-            :filters="filters"
-            :params="params"
-            :onFilterChange="onFilterChange"
-            :nPlants="{
+        <FilterEnv :filters="filters" :params="params" :onFilterChange="onFilterChange" :nPlants="{
               filtered: filteredPlants.length,
               all: plants.length,
-            }"
-          :hardyData="hardyData"
-          />
+            }" :hardyData="hardyData" />
       </el-row>
       <el-row class="filter-group">
         <p class="group-label">Ecology:</p>
-          <FilterEco
-            :filters="filters"
-            :params="params"
-            :onFilterChange="onFilterChange"
-            :nPlants="{
+        <FilterEco :filters="filters" :params="params" :onFilterChange="onFilterChange" :nPlants="{
               filtered: filteredPlants.length,
               all: plants.length,
-            }"
-          :hardyData="hardyData"
-          />
+            }" :hardyData="hardyData" />
       </el-row>
       <el-row class="filter-group">
         <p class="search-label">Search for names, uses, cultivation details, or origins:</p>
-          <FilterSearch
-            :filters="filters"
-            :params="params"
-            :onFilterChange="onFilterChange"
-            :nPlants="{
-              all: plants.length,
+        <FilterSearch :filters="filters" :params="params" :onFilterChange="onFilterChange" :nPlants="{
               filtered: filteredPlants.length,
-            }"
-          :hardyData="hardyData"
-          />
+              all: plants.length,
+              show: plantsLoaded.length, 
+            }" :hardyData="hardyData" />
       </el-row>
-    </el-row>
-    <div class="plant-cards">
-      <PlantCard 
-        class="plant-card"
-        v-for="p in filteredPlants"
-        :latinname="p.latinname"
-        :commonname="p.commonname"
-        :synonyms="p.synonyms"
-        :imgthb="p.imgthb"
-        :group="p.type"
-        :proptype="p.proptype"
-        :ediblerating="p.ediblerating"
-        :onFilterChange="onFilterChange"
-      >
-      </PlantCard>
+    </div>
+    <div class="search-results">
+      <div v-for="(p, index) in plantsLoaded" :key="index" :id="p.id" @click="drawer = true; plantPass(p)">
+        <PlantCard :latinname="p.latinname" :commonname="p.commonname" :synonyms="p.synonyms" :imgthb="p.imgthb" :growth="p.growth" :type="p.type" :proptype="p.proptype" :onFilterChange="onFilterChange" />
+      </div>
+      <el-drawer v-model="drawer" direction="rtl" size="50%">
+        <PlantOverlay  v-bind:id="id"/>
+      </el-drawer>
     </div>
   </div>
-  <!--   <footbar></footbar> -->
+  <div class="load">
+    <div class="more" @click="loadMore">+ load more +</div>
+  </div>
+  <footbar></footbar>
 </template>
 
-<script>
-// import plants from '@/assets/data/plants_test.json';
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { ElMessageBox } from 'element-plus';
+const drawer = ref(false);
+</script>
+
+<script lang="ts">
 import plants from '@/assets/data/plants.json';
 import { rollup, ascending, descending } from "d3-array";
 import { FILTERS, PARAMS } from "../global";
+import mitt from 'mitt';
+const emitter = mitt();
 
 import Navbar from "@/components/Navbar.vue";
 import FilterEnv from "@/components/Filterenv.vue";
 import FilterEco from "@/components/Filtereco.vue";
 import FilterSearch from "@/components/Filtersearch.vue";
 import PlantCard from '@/components/PlantCard.vue';
+import PlantOverlay from '@/components/PlantOverlay.vue';
 import Footbar from "@/components/Footbar.vue";
-
-
-// console.log(plantData)
-  // console.log(Object.keys(plantData.plants).length)
-// console.log(filteredPlants)
-
-const FILTER_HEIGHT = 40;
 
 export default {
   name: "Search",
@@ -89,15 +69,16 @@ export default {
     FilterEco,
     FilterSearch,
     PlantCard,
+    PlantOverlay,
     Footbar,
   },
   data() {
     return {
-      // plants: plantData,
       plants: [],
       filters: FILTERS,
       params: PARAMS,
       search: "",
+      length: 60,
     }
   }, //close data
   mounted() {
@@ -121,36 +102,34 @@ export default {
       return this.plants
         .filter(
           (p) =>
-            p.hardiness >= HARDINESS.selected[0] &&
-            p.hardiness <= HARDINESS.selected[1] &&
-            (!SUN.selected.length ||
-              SUN.selected.some((sunOpt) => p.sun.includes(sunOpt))) &&
-            (!SOIL.selected.length ||
-              SOIL.selected.some((soilOpt) => p.soil.includes(soilOpt))) &&
-            (!MOISTURE.selected.length ||
-              MOISTURE.selected.some((moistureOpt) => p.moisture.includes(moistureOpt))) &&
-            (!PH.selected.length ||
-              PH.selected.some((phOpt) => p.ph.includes(phOpt))) &&
-            (!HARDINESSUSE.selected.length ||
-              HARDINESSUSE.selected.some((huseOpt) => p.hardinessuse.includes(huseOpt))) &&
-            (!GROUP.selected.length ||
-              GROUP.selected.some((groupOpt) => p.group.includes(groupOpt))) &&
-            (!SIZE.selected.length ||
-              SIZE.selected.some((sizeOpt) => p.size.includes(sizeOpt))) &&
-            (!PROP.selected.length ||
-              PROP.selected.some((propOpt) => p.prop.includes(propOpt))) &&
-            (!GROWTH.selected.length ||
-              GROWTH.selected.some((growthOpt) => p.growth.includes(growthOpt))) &&
-            (!SCENT.selected.length ||
-              SCENT.selected.some((scentOpt) => p.aromatic.includes(scentOpt))) &&
-            (!POLLINATORS.selected.length ||
-              POLLINATORS.selected.some((pollinOpt) => p.pollinators.includes(pollinOpt))) &&
-            (!searchTerm || p.searchTarget.indexOf(searchTerm) !== -1)
+          p.hardiness >= HARDINESS.selected[0] &&
+          p.hardiness <= HARDINESS.selected[1] &&
+          (!SUN.selected.length ||
+            SUN.selected.some((sunOpt) => p.sun.includes(sunOpt))) &&
+          (!SOIL.selected.length ||
+            SOIL.selected.some((soilOpt) => p.soil.includes(soilOpt))) &&
+          (!MOISTURE.selected.length ||
+            MOISTURE.selected.some((moistureOpt) => p.moisture.includes(moistureOpt))) &&
+          (!PH.selected.length ||
+            PH.selected.some((phOpt) => p.ph.includes(phOpt))) &&
+          (!HARDINESSUSE.selected.length ||
+            HARDINESSUSE.selected.some((huseOpt) => p.hardinessuse.includes(huseOpt))) &&
+          (!GROUP.selected.length ||
+            GROUP.selected.some((groupOpt) => p.group.includes(groupOpt))) &&
+          (!SIZE.selected.length ||
+            SIZE.selected.some((sizeOpt) => p.size.includes(sizeOpt))) &&
+          (!PROP.selected.length ||
+            PROP.selected.some((propOpt) => p.prop.includes(propOpt))) &&
+          (!GROWTH.selected.length ||
+            GROWTH.selected.some((growthOpt) => p.growth.includes(growthOpt))) &&
+          (!SCENT.selected.length ||
+            SCENT.selected.some((scentOpt) => p.aromatic.includes(scentOpt))) &&
+          (!POLLINATORS.selected.length ||
+            POLLINATORS.selected.some((pollinOpt) => p.pollinators.includes(pollinOpt))) &&
+          (!searchTerm || p.searchTarget.indexOf(searchTerm) !== -1)
         )
         .sort((a, b) =>
-          isSortAsc
-            ? ascending(a[sortParam], b[sortParam])
-            : descending(a[sortParam], b[sortParam])
+          isSortAsc ? ascending(a[sortParam], b[sortParam]) : descending(a[sortParam], b[sortParam])
         );
     },
     hardyData() {
@@ -181,6 +160,9 @@ export default {
         filtered: filteredHardyData,
         all: unfilteredHardyData,
       };
+    },
+    plantsLoaded() {
+      return this.filteredPlants.slice(0, this.length);
     },
   }, //close computed
   methods: {
@@ -343,22 +325,22 @@ export default {
 
       for (let i = 0; i < this.plants.length; i++) {
         const { sun, soil, moisture, ph, hardinessuse, hardiness, group, size, proptype, growth, aromatic, pollinators } = this.plants[i];
-          sunOpts = [...sunOpts, ...sun].filter(Boolean);
-          soilOpts = [...soilOpts, ...soil].filter(Boolean);
-          moistureOpts = [...moistureOpts, ...moisture].filter(Boolean);
-          phOpts = [...phOpts, ...ph].filter(Boolean);
-          huseOpts = [...huseOpts, hardinessuse].filter(Boolean);
-          hardyRange = [
-            Math.min(hardiness, hardyRange[0]),
-            Math.max(hardiness, hardyRange[1]),
-          ];
+        sunOpts = [...sunOpts, ...sun].filter(Boolean);
+        soilOpts = [...soilOpts, ...soil].filter(Boolean);
+        moistureOpts = [...moistureOpts, ...moisture].filter(Boolean);
+        phOpts = [...phOpts, ...ph].filter(Boolean);
+        huseOpts = [...huseOpts, hardinessuse].filter(Boolean);
+        hardyRange = [
+          Math.min(hardiness, hardyRange[0]),
+          Math.max(hardiness, hardyRange[1]),
+        ];
 
-          groupOpts = [...groupOpts, ...group].filter(Boolean);
-          sizeOpts = [...sizeOpts, size].filter(Boolean);
-          propOpts = [...propOpts, proptype].filter(Boolean);
-          growthOpts = [...growthOpts, growth].filter(Boolean);
-          scentOpts = [...scentOpts, aromatic];
-          pollinOpts = [...pollinOpts, ...pollinators].filter(Boolean);
+        groupOpts = [...groupOpts, ...group].filter(Boolean);
+        sizeOpts = [...sizeOpts, size].filter(Boolean);
+        propOpts = [...propOpts, proptype].filter(Boolean);
+        growthOpts = [...growthOpts, growth].filter(Boolean);
+        scentOpts = [...scentOpts, aromatic];
+        pollinOpts = [...pollinOpts, ...pollinators].filter(Boolean);
 
       }
       this.filters = {
@@ -413,29 +395,34 @@ export default {
           options: [...new Set(pollinOpts)].sort(),
         },
       };
-    }//close function
-    // plantDetails(p) {
-    //   const details = {
-    //     name: h.data.latinname,
-    //     cname: h.data.commonname,
-    //     sname: h.data.synonyms,
-    //     growth: h.data.growth,
-    //     hardinessuse: h.data.hardinessuse,
-    //     edible: h.data.ediblerating,
-    //     medicinal: h.data.medicinalrating,
-    //     material: h.data.materialrating,
-    //     value: h.value,
-    //   }
-    // }
-  }//close methods
-};//close export
+    }, 
+    plantPass(h) {
+      const plantDetails = {
+        name: h.latinname,
+        cname: h.commonname,
+        sname: h.synonyms,
+        growth: h.growth,
+        hardinessuse: h.hardinessuse,
+        edible: h.ediblerating,
+        medicinal: h.medicinalrating,
+        material: h.materialrating,
+        value: h.value,
+      }
+    },
+    loadMore() {
+      if (this.length > this.filteredPlants.length) return;
+      this.length = this.length + 60;
+    }
+  } //close methods
+}; //close export
 </script>
 
 <style>
 .search-filters {
   grid-column: span 4;
+  display: grid;
   position: relative;
-  display: flex;
+  width: 100%;
   height: 20%;
   margin: 0 10%;
 }
@@ -444,14 +431,22 @@ export default {
   position: relative;
   display: flex;
   width: 100%;
-  vertical-align: middle;
   margin: 10px 0px;
+}
+
+.plant-counts {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin: 10px 0px;
+  font-size: .8em;
 }
 
 .group-label {
   width: 10%;
   float: left;
   clear: none;
+  margin-top: 20px;
 }
 
 .search-label {
@@ -459,12 +454,22 @@ export default {
   float: left;
   clear: none;
   text-align: right;
-  padding-right: 20px;
+  padding: 0 20px;
+}
+
+.count-label {
+  width: 100%;
+  text-align: right;
+  padding: 0 20px;
 }
 
 .filters {
   width: 90%;
   position: relative;
+}
+
+.search-field {
+  width: 30%;
 }
 
 .label {
@@ -484,28 +489,37 @@ export default {
   width: 98%;
 }
 
-.plant-counts {
-  width: 100%;
-  font-size: .8em;
-  text-align: right;
-}
-
-.plant-cards {
+.search-results {
   position: relative;
-  display: flex;
   grid-column: span 4;
   width: 100%;
-  margin: 20% 10%;
+  margin: 20% 10% 0 10%;
 }
 
 .plant-card {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  word-wrap: break-word;
-  column-gap: 20px;
-  row-gap: 20px;
-  min-width: 0;
+  float: left;
+  padding: 8px;
+  display: grid;
+  cursor: cell;
+}
+
+.load {
+  width: 100%;
+  height: 100px;
+  margin-top: 5%;
+  background-color: var(--low-edible);
+  opacity: 60%;
+}
+
+.more {
+  padding: 2% 45%;
+  color: white;
+}
+
+.load:hover {
+  opacity: 100%;
+  cursor: pointer;
 }
 
 @media (max-width: 399px) {
@@ -513,7 +527,6 @@ export default {
     width: 100%;
     margin: 0px;
   }
-
   .search-filter,
   .tag-filter {
     width: 100%;

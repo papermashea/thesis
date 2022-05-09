@@ -155,6 +155,7 @@ export default {
     mouseOverChildren(details, event) {
       this.openTooltip(details, event)
       event.target.style.stroke = 'rgba(255, 255, 255, .5)'
+      // event.target.style.transform = 'scale(1.01);'
     },
     mouseOutChildren(event) {
       this.closeTooltip(event)
@@ -180,4 +181,8 @@ circle[value="4"] {
 circle[value="5"] {
 	fill: var(--high-edible);
 }
+.plant-node {
+  cursor: cell;
+}
+
 </style>

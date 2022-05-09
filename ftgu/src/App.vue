@@ -6,6 +6,8 @@
 import mitt from 'mitt';
 const emitter = mitt();
 
+
+
 </script>
 
 <style>
@@ -73,6 +75,7 @@ a {
   font-family: Helvetica Neue;
   font-weight: 500;
   text-decoration: none;
+  cursor: pointer;
 }
 
 a:hover {

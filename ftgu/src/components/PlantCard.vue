@@ -1,48 +1,39 @@
 <template>
-  <div>
-<!--     <el-row>
-      <el-col> -->
-        <el-card 
-        :body-style="{ padding: '0px' }"
-        shadow="hover">
-            <img
-              :src=imgthb
-              class="image"
-            />
-            <div style="padding: 14px">
-              <p class="scientific-name">
-                {{ this.latinname }} 
-              </p>
-              <p class="other-names">
-                {{ this.commonname }} | {{ this.synonyms }}
-              </p>
-              <div class="bottom">
-                <div class="flag1">
-                  <p class="type">{{ this.type }}</p>
-                </div>
-                <div class="flag2">
-                  <p class="seed">{{ this.proptype }}</p>
-                </div>
-                <div class="flag2">
-                  <p class="edible">{{ this.ediblerating }}/5 Ediblity</p>
-                </div>
-              </div>
+  <div class="plant-card">
+    <el-card 
+    :body-style="{ padding: '0px' }"
+    shadow="hover">
+        <img
+          :src=imgthb
+          class="image"
+        />
+        <div class="card-text">
+          <p class="scientific-name">
+            {{ this.latinname }} 
+          </p>
+          <p class="other-names">
+            <span v-if="this.commonname !== ''">aka</span>
+            <span v-else-if="this.synonyms !== ''">aka</span>
+            {{ this.commonname }}
+            <span v-if="this.commonname !== '' && this.synonyms !== '' && this.synonyms.length < 80">,</span> 
+            <span v-if="this.synonyms.length < 80">
+            {{ this.synonyms }}
+          </span>
+          </p>
+            <div class="flag">
+              <p class="tag" v-if="this.type !== ''">{{ this.type }}</p>
+              <p class="tag">{{ this.proptype }}</p>
             </div>
-        </el-card>
-<!--       </el-col>
-    </el-row> -->
+          </div>
+    </el-card>
   </div>
 </template>
 
 <script>
-// import PlantOverlay from '@/components/PlantOverlay.vue';
-
-
 export default {
   name: 'PlantCard',
 
   components: {
-    // PlantOverlay,
   },
 
   props: {
@@ -66,29 +57,30 @@ export default {
     object-fit: cover;
   }
 
+  .card-text {
+    padding: 0 10px;
+    min-height: 100px; 
+    max-height: 100px;
+    max-width: 300px;
+  }
+
   .scientific-name {
     font-size: 1em;
+    margin-bottom: 0px;
   }
 
   .other-names {
-    font-size: .9em;
+    font-size: .8em;
+    margin-bottom: 0px;
+    font-style: italic;
   }
 
-  .flag1 {
+  .flag {
+    font-size: .7em;
+  }
+  .tag {
     width: 50%;
-    height: 10px;
     float: left;
-    font-size: .8em;
-    marging: 0 1%;
   }
-
-  .flag2 {
-    width: 25%;
-    height: 10px;
-    float: left;
-    font-size: .8em;
-    marging: 0 1%;
-  }  
-
 
 </style>

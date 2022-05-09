@@ -98,6 +98,11 @@ export default {
   cx: 50%;
 }
 
+.collection:hover {
+  fill: rgba(61, 112, 104, .6);
+  stroke: 2px solid rgba(61, 112, 104, 1);
+}
+
 .graphCol,
 .numCol {
   width: 50%;
