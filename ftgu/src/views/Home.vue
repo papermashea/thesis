@@ -62,9 +62,6 @@ import Tooltip from '@/components/Tooltip.vue'
 import PlantPack from "@/components/PlantPack.vue";
 import Footbar from "@/components/Footbar.vue";
 
-// console.log(plants)
-// console.log(Array.isArray(plants))
-
 export default {
   name: "App",
 
@@ -77,6 +74,7 @@ export default {
     Information,
     PlantPack,
     Tooltip,
+    // Legend,
     Footbar,
   },
   data() {
@@ -526,6 +524,10 @@ ol {
     margin-top: 50px;
   }
 }
+.plant-flow {
+  margin-bottom: 150px;
+}
+
 .cluster {
   max-width: 950px;
   margin: 0 auto;

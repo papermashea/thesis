@@ -25,13 +25,6 @@
           transform: `translate(${node.x}px, ${node.y}px)`
         }"
         >
-          <el-drawer
-            v-model="drawer"
-            title="I am the title"
-            direction="rtl"
-          ><span>Hi, there!</span>
-          </el-drawer>
-
 		      <circle
 		      class="plant-node"
 		      :name="node.data.latinname"
@@ -39,7 +32,7 @@
 		      :r="node.data.usefulness/1.5"
           @mouseover="mouseOverChildren(node, $event)"
           @mouseout="mouseOutChildren($event)"
-          @click="drawer = true"
+          @click="drawer = true; plantPass(node.data)"
 		      />
 			</g>
       <rect class="label"
@@ -60,27 +53,38 @@
 	      </text>
     </g>
     </svg>
+    <el-drawer v-model="drawer" direction="rtl" size="50%">
+      <PlantOverlay v-if="drawer = true"
+      v-bind="{plantDetails}"/>
+    </el-drawer>
   </div>
 </template>
 
-<script>
-import { ref } from 'vue'
-import { ElMessageBox } from 'element-plus'
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { ElMessageBox } from 'element-plus';
+const drawer = ref(false);
 
+import mitt from 'mitt';
+
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    emitter: mitt;
+  }
+}
+
+</script>
+
+<script lang="ts">
 import * as d3 from 'd3';
 import { hierarchy, pack } from 'd3-hierarchy'
 
-import mitt from 'mitt';
-const emitter = mitt();
-
-const drawer = ref(false);
-
-// import PlantOverlay from '@/components/PlantOverlay.vue'
+import PlantOverlay from '@/components/PlantOverlay.vue'
 
 export default {
   name: 'PlantPack',
   components: {
-    // PlantOverlay
+    PlantOverlay
   },
   props: {
     onFilterChange: Function,
@@ -92,28 +96,13 @@ export default {
     return {
       width: 1200,
       height: 1200,
-      // value: this.data.value,
     }
   }, //close data
   computed: {
   	useColor() {
       let petri = ["#3C6962", "#309172","#20C387", "#4BDA45", "#73F009"];
       let values = [1, 2, 3, 4, 5];
-			// return d3.quantize(d3.interpolateDiscrete(petri), petri.length)
-			
-			// const color = d3.scaleLinear()
-			//     .domain([1, 2, 3, 4, 5])
-			//     .range([ "#3C6962", "#309172","#20C387", "#4BDA45", "#73F009"]);
-			
-			// const color = d3.scaleOrdinal()
-			//     .domain([1, 2, 3, 4, 5])
-			//     .range([ "#3C6962", "#309172","#20C387", "#4BDA45", "#73F009"]);
 
-			// const color = d3.quantize(d3.interpolateDiscrete(petri), 5)
-			
-			// const color = d3.quantize(d3.interpolateCool, values.length)
-			
-			// const colorInterpolator = d3.quantize(d3.interpolateHcl("#3C6962", "#73F009"), 5)
 			const colorInt = d3.interpolateDiscrete(petri)
 
 			const colorScale = d3.scaleQuantize()
@@ -134,6 +123,52 @@ export default {
     } 
   }, //close computed
   methods: {
+    plantPass(o) {
+      console.log(o.id)
+      const plantDetails = {
+          commonname: o.commonname,
+          cultivationdetails: o.cultivationdetails,
+          edibleuses: o.edibleuses,
+          family: o.family,
+          flowerendmonth: o.flowerendmonth,
+          flowerstartMonth: o.flowerstartMonth,
+          flowertype: o.flowertype,
+          growth: o.growth,
+          habitat: o.habitat,
+          hardinessuse: o.hardinessuse,
+          id: o.id,
+          img: o.img,
+          imgcreator: o.imgcreator,
+          imgthb: o.imgthb,
+          indigenoususe: o.indigenoususe,
+          knownhazards: o.knownhazards,
+          latinname: o.latinname,
+          leaftype: o.leaftype,
+          materialuses: o.materialuses,
+          medicinaluses: o.medicinaluses,
+          ovlink: o.ovlink,
+          pfaflink: o.pfaflink,
+          propdetails: o.propdetails,
+          proptype: o.proptype,
+          range: o.range,
+          scent: o.scent,
+          searchTarget: o.searchTarget,
+          season: o.season,
+          seedendmonth: o.seedendmonth,
+          seedstartmonth: o.seedstartmonth,
+          size: o.size,
+          synonyms: o.synonyms,
+          type: o.type,
+          usda: o.usda,
+          usdalink: o.usdalink,
+          wslink: o.wslink,
+      }
+
+      // console.log(plantDetails)
+      this.plantDetails = plantDetails
+
+      return { plantDetails }
+    },
     openTooltip(h, event) {
       const details = {
         name: h.data.latinname,

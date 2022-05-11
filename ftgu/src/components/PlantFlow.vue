@@ -1,4 +1,5 @@
 <template>
+<div class="plant-flow">
   <div class="container">
     <p class="level-1 rectangle" id="top">Test Your Environment</p>
     <ol class="level-2-wrapper">
@@ -9,47 +10,65 @@
           <p class="factor" id="nested">{{ factor.name}} </p>
             <p class="test"> {{ factor.test }} </p>
             <p class="cat"> {{ factor.name}} categories: </p>
-              <div class="accordion" role="tablist">  
-                <b-button 
-                class="loop"
-                v-for="(res, index) in factor.results"
-                v-b-toggle="'accordion' + '_' + factor.name + '_'+res.id"
-                style="{background-color: var(--${factor.name}}"
-                >+
-                </b-button>
-                <b-collapse 
-                  v-for="(res, index) in factor.results"
-                  :id="'accordion' + '_' + factor.name + '_'+res.id"
-                >
-<!--                   <Results
-                    resArray="{data: factors, resArray}"
-                  /> -->
-                </b-collapse>
-              </div>
+            <div class="results-button" v-for="(res, index) in factor.results">
+              <el-button
+              circle
+              @click="showResults(res)"
+              :class="factor.name"
+              :id="res.id"
+              :style="{
+                opacity: (index+.3)/2,
+                color: white,
+                stroke: none
+              }"
+              >
+            <div :key="factor.name" v-if="factor.name === 'ph'"><el-icon><coin /></el-icon></div>
+            <div :key="factor.name" v-else-if="factor.name == 'moisture'"><el-icon><pouring /></el-icon></div>
+            <div :key="factor.name" v-else-if="factor.name == 'soil'"><el-icon><picture-rounded /></el-icon></div>
+            <div :key="factor.name" v-else="factor.name == 'sun'"><el-icon><sunny /></el-icon></div>            
+              </el-button>
+            </div>
+              <Results v-bind="{resultDetails}" :class="factor.name" :id="index"/>
           </div>
       </li>
     </ol>
   <!-- <div v-for="(factor, index) in factors" class="band" v-bind:id="factor.name"></div> -->
   </div>
+</div>
 </template>
 
 <script>
 import environmentData from "@/assets/data/environment.json";
-// import Results from "@/components/Results.vue";
-
-// console.log(environmentData)
+import Results from "@/components/Results.vue";
 
 export default {
   name: 'PlantFlow',
   components: {
-    // Results,
+    Results,
   },
   data(){
     return {
       factors: environmentData,
       resArray: environmentData.results,
     }
-  }
+  },//close data
+  methods: {
+    showResults(r) {
+
+      const resultDetails = {
+        type: r.type,
+        description: r.description,
+        details: r.details,
+        infolink: r.infolink,
+        testlink: r.testlink,
+      }
+
+      console.log(resultDetails.description)
+      this.resultDetails = resultDetails
+
+      return { resultDetails }
+    }
+  }//close methods
 };
 
 </script>
@@ -73,17 +92,50 @@ export default {
   text-transform: capitalize;
 }
 
-.loop {
+.results-button {
   width: 30%;
-  display: inline;
+  padding: 0 5%;
+  float: left;
 }
 
-.btn-secondary {
-  border-radius: 50%;
+.el-button:hover {
+  opacity: 1!important;
+  stroke: 2px;
+}
+
+.el-button {
+  height: 40px;
+  width: 40px;
+  float: left;
+}
+
+.el-icon svg {
+  height: 1em;
+  width: 1em;
+  padding: 0;
+  margin: 0;
   color: white;
-  margin: 6% 2%;
-  padding: 14px;
-  border: none;
+}
+
+.el-button.sun,
+.band#sun {
+  stroke: var(--sun);
+  background-color: var(--sun);
+}
+
+.el-button.moisture,
+.band#moisture {
+  background-color: var(--moisture);
+}
+
+.el-button.soil,
+.band#soil {
+  background-color: var(--soil);
+}
+
+.el-button.ph,
+.band#ph {
+  background-color: var(--ph);
 }
 
 .band {
@@ -98,27 +150,6 @@ export default {
 
 .band#ph {
   margin-right: -120px;
-}
-
-
-#sun .btn-secondary, 
-.band#sun {
-    background-color: var(--sun);
-}
-
-#moisture .btn-secondary, 
-.band#moisture {
-    background-color: var(--moisture);
-}
-
-#soil .btn-secondary,
-.band#soil {
-    background-color: var(--soil);
-}
-
-#ph .btn-secondary, 
-.band#ph {
-    background-color: var(--ph);
 }
 
 .notShown {

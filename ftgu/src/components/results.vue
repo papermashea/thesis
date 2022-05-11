@@ -1,32 +1,16 @@
 <template>
-    <b-card-body class="resultsInfo" 
-    >
-      <p class="type">component</p>
-  <!--     <p class="description">{{ this.description }}</p>
-      <p class="details">{{ this.details }}</p>
+  <div class="res">
       <a class="oneline" id="external" :href=infolink target="_blank"> <button type="button" class="btn btn-light">info </button></a>
-      <a class="oneline" id="external" :href=testlink target="_blank"> <button type="button" class="btn btn-light">tests </button></a> -->
-    </b-card-body>
+      <a class="oneline" id="external" :href=testlink target="_blank"> <button type="button" class="btn btn-light">tests </button></a>
+  </div>
 </template>
  
 <script>
-// console.log(resultsData)
-
 export default {
   name: 'Results',
   props: {
-    resArray: { type: Array, required: true },
-   // name: String,
-   // id: String,
-   // type: String,
-   // description: String,
-   // details: String,
-   // infolink: String,
-   // testlink: String,
+    resultDetails: { type: Object, required: true },
    }, //close props
-  data() {
-    currentlyOpen: null
-  } //close data
 };
 </script>
 

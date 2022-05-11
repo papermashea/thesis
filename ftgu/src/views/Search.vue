@@ -7,14 +7,14 @@
         <FilterEnv :filters="filters" :params="params" :onFilterChange="onFilterChange" :nPlants="{
               filtered: filteredPlants.length,
               all: plants.length,
-            }" :hardyData="hardyData" />
+            }" />
       </el-row>
       <el-row class="filter-group">
         <p class="group-label">Ecology:</p>
         <FilterEco :filters="filters" :params="params" :onFilterChange="onFilterChange" :nPlants="{
               filtered: filteredPlants.length,
               all: plants.length,
-            }" :hardyData="hardyData" />
+            }" />
       </el-row>
       <el-row class="filter-group">
         <p class="search-label">Search for names, uses, cultivation details, or origins:</p>
@@ -22,15 +22,16 @@
               filtered: filteredPlants.length,
               all: plants.length,
               show: plantsLoaded.length, 
-            }" :hardyData="hardyData" />
+            }"/>
       </el-row>
     </div>
     <div class="search-results">
-      <div v-for="(p, index) in plantsLoaded" :key="index" :id="p.id" @click="drawer = true; plantPass(p)">
-        <PlantCard :latinname="p.latinname" :commonname="p.commonname" :synonyms="p.synonyms" :imgthb="p.imgthb" :growth="p.growth" :type="p.type" :proptype="p.proptype" :onFilterChange="onFilterChange" />
+      <div v-for="(p, index) in plantsLoaded" :key="index" :id="p.id">
+        <PlantCard :latinname="p.latinname" :commonname="p.commonname" :synonyms="p.synonyms" :imgthb="p.imgthb" :growth="p.growth" :type="p.type" :proptype="p.proptype" :onFilterChange="onFilterChange" @click="drawer = true; plantPass(p)"/>
       </div>
       <el-drawer v-model="drawer" direction="rtl" size="50%">
-        <PlantOverlay  v-bind:id="id"/>
+        <PlantOverlay v-if="drawer = true"
+        v-bind="{plantDetails}"/>
       </el-drawer>
     </div>
   </div>
@@ -43,6 +44,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { ElMessageBox } from 'element-plus';
+
 const drawer = ref(false);
 </script>
 
@@ -50,8 +52,6 @@ const drawer = ref(false);
 import plants from '@/assets/data/plants.json';
 import { rollup, ascending, descending } from "d3-array";
 import { FILTERS, PARAMS } from "../global";
-import mitt from 'mitt';
-const emitter = mitt();
 
 import Navbar from "@/components/Navbar.vue";
 import FilterEnv from "@/components/Filterenv.vue";
@@ -396,18 +396,51 @@ export default {
         },
       };
     }, 
-    plantPass(h) {
+    plantPass(o) {
+      console.log(o.id)
       const plantDetails = {
-        name: h.latinname,
-        cname: h.commonname,
-        sname: h.synonyms,
-        growth: h.growth,
-        hardinessuse: h.hardinessuse,
-        edible: h.ediblerating,
-        medicinal: h.medicinalrating,
-        material: h.materialrating,
-        value: h.value,
+          commonname: o.commonname,
+          cultivationdetails: o.cultivationdetails,
+          edibleuses: o.edibleuses,
+          family: o.family,
+          flowerendmonth: o.flowerendmonth,
+          flowerstartMonth: o.flowerstartMonth,
+          flowertype: o.flowertype,
+          growth: o.growth,
+          habitat: o.habitat,
+          hardinessuse: o.hardinessuse,
+          id: o.id,
+          img: o.img,
+          imgcreator: o.imgcreator,
+          imgthb: o.imgthb,
+          indigenoususe: o.indigenoususe,
+          knownhazards: o.knownhazards,
+          latinname: o.latinname,
+          leaftype: o.leaftype,
+          materialuses: o.materialuses,
+          medicinaluses: o.medicinaluses,
+          ovlink: o.ovlink,
+          pfaflink: o.pfaflink,
+          propdetails: o.propdetails,
+          proptype: o.proptype,
+          range: o.range,
+          scent: o.scent,
+          searchTarget: o.searchTarget,
+          season: o.season,
+          seedendmonth: o.seedendmonth,
+          seedstartmonth: o.seedstartmonth,
+          size: o.size,
+          synonyms: o.synonyms,
+          type: o.type,
+          usda: o.usda,
+          usdalink: o.usdalink,
+          wslink: o.wslink,
       }
+
+      console.log(plantDetails)
+      this.plantDetails = plantDetails
+
+      return { plantDetails }
     },
     loadMore() {
       if (this.length > this.filteredPlants.length) return;

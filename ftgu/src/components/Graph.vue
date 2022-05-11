@@ -35,17 +35,17 @@
       <div class="num-block">
         <p class="num2">{{ nPlants.all }}</p>
         <p class="num-label">plants suited for temperate zones have edible properties</p>
-        <a class="num-link" href="/#/search" target="_blank"><div class="label-line"></div>see all plants ></a>
+        <a class="num-link" href="/#/search" target="_blank"><div class="label-line"></div>see all plants <el-icon class="forward"><back /></el-icon></a>
       </div>
       <div class="num-block">
         <p class="num1">{{ nPlants.filtered }}</p>
         <p class="num-label">edible plants compatible with your environment</p>
-        <a class="num-link" href="/#/search" target="_blank"><div class="label-line"></div>see filtered plants ></a>
+        <a class="num-link" href="/#/search" target="_blank"><div class="label-line"></div>see filtered plants <el-icon class="forward"><back /></el-icon></a>
       </div>
       <div class="num-block">
         <p class="num2">{{ nPlants.med }}</p>
         <p class="num-label">of these have additional medicinal properties</p>
-        <a class="num-link"  href="/#/search" target="_blank"><div class="label-line"></div>see these plants ></a>
+        <a class="num-link"  href="/#/search" target="_blank"><div class="label-line"></div>see these plants <el-icon class="forward"><back /></el-icon></a>
       </div>
     </div>
   </div>
@@ -138,8 +138,12 @@ export default {
 
 .num-link {
   font-weight: bold;
-  font-style: italic;
+  text-decoration: none;
   font-size: .8em;
+}
+
+.forward {
+  transform: rotate(0.5turn);
 }
 
 </style>
