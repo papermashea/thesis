@@ -22,14 +22,14 @@
                 stroke: none
               }"
               >
-            <div :key="factor.name" v-if="factor.name === 'ph'"><el-icon><coin /></el-icon></div>
-            <div :key="factor.name" v-else-if="factor.name == 'moisture'"><el-icon><pouring /></el-icon></div>
-            <div :key="factor.name" v-else-if="factor.name == 'soil'"><el-icon><picture-rounded /></el-icon></div>
-            <div :key="factor.name" v-else="factor.name == 'sun'"><el-icon><sunny /></el-icon></div>            
+              <div :key="factor.name" v-if="factor.name === 'ph'"><el-icon><coin /></el-icon></div>
+              <div :key="factor.name" v-else-if="factor.name == 'moisture'"><el-icon><pouring /></el-icon></div>
+              <div :key="factor.name" v-else-if="factor.name == 'soil'"><el-icon><picture-rounded /></el-icon></div>
+              <div :key="factor.name" v-else="factor.name == 'sun'"><el-icon><sunny /></el-icon></div>            
               </el-button>
+              </div>
+            <Results v-bind="{resultDetails}" :class="factor.name" />
             </div>
-              <Results v-bind="{resultDetails}" :class="factor.name" :id="index"/>
-          </div>
       </li>
     </ol>
   <!-- <div v-for="(factor, index) in factors" class="band" v-bind:id="factor.name"></div> -->
