@@ -18,8 +18,6 @@
               :id="res.id"
               :style="{
                 opacity: (index+.3)/2,
-                color: white,
-                stroke: none
               }"
               >
               <div :key="factor.name" v-if="factor.name === 'ph'"><el-icon><coin /></el-icon></div>
@@ -28,7 +26,15 @@
               <div :key="factor.name" v-else="factor.name == 'sun'"><el-icon><sunny /></el-icon></div>            
               </el-button>
               </div>
-            <Results v-bind="{resultDetails}" :class="factor.name" />
+            <!-- <Results v-bind="{resultDetails}" :key="resultsDetails[factor.name]" :class="factor.name" /> -->
+            <Results :class="factor.name" v-if="factor.name === 'sun'" v-bind="factor.results[0]" :id="factor.results.id"
+            />
+            <Results :class="factor.name" v-else-if="factor.name === 'moisture'" v-bind="factor.results[0]" 
+            />
+            <Results :class="factor.name" v-else-if="factor.name === 'soil'" v-bind="factor.results[0]" 
+            />
+            <Results :class="factor.name" v-else="factor.name === ph" v-bind="factor.results[0]" 
+            />
             </div>
       </li>
     </ol>
@@ -50,20 +56,64 @@ export default {
     return {
       factors: environmentData,
       resArray: environmentData.results,
+      resultDetails: {},
     }
   },//close data
   methods: {
     showResults(r) {
 
+      // const resultDetails = f
+      // const resultDetails = r
       const resultDetails = {
+        // sun:{
         type: r.type,
         description: r.description,
         details: r.details,
         infolink: r.infolink,
         testlink: r.testlink,
+        // name: f
       }
 
-      console.log(resultDetails.description)
+      // const factor = f,
+      // if factor = "sun"
+
+      // const resultDetails = {
+        // sun: {},
+        // moisture: {},
+        // soil: {},
+        // ph: {},
+        // sun: {
+          // type: r.type,
+          // description: r.description,
+          // details: r.details,
+          // infolink: r.infolink,
+          // testlink: r.testlink,
+        // },
+        // moisture: {
+        //   type: r.type,
+        //   description: r.description,
+        //   details: r.details,
+        //   infolink: r.infolink,
+        //   testlink: r.testlink,          
+        // },
+        // soil: {
+        //   type: r.type,
+        //   description: r.description,
+        //   details: r.details,
+        //   infolink: r.infolink,
+        //   testlink: r.testlink,          
+        // },
+        // ph: {
+        //   type: r.type,
+        //   description: r.description,
+        //   details: r.details,
+        //   infolink: r.infolink,
+        //   testlink: r.testlink,          
+        // },
+      // }
+
+
+    //   console.log(resultDetails)
       this.resultDetails = resultDetails
 
       return { resultDetails }
