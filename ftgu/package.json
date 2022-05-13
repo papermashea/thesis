@@ -23,6 +23,7 @@
     "d3-tile": "^1.0.0",
     "element-plus": "^2.1.11",
     "fs": "^0.0.1-security",
+    "intersection-observer": "^0.12.0",
     "mitt": "^3.0.0",
     "nano-sql": "^1.8.5",
     "save": "^2.4.0",
@@ -30,9 +31,8 @@
     "vue": "^3.2.31",
     "vue-csv-import": "^4.1.2",
     "vue-d3": "^0.1.0",
-    "vue-good-table": "^2.21.11",
-    "vue-multiselect": "^2.1.6",
     "vue-router": "^4.0.13",
+    "vue-scrollama": "^2.0.6",
     "vue3-blocks-tree": "^0.6.1",
     "vue3-popper": "^1.1.0"
   },

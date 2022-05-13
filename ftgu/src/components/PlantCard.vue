@@ -3,10 +3,11 @@
     <el-card 
     :body-style="{ padding: '0px' }"
     shadow="hover">
-        <img
-          :src=imgthb
-          class="image"
-        />
+        <el-image :src=imgthb class="image" fit="cover" lazy>
+          <template #error>
+            <div class="image-slot"><el-image src="@/assets/placeholder.png" class="image" fit="cover" lazy /></div>
+          </template>
+        </el-image>
         <div class="card-text">
           <p class="scientific-name">
             {{ this.latinname }} 
@@ -30,6 +31,8 @@
 </template>
 
 <script>
+import "@/assets/mapPreview.png";
+
 export default {
   name: 'PlantCard',
 
@@ -51,10 +54,9 @@ export default {
 </script>
 
 <style>
-  img {
+  .el-image {
     width: 300px;
     height: 200px;
-    object-fit: cover;
   }
 
   .card-text {
