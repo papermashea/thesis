@@ -1,5 +1,5 @@
 <template>
-  <navbar class="mainNav"></navbar>
+  <Navbar :route="isDig"></Navbar>
   <div id="page">
     <div class="search-filters">
       <el-row class="filter-group">
@@ -38,7 +38,7 @@
   <div class="load">
     <div class="more" @click="loadMore">+ load more +</div>
   </div>
-  <footbar></footbar>
+  <Footbar></Footbar>
 </template>
 
 <script lang="ts" setup>
@@ -62,7 +62,7 @@ import PlantOverlay from '@/components/PlantOverlay.vue';
 import Footbar from "@/components/Footbar.vue";
 
 export default {
-  name: "Search",
+  name: "Dig",
   components: {
     Navbar,
     FilterEnv,
@@ -164,6 +164,9 @@ export default {
     plantsLoaded() {
       return this.filteredPlants.slice(0, this.length);
     },
+    isDig() {
+       return this.$route.name === 'Dig'
+    }
   }, //close computed
   methods: {
     onFilterChange(id, selected) {

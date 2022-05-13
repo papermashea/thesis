@@ -17,28 +17,12 @@ const emitter = mitt();
   font-weight: 200;
 }
 
-  #page {
-    max-width: 1280px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 10px;
-  }
-
-  .nav,
-  .foot {
-    background-color: #000;
-    color: #fff;
-    text-decoration: none;
-    grid-column: span 4;
-    grid-row: span 10;
-  }
-  .nav-links {
-    color: #fff;
-  }
-  .nav-links:hover {
-    color: #fff;
-    text-decoration: underline;
-  }
+#page {
+  max-width: 1280px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 10px;
+}
 
  .wrapper {
     grid-row: span 100;
@@ -68,6 +52,8 @@ const emitter = mitt();
     --med-edible: rgba(32, 195, 135, 1);
     --medhigh-edible: rgba(75, 218, 69, 1);
     --high-edible: rgba(115, 240, 9, 1);
+    --highlight: rgba(200, 240, 9, 1);
+    --external: rgba(0, 100, 120, 1);
   }
 
 a {
@@ -76,17 +62,18 @@ a {
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  padding: 4px;
 }
 
 a:hover {
-  color: var(--low-edible);
-  background-color: var(--high-edible);
+  text-color: black;
+  background-color: var(--highlight);
   text-decoration: underline;
 }
 
 
 #external:hover {
-  color: var(--low-edible);
+  color: var(--external);
   background-color: rgba(0,0,0,0);
 }
 

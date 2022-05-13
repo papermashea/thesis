@@ -1,11 +1,11 @@
 <template>
-  <Navbar></Navbar>
+<!--   <el-affix target=".intro-img"> -->
+    <Navbar :route="isLearn"></Navbar>
+<!--   </el-affix> -->
   <div id="page">
-
     <Introduction class="intro-img" id="overlay">
       <div class="wrapper" id="intro"></div>
     </Introduction>
-
     <PlantFlow class="environment"></PlantFlow>
 
     <div class="PlantForm environment">
@@ -63,7 +63,7 @@ import PlantPack from "@/components/PlantPack.vue";
 import Footbar from "@/components/Footbar.vue";
 
 export default {
-  name: "App",
+  name: "Learn",
 
   components: {
     Navbar,
@@ -173,6 +173,9 @@ export default {
       )
        return gPlants
         // console.log(gPlants)
+    },
+    isLearn() {
+       return this.$route.name === 'Learn'
     }
   }, //close computed
   methods: {

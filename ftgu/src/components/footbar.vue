@@ -1,12 +1,12 @@
 <template>
   <el-row class="foot">
-    <div class="source">
-      <p class="footbar">Source: <a class="nav-links" href="https://pfaf.org/user/Default.aspx" target="_blank">Plants for a Future</a></p>
+    <div class="nav-split" id="source">
+      <p class="footbar">Primary source: <a class="nav-links" href="https://pfaf.org/user/Default.aspx" target="_blank">Plants for a Future</a> - 2022</p>
     </div>
-    <div class="to-top">
+    <div class="nav-split" id="direction">
       <router-link to @click="moveUp" class="nav-links">
-        <p class="footbar"> back to top         
-          <el-icon class="turn-up"><d-arrow-right /></el-icon>
+        <p class="footbar">
+          <el-icon class="" id="turn-up"><d-arrow-right /></el-icon>
         </p>
 
       </router-link>
@@ -27,25 +27,11 @@
 </script>
 
 <style>
-.foot {
- padding: 1% 3% 1% 1%; 
-}
-
-.source {
-width: 70%;
-}
-
-.to-top {
-  width: 30%;
-  text-align: right;
-}
-
 .router-link-active:hover {
   background-color: none;
 }
 
-.turn-up {
+#turn-up {
   transform: rotate(-0.25turn);
 }
-
 </style>
