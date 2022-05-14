@@ -2,9 +2,29 @@
   <Navbar></Navbar>
     <div id="page">
       <div class="wrapper">
-        <div class="slide" v-for="(i, index) in garden"> 
+      <p v-if="selectedImage" class="slide"><img style="width:100%" :src="selectedImage" alt=""></p>
+
+      <p class="section">Want to grow your own food? It can be hard to know where to start. Your plant-powered journey can begin here by digging through 5,913 plants with documented edible properties suitable for growing indoors or outdoors in a temperate climate. Learn about the environmental factors that will impact success, dig through the ecological variables that are most impactful to your area, and take this information with you as you go out and talk to plant people in your community.</p>
+
+      <p v-if="selectedImage" class="slide"><img style="width:100%" :src="selectedImage" alt=""></p>
+      <p class="section">From the Ground Up explores plant data collected by the environmentalists at Plants for a Future, an organization dedicated to researching and providing information on ecologically sustainable horticulture for more than 30 years.* You will also find resources from the USDA, the National Garden Association, the Farmer’s Almanac, and a number of educational extensions. The depth of information available about plants, gardening, and growing food is immense and many of the best resources available include books, videos, and people.</p>
+          <el-button type="success" round>USDA</el-button>
+          <el-button type="success" round>National Gardening Association</el-button>
+          <el-button type="success" round>Backyard Gardens</el-button>
+
+      <p v-if="selectedImage" class="slide"><img style="width:100%" :src="selectedImage" alt=""></p>
+      <p class="section">The interactions and information presented have been shaped by conversations with neighbors at Roots, Natty Garden, Umoja Learning Garden, Good Life Garden, BK Rot. Growing food in New York City has a long history of communities learning together and sharing resources. If you’re interested in growing food in the New York City area, these tools may help you get started:</p>
+          <el-button type="success" round>Grow NYC</el-button>
+          <el-button type="success" round>Brooklyn College Urban Soils Lab</el-button>
+          <el-button type="success" round>Cornell Cooperative Extension</el-button>
+<div class="cta">
+          <el-button type="success" round><a class="nav-links" id="menu-item" href="/learn">Explore the plants</a></el-button>
+</div>
+
+
+<!--         <div class="slide" v-for="(i, index) in garden"> 
           <a target="_blank" :href="i.thumbnail"><el-image class="slide" :src="i.thumbnail" lazy></el-image></a>
-        </div>
+        </div> -->
       </div>
     </div>
   <Footbar></Footbar>
@@ -45,23 +65,37 @@ export default {
     };
   }, //close data
   methods: {
-    // randomItem (items) {
-    //   return items[Math.floor(Math.random()*200)];
-    // }
+    randomItem (items) {
+      return items[Math.floor(Math.random()*items.length)];
+    }
     },//close methods
-    // created() {
-    //    this.selectedImage = this.randomItem(this.gardens)
-    // }
+    created() {
+       this.selectedImage = this.randomItem(this.images)
+       console.log(this.selectedImage)
+    }
 }; //close export
 </script>
 
 <style>
 .slide {
-  height: 500px;
+  height: 400px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.section {
+  width: 100%;
+}
+
+.cta {
+  width: 100%;
+  margin: 10%;
 }
 
 img {
-  filter: grayscale(100%)
+  filter: grayscale(100%);
+  height: 300px;
+  object-fit: cover;
 }
 
 img:hover {

@@ -35,3 +35,5 @@ S. Molloy MSDV 2022 Graduate thesis
  
  ![From the ground up wireframe](/process/MS2_Molloy_Wireframe.jpg)
 
+  ![Video demo](demo.mp4) 
+

@@ -6,6 +6,9 @@
         <img :src="plantDetails.imgthb"/>
         <h2>{{ plantDetails.latinname }}</h2>
         <h4>{{ plantDetails.commonname }}</h4>
+              <p class="information">{{ plantDetails.range }}</p>
+              <p class="information">{{ plantDetails.cultivation }}</p>
+              <p class="information">{{ plantDetails.habitat }}</p>
 
         <el-collapse v-model="activeNames" @change="handleChange">
           <el-collapse-item title="Edible uses" class="edible" name="1">

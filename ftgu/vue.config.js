@@ -13,7 +13,9 @@ module.exports = {
           'sass-loader'
         ]
       }
-    ]
+    ],
+    publicPath: process.env.NODE_ENV === "production" ? "/thesis/" : "/",
+
   },
 
   configureWebpack: config => {
