@@ -146,7 +146,6 @@ ol {
   padding: 5px 0;
 }
 
-
 #top {
     font-family: Helvetica Neue;
     font-weight: 200;

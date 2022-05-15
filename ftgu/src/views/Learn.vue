@@ -370,19 +370,6 @@ export default {
 </script>
 
 <style>
-.banner {
-  align-items: center;
-  background-color: rgba(61, 112, 104, .5);
-  background-image: url("@/assets/growth_wh.png");
-  background-size: 1920px;
-  grid-column: span 4;
-  color: black;
-  display: block;
-  justify-content: center;
-  height: 200px;
-  width: 100%;
-}
-
 .cluster {
   max-width: 950px;
   margin: 0 auto;

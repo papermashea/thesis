@@ -7,6 +7,11 @@ const routes = [
     component:()=>import('./views/Root.vue'),
   },
   {
+    path: "/",
+    name: "Root",
+    component:()=>import('./views/Root.vue'),
+  },
+  {
     path: "/learn",
     name: "Learn",
     component:()=>import('./views/Learn.vue'),

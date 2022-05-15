@@ -40,7 +40,7 @@
   </section>
 
   <div class="load">
-    <div class="more" @click="loadMore"><el-icon><Plus /></el-icon>load more<el-icon><Plus /></el-icon></div>
+    <p class="level-1 rectangle" id="top" @click="loadMore"><el-icon><Plus /></el-icon>load more<el-icon><Plus /></el-icon></p>
   </div>
 
 </div>
@@ -608,18 +608,27 @@ export default {
   cursor: pointer;
 }
 
-.more {
-  font-size: 1.5em;
-  font-weight: 800;
-  font-style: oblique;
-  padding: 2% 40%;
-  opacity: 100%;
-  text-transform: uppercase;
+.rectangle {
+  position: relative;
+  padding: 5px 0;
 }
 
-.more .el-icon {
-  padding: 0 10px;
-  vertical-align: text-top;
+#top {
+    font-family: Helvetica Neue;
+    font-weight: 200;
+    font-size: 1.6em;
+    text-transform: uppercase;
+}
+
+.level-1  {
+  width: 35%;
+  background: black;
+  color: white;
+}
+
+.level-1 .el-icon {
+  padding: 0 30px;
+  vertical-align: baseline;
 }
 
 @media (max-width: 399px) {
