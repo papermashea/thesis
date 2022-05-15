@@ -1,7 +1,8 @@
 <template>
-<div class="plant-flow">
+<div class="PlantFlow">
   <div class="container">
     <p class="level-1 rectangle" id="top">Test Your Environment</p>
+
     <ol class="level-2-wrapper">
       <li v-for="factor in factors">
         <div 
@@ -125,7 +126,6 @@ export default {
 
 <style>
 .test {
-  font-family: Helvetica Neue;
   font-weight: 200;
   font-size: .8em;
   height: 150px;

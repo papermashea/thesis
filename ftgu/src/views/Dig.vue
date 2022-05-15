@@ -36,7 +36,7 @@
     </div>
   </div>
   <div class="load">
-    <div class="more" @click="loadMore">+ load more +</div>
+    <div class="more" @click="loadMore"><el-icon><Plus /></el-icon>load more <el-icon><Plus /></el-icon></div>
   </div>
   <Footbar></Footbar>
 </template>
@@ -400,28 +400,37 @@ export default {
       };
     }, 
     plantPass(o) {
-      console.log(o.id)
+      // console.log(o.id)
       const plantDetails = {
           commonname: o.commonname,
           cultivationdetails: o.cultivationdetails,
+          cultivationcite: o.cultivationcite,
           edibleuses: o.edibleuses,
+          ediblecite: o.ediblecite,
+          ediblerating: o.ediblerating,
           family: o.family,
           flowerendmonth: o.flowerendmonth,
-          flowerstartMonth: o.flowerstartMonth,
+          flowerstartmonth: o.flowerstartmonth,
           flowertype: o.flowertype,
           growth: o.growth,
           habitat: o.habitat,
           hardinessuse: o.hardinessuse,
+          height: o.height,
           id: o.id,
           img: o.img,
           imgcreator: o.imgcreator,
           imgthb: o.imgthb,
           indigenoususe: o.indigenoususe,
-          knownhazards: o.knownhazards,
+          hazards: o.hazards,
+          hazardscite: o.hazardscite,
           latinname: o.latinname,
           leaftype: o.leaftype,
           materialuses: o.materialuses,
+          materialcite: o.materialcite,
+          materialrating: o.materialrating,
           medicinaluses: o.medicinaluses,
+          medicinalcite: o.medicinalcite,
+          medicinalrating: o.medicinalrating,
           ovlink: o.ovlink,
           pfaflink: o.pfaflink,
           propdetails: o.propdetails,
@@ -434,13 +443,18 @@ export default {
           seedstartmonth: o.seedstartmonth,
           size: o.size,
           synonyms: o.synonyms,
+          sun: o.sun,
+          soil: o.soil,
+          moisture: o.moisture,
+          ph: o.ph,
           type: o.type,
           usda: o.usda,
           usdalink: o.usdalink,
           wslink: o.wslink,
+          width: o.width,
       }
 
-      console.log(plantDetails)
+      // console.log(plantDetails)
       this.plantDetails = plantDetails
 
       return { plantDetails }
@@ -460,7 +474,6 @@ export default {
   position: relative;
   width: 100%;
   height: 20%;
-  margin: 0 10%;
 }
 
 .filter-group {
@@ -471,6 +484,7 @@ export default {
 }
 
 .plant-counts {
+  font-family: var(--technical);
   position: relative;
   display: flex;
   width: 100%;
@@ -494,9 +508,15 @@ export default {
 }
 
 .count-label {
-  width: 100%;
+  font-size: 1.4em;
   text-align: right;
-  padding: 0 20px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.results-number {
+  font-weight: 800;
 }
 
 .filters {
@@ -505,13 +525,15 @@ export default {
 }
 
 .search-field {
-  width: 30%;
+  margin-top: 10px;
+  width: 20%;
 }
 
 .label {
   position: absolute;
   top: 0;
   font-size: .6em;
+  font-family: var(--technical);
   text-align: left;
 }
 
@@ -529,33 +551,49 @@ export default {
   position: relative;
   grid-column: span 4;
   width: 100%;
-  margin: 20% 10% 0 10%;
+  margin-top: 20%;
+  justify-content: space-evenly;
+  justify-items: center;
+  align-content: space-evenly;
+  align-items: center;
 }
 
 .plant-card {
   position: relative;
   float: left;
-  padding: 8px;
+  padding: 10px;
   display: grid;
   cursor: cell;
 }
 
 .load {
+  align-items: center;
+  background-color: rgba(61, 112, 104, .5);
+  background-image: url("@/assets/growth_wh.png");
+  background-size: 1920px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  height: 200px;
   width: 100%;
-  height: 100px;
-  margin-top: 5%;
-  background-color: var(--low-edible);
-  opacity: 60%;
-}
-
-.more {
-  padding: 2% 45%;
-  color: white;
 }
 
 .load:hover {
-  opacity: 100%;
+  background-color: var(--highlight);
   cursor: pointer;
+}
+
+.more {
+  font-size: 1.5em;
+  font-weight: 800;
+  font-style: oblique;
+  padding: 2% 40%;
+  opacity: 100%;
+  text-transform: uppercase;
+}
+
+.more .el-icon{
+  padding: 0 30px;
 }
 
 @media (max-width: 399px) {

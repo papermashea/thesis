@@ -10,9 +10,11 @@
           v-model="filterSun.selected"
           @change="(options) => onFilterChange('SUN', options)"
           placeholder="sun"
+          class="sun"
         >
           <el-option
             v-for="item in filterSun.options"
+            class="sun"
             :key="item"
             :label="item"
             :value="item"
@@ -29,9 +31,11 @@
           v-model="filterMoisture.selected"
           @change="(options) => onFilterChange('MOISTURE', options)"
           placeholder="moisture"
+          class="moisture"
         >
           <el-option
             v-for="item in filterMoisture.options"
+            class="moisture"
             :key="item"
             :label="item"
             :value="item"
@@ -48,9 +52,11 @@
           v-model="filterSoil.selected"
           @change="(options) => onFilterChange('SOIL', options)"
           placeholder="soil type"
+          class="soil"
         >
           <el-option
             v-for="item in filterSoil.options"
+            class="soil"
             :key="item"
             :label="item"
             :value="item"
@@ -67,9 +73,11 @@
           v-model="filterPh.selected"
           @change="(options) => onFilterChange('PH', options)"
           placeholder="ph"
+          class="ph"
         >
           <el-option
             v-for="item in filterPh.options"
+            class="ph"
             :key="item"
             :label="item"
             :value="item"
@@ -86,9 +94,11 @@
           v-model="filterHuse.selected"
           @change="(options) => onFilterChange('HARDINESSUSE', options)"
           placeholder="where to grow?"
+          class="hardy"
         >
           <el-option
             v-for="item in filterHuse.options"
+            class="hardy"
             :key="item"
             :label="item"
             :value="item"

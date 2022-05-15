@@ -2,13 +2,11 @@
 <!--   <el-affix target=".intro-img"> -->
     <Navbar :route="isLearn"></Navbar>
 <!--   </el-affix> -->
+    <div class="banner"></div>      
   <div id="page">
-    <Introduction class="intro-img" id="overlay">
-      <div class="wrapper" id="intro"></div>
-    </Introduction>
-    <PlantFlow class="environment"></PlantFlow>
+    <PlantFlow></PlantFlow>
 
-    <div class="PlantForm environment">
+    <div class="PlantForm">
       <Form
         :filters="filters"
         :params="params"
@@ -338,16 +336,21 @@ export default {
 </script>
 
 <style>
-.intro-img {
-  box-shadow: inset 0 0 0 1000px rgba(255,255,255,0.6);
+.banner {
+  align-items: center;
+  background-color: rgba(61, 112, 104, .5);
+  background-image: url("@/assets/growth_wh.png");
+  background-size: 1920px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  height: 200px;
   width: 100%;
-  height: 300px;
-  background: url(@/assets/mapPreview.png);
-  background-repeat: no-repeat, repeat;
 }
 
-.notShown {
-  visibility: hidden !important;
+.PlantFlow,
+.PlantForm {
+  display: block;
 }
 
 * {

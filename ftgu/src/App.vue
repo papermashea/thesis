@@ -8,17 +8,24 @@ const emitter = mitt();
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+
 #app {
   margin: 0;
   font-family: Helvetica Neue;
   font-weight: 200;
+  text-align: center;
 }
 
 #page {
-  max-width: 1280px;
+  max-width: 1920;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 10px;
+  margin: 2% 5%;
+  text-align: center;
 }
 
  .wrapper {
@@ -31,12 +38,15 @@ const emitter = mitt();
   }
 
   .wrapper,
-  .environment,
+  .PlantFlow,
+  .PlantForm,
   .plantCards, 
   .searchFilters {
     grid-column: span 4;
     width: 100%;
     content-align: center;
+    display: flex;
+    place-items: flex-start;
   }
 
   :root {
@@ -51,11 +61,13 @@ const emitter = mitt();
     --high-edible: rgba(115, 240, 9, 1);
     --highlight: rgba(200, 240, 9, 1);
     --external: rgba(0, 100, 120, 1);
+    --clean: Helvetica Neue, sans;
+    --technical: Courier New, monospace;
   }
 
 a {
   color: var(--low-edible);
-  font-family: Helvetica Neue;
+  font-family: var(--clean);
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
@@ -77,6 +89,23 @@ a:hover {
 .btn {
   font-size: .7em;
   margin: 5px;
+}
+
+.el-select-dropdown__item,
+.el-input__inner {
+  font-family: var(--technical);
+}
+
+.el-input {
+  --el-select-input-focus-border-color: var(--highlight);
+}
+
+.el-select-dropdown.is-multiple .el-select-dropdown__item.selected {
+  color: black;
+}
+
+.el-select-dropdown.is-multiple .el-select-dropdown__item.selected::after {
+  background-color: black;
 }
 
 </style>

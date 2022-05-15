@@ -5,8 +5,8 @@
     </div>
     <div class="nav-split" id="direction">
       <router-link to @click="moveUp" class="nav-links">
-        <p class="footbar">
-          <el-icon class="" id="turn-up"><d-arrow-right /></el-icon>
+        <p class="footbar" id="to-top">
+          <el-icon class="nav-item" id="turn-up"><d-arrow-right /></el-icon>
         </p>
 
       </router-link>
@@ -29,6 +29,10 @@
 <style>
 .router-link-active:hover {
   background-color: none;
+}
+
+#to-top {
+  padding-left: 100%;
 }
 
 #turn-up {

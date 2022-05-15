@@ -4,12 +4,14 @@ import { createApp } from "vue";
 import mitt from 'mitt';
 import router from "./router.js";
 import Popper from "vue3-popper";
+import VueHtml2Canvas from 'vue-html2canvas';
+import babelPolyfill from 'babel-polyfill'
+
 
 ////libraries
 import ElementPlus from "element-plus";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import "element-plus/theme-chalk/index.css";
-// import Scrollama from "vue-scrollama";
 
 import App from "./App.vue";
 
@@ -21,8 +23,9 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 
 app.use(router)
-// app.use(Scrollama)
 app.use(ElementPlus)
+// app.use(VueHtml2Canvas)
+app.use(babelPolyfill)
 app.component("Popper", Popper)
 // app.provide('emitter', emitter); 
 app.config.globalProperties.emitter = emitter

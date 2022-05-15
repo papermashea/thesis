@@ -3,7 +3,7 @@
     <el-card 
     :body-style="{ padding: '0px' }"
     shadow="hover">
-        <el-image :src=imgthb class="image" fit="cover" lazy>
+        <el-image :src=imgthb class="card-image" fit="cover" lazy>
           <template #error>
             <div class="image-slot"><el-image src="@/assets/placeholder.png" class="image" fit="cover" lazy /></div>
           </template>
@@ -54,9 +54,9 @@ export default {
 </script>
 
 <style>
-  .el-image {
-    width: 300px;
-    height: 200px;
+  .card-image {
+    width: 320px;
+    height: 240px;
   }
 
   .card-text {

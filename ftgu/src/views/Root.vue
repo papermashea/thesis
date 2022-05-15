@@ -12,7 +12,7 @@
           <el-button type="success" round>National Gardening Association</el-button>
           <el-button type="success" round>Backyard Gardens</el-button>
 
-      <p v-if="selectedImage" class="slide"><img style="width:100%" :src="selectedImage" alt=""></p>
+      <p v-if="selectedImage" class="slide"><img style="width:100%" :src="selectedImage" alt="" id="native-image"></p>
       <p class="section">The interactions and information presented have been shaped by conversations with neighbors at Roots, Natty Garden, Umoja Learning Garden, Good Life Garden, BK Rot. Growing food in New York City has a long history of communities learning together and sharing resources. If you’re interested in growing food in the New York City area, these tools may help you get started:</p>
           <el-button type="success" round>Grow NYC</el-button>
           <el-button type="success" round>Brooklyn College Urban Soils Lab</el-button>
@@ -76,7 +76,7 @@ export default {
 }; //close export
 </script>
 
-<style>
+<style scoped>
 .slide {
   height: 400px;
   margin-top: 20px;

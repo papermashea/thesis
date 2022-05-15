@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="plant-counts">
-         <p class="count-label">Showing {{ nPlants.show }} of {{ nPlants.filtered }} potential plants</p>
+         <p class="count-label">Showing <span class="results-number">{{ nPlants.show }}</span> of <span class="results-number">{{ nPlants.filtered }} </span> potential plants</p>
   </div>
 </template>
 
