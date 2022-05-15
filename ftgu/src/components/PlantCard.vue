@@ -5,7 +5,7 @@
     shadow="hover">
         <el-image :src=imgthb class="card-image" fit="cover" lazy>
           <template #error>
-            <div class="image-slot"><el-image src="@/assets/placeholder.png" class="image" fit="cover" lazy /></div>
+            <div class="image-slot"><img src="@/assets/placeholder.png" class="error-image" /></div>
           </template>
         </el-image>
         <div class="card-text">
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import "@/assets/mapPreview.png";
+import "@/assets/placeholder.png";
 
 export default {
   name: 'PlantCard',
@@ -54,35 +54,41 @@ export default {
 </script>
 
 <style>
-  .card-image {
-    width: 320px;
-    height: 240px;
-  }
+.card-image {
+  width: 320px;
+  height: 240px;
+}
 
-  .card-text {
-    padding: 0 10px;
-    min-height: 100px; 
-    max-height: 100px;
-    max-width: 300px;
-  }
+.error-image {
+  width: 100%;
+  height: 100%;
+}
 
-  .scientific-name {
-    font-size: 1em;
-    margin-bottom: 0px;
-  }
+.card-text {
+  padding: 0 10px;
+  min-height: 100px; 
+  max-height: 100px;
+  max-width: 300px;
+}
 
-  .other-names {
-    font-size: .8em;
-    margin-bottom: 0px;
-    font-style: italic;
-  }
+.scientific-name {
+  font-size: 1em;
+  margin-bottom: 0px;
+}
 
-  .flag {
-    font-size: .7em;
-  }
-  .tag {
-    width: 50%;
-    float: left;
-  }
+.other-names {
+  font-size: .8em;
+  margin-bottom: 0px;
+  font-style: italic;
+}
+
+.flag {
+  font-size: .7em;
+}
+
+.tag {
+  width: 50%;
+  float: left;
+}
 
 </style>

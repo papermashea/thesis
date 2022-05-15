@@ -2,7 +2,11 @@
   <div class="plant-overlay">
     <el-scrollbar max-height="1000px">
       <div class="plantprint" :id="plantDetails.id">
-        <el-image class="over-image" :src="plantDetails.imgthb" fit="cover"/>
+        <el-image class="over-image" :src="plantDetails.imgthb" fit="cover">
+            <template #error>
+              <div class="image-slot"><img src="@/assets/placeholder.png" class="error-image" /></div>
+          </template>
+        </el-image>
           <div class="plant-info">
             <h2>{{ plantDetails.latinname }}</h2>
             <h4>{{ plantDetails.commonname }}</h4>
@@ -122,7 +126,7 @@
 <!--           </el-collapse-item> -->
 <!--         </el-collapse> -->
         </div>
-        <a class="dwl" @click="generatePrint"><el-icon class="download"><download /></el-icon></a>
+        <a class="dwld" @click="generatePrint"><el-icon class="download" fill="var(--low-edible)"><download /></el-icon></a>
       <img :src="output">
     </el-scrollbar>
   </div>
@@ -249,6 +253,7 @@ export default {
   background-color: var(--highlight);
   padding: 0;
 }
+
 .haz-header {
   text-align: center;
   width: 100%;

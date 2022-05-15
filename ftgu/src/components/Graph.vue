@@ -33,19 +33,25 @@
    </div>
    <div class="numCol">
       <div class="num-block">
-        <p class="num2">{{ nPlants.all }}</p>
-        <p class="num-label">plants suited for temperate zones have edible properties</p>
-        <a class="num-link" href="/#/search" target="_blank"><div class="label-line"></div>see all plants <el-icon class="forward"><back /></el-icon></a>
+        <a class="num-link" href="/dig" target="_blank">
+          <p class="num2">{{ nPlants.all }}</p>
+          <p class="num-label">total plants suited for temperate zones with edible properties</p>
+        <div class="label-line"></div><el-icon class="forward"><back /></el-icon></a>
       </div>
       <div class="num-block">
-        <p class="num1">{{ nPlants.filtered }}</p>
-        <p class="num-label">edible plants compatible with your environment</p>
-        <a class="num-link" href="/#/search" target="_blank"><div class="label-line"></div>see filtered plants <el-icon class="forward"><back /></el-icon></a>
+        <router-link :to="`/dig?`+query" class="num-link">
+          <!-- <a :href="`/dig?`+query" :id="query" target="_blank"> -->
+            <p class="num1">{{ nPlants.filtered }}</p>
+            <p class="num-label">edible plants compatible with your environment</p>
+            <div class="label-line"></div><el-icon class="forward"><back /></el-icon>
+          <!-- </a> -->
+        </router-link>
       </div>
       <div class="num-block">
-        <p class="num2">{{ nPlants.med }}</p>
-        <p class="num-label">of these have additional medicinal properties</p>
-        <a class="num-link"  href="/#/search" target="_blank"><div class="label-line"></div>see these plants <el-icon class="forward"><back /></el-icon></a>
+        <a class="num-link"  href="/dig" target="_blank">
+          <p class="num2">{{ nPlants.med }}</p>
+          <p class="num-label">of these have additional medicinal properties</p>
+        <div class="label-line"></div><el-icon class="forward"><back /></el-icon></a>
       </div>
     </div>
   </div>
@@ -59,6 +65,7 @@ export default {
   props: {
     onFilterChange: Function,
     nPlants: Object,
+    query: String,
   },
   data() {
     return {
@@ -112,26 +119,35 @@ export default {
 
 .num-block{
   margin: 0 0 10% 10%;
-  height: 30%;
+  height: 25%;
   text-align: right;
 }
 
 .num1,
 .num2 {
+  font-family: var(--technical);
   margin: 0;
+}
+
+.num1 {
+  font-size: 2em;
+}
+
+.num2 {
+  font-size: 1.6em;
 }
 
 .num-label {
   font-size: .7em;
-  margin: 0;
-  width: 100%;
+  margin-left: 50%;
+  width: 50%;
   text-align: right;
 }
 
 .label-line {
-  width: 135%;
+  width: 150%;
   border-bottom: 1px dotted black;
-  margin: 0 0 0 -75%;
+  margin: 0 0 0 -65%;
   padding: 15px 10px 0 0;
   float: left;
 }
@@ -144,6 +160,7 @@ export default {
 
 .forward {
   transform: rotate(0.5turn);
+  vertical-align: bottom;
 }
 
 </style>

@@ -5,45 +5,6 @@
 
 var fs = require('fs');
 
-// function createObject(){
-// 	csv = fs.readFileSync("plantsTable.csv")
-// 	var array = csv.toString().split("\r");
-// 	let result = [];
-// 	let headers = array[0].split(", ")
-
-// 	for (let i = 1; i < array.length - 1; i++) {
-// 	  let obj = {}
-
-// 	  let str = array[i]
-// 	  let s = ''
-
-// 	  let flag = 0
-// 	  for (let ch of str) {
-// 	    if (ch === '"' && flag === 0) {
-// 	      flag = 1
-// 	    }
-// 	    else if (ch === '"' && flag == 1) flag = 0
-// 	    if (ch === ', ' && flag === 0) ch = '|'
-// 	    if (ch !== '"') s += ch
-// 	  }
-
-// 	  let properties = s.split("|")
-
-// 	  for (let j in headers) {
-// 	    if (properties[j].includes(", ")) {
-// 	      obj[headers[j]] = properties[j]
-// 	        .split(", ").map(item => item.trim())
-// 	    }
-// 	    else obj[headers[j]] = properties[j]
-// 	  }
-
-// 	  result.push(obj)
-// 	}
-
-// 	let json = JSON.stringify(result);
-// 	fs.writeFileSync('plantsTableTest.json', json);
-// }
-
 var plants = [];
 
 function createPlants() {
@@ -73,6 +34,7 @@ function createPlants() {
 
 		var lepidoptera = {
 			butterflies: "butterflies/moths",
+			butterinsects: "butterflies/moths",
 			lepidoptera: "butterflies/moths",
 			moths: "butterflies/moths"
 		}
@@ -81,7 +43,7 @@ function createPlants() {
 			cleistogamy: "asexual/self",
 			cleistogamous: "asexual/self",
 			cleistogomous: "asexual/self",
-			cleistogamy: "asexual/self",
+			cleistogomy: "asexual/self",
 			apomixis: "asexual/self",
 			apomixy: "asexual/self",
 			apomictic: "asexual/self",
@@ -93,7 +55,10 @@ function createPlants() {
 			midges: "insects",
 			hoverflies: "insects",
 			diptera: "insects",
-			hymenoptera: "insects"
+			hymenoptera: "insects",
+			insects: "insects",
+			flies: "insects",
+			beetles: "insects"
 		}
 
 		var plantObject = {
@@ -135,10 +100,10 @@ function createPlants() {
 			propcite: cData.propdetails.match(/(?<=\[).+?(?=\])/g),
 			cultivationdetails: cData.cultivationdetails.replace(/ *\[[^\]]*]/g, '').replace(/(\r\n|\n|\r)/gm, "").replaceAll("\ufffd"," degrees"),
 			cultivationcite: cData.cultivationdetails.match(/(?<=\[).+?(?=\])/g),
-			pollinators: cData.pollinators.toLowerCase().replaceAll('5 - 6',"").replaceAll('7',"").replaceAll('?',"").replaceAll("wasps","bees").replaceAll("bumblebees","bees").replaceAll('carrion',"").replaceAll('s,b','s, b').replaceAll(' flies',' insects').replaceAll('hover-flies','insects').replace(/cleistogamy|cleistogomy|cleistogamous|cleistogomous|apomictic|apomixy|apomixis|dryoptera|self/gi, function(matched){
-      			return ace[matched];}).replace(/butterflies|moths|lepidoptera/gi, function(matched){
-      			return lepidoptera[matched];}).replace(/midges|hymenoptera|hoverflies|diptera/gi, function(matched){
-      			return insects[matched];}).trim().split(", "),
+			pollinators: cData.pollinators.toLowerCase().replaceAll('5 - 6',"").replaceAll('7',"").replaceAll('?',"").replaceAll("wasps","bees").replaceAll("bumblebees","bees").replaceAll('carrion','').replaceAll('hover-flies','insects').replaceAll('s,b','s, b').replace(/cleistogamy|cleistogomy|cleistogamous|cleistogomous|apomictic|apomixy|apomixis|dryoptera|self/gi, function(matched){
+      			return ace[matched];}).replace(/midges|hoverflies|diptera|hymenoptera|insects|flies|beetles/gi, function(matched){
+      			return insects[matched];}).replace(/butterflies|butterinsects|moths|lepidoptera/gi, function(matched){
+      			return lepidoptera[matched];}).trim().split(", "),
 			flowertype: cData.flowertype.toLowerCase(),
 			scent: cData.scented.toLowerCase(),
 			aromatic: cData.aromatic,

@@ -1,8 +1,8 @@
 <template>
   <div class="plant-form">
     <!-- SUN FILTER -->
-    <el-row class="field">
-      <p class="madLib">I have
+    <div class="field">
+      <p class="mad-lib">I have
         <div class="filter tag-filter oneline">
 
           <el-select
@@ -21,11 +21,11 @@
           </el-select>
         </div>
       sun </p>
-    </el-row>
+    </div>
 
     <!-- MOISTURE FILTER -->
-    <el-row class="field">
-      <p class="madLib">and
+    <div class="field">
+      <p class="mad-lib">and
       <div class="filter tag-filter oneline">
         <el-select
           multiple
@@ -57,11 +57,11 @@
         </el-select>
       </div>
       soil </p>
-    </el-row>
+    </div>
 
     <!-- PH LEVEL -->
-    <el-row class="field">
-      <p class="madLib">and
+    <div class="field">
+      <p class="mad-lib">and
       <div class="filter tag-filter oneline">
         <el-select
           multiple
@@ -79,11 +79,11 @@
         </el-select>
       </div>
       pH.</p>
-    </el-row>
+    </div>
 
     <!-- HARDINESS GROUP FILTER -->
-    <el-row class="field">
-      <p class="madLib">I'd like plants that are
+    <div class="field">
+      <p class="mad-lib">I'd like plants that are
       <div class="filter tag-filter oneline">
         <el-select
           multiple
@@ -101,7 +101,7 @@
         </el-select>
       </div>
       .</p>
-    </el-row>
+    </div>
 
   </div>
 </template>
@@ -143,4 +143,29 @@ export default {
 </script>
 
 <style>
+.plant-form {
+  width: 40%;
+  clear: none;
+  float: left;
+}
+
+.plant-form-subset {
+  width: 60%;
+  clear: none;
+  float: left;
+}
+
+.div#field {
+  margin-bottom: 30px;
+}
+
+.field {
+  display: inline-block;
+  float: left;
+  text-align: left;
+  height: 40px;
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
 </style>

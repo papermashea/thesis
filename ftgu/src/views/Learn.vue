@@ -1,44 +1,50 @@
 <template>
 <!--   <el-affix target=".intro-img"> -->
-    <Navbar :route="isLearn"></Navbar>
+    <Navbar></Navbar>
 <!--   </el-affix> -->
-    <div class="banner"></div>      
+
   <div id="page">
-    <PlantFlow></PlantFlow>
-
-    <div class="PlantForm">
-      <Form
-        :filters="filters"
-        :params="params"
-        :onFilterChange="onFilterChange"
-        :nPlants="{
-          all: plants.length,
-          filtered: filteredPlants.length,
-        }"
-      />
-      <Graph
-        :filters="filters"
-        :onFilterChange="onFilterChange"
-        :nPlants="{
-          all: plants.length,
-          filtered: filteredPlants.length,
-          med: filteredMed.length,
-        }"
-      />
-    </div>
-
-    <Information 
+    <div class="banner"></div>
+    <section>
+      <PlantFlow></PlantFlow>
+    </section>
+    
+    <section>
+      <div class="PlantForm">
+        <Form
+          :filters="filters"
+          :params="params"
+          :onFilterChange="onFilterChange"
+          :nPlants="{
+            all: plants.length,
+            filtered: filteredPlants.length,
+          }"
+        />
+        <Graph
+          :filters="filters"
+          :onFilterChange="onFilterChange"
+          :nPlants="{
+            all: plants.length,
+            filtered: filteredPlants.length,
+            med: filteredMed.length,
+          }"
+          :query="queries"
+        />
+      </div>
+    </section>
+    <section>
+<!--     <Information 
       :filters="filters"
       :onFilterChange="onFilterChange"
-    />
+    /> -->
     <Tooltip />
     <PlantPack 
       class="collection-vis"
       :onFilterChange="onFilterChange"
       v-bind="{ data: group }"
-     />  
-
-  </div>  
+     />    
+  </section>
+</div>  
   <Footbar></Footbar>
 </template>
 
@@ -72,7 +78,6 @@ export default {
     Information,
     PlantPack,
     Tooltip,
-    // Legend,
     Footbar,
   },
   data() {
@@ -90,6 +95,12 @@ export default {
     }));
     this.populateFilters();
   },
+  created() {
+    let qp = new URLSearchParams(window.location.search);
+
+    let fs = qp.get('filters');
+    if(fs) this.filters = fs.split(',');
+  },
   computed: {
     filteredPlants() {
       if (!this.plants.length) {
@@ -100,6 +111,7 @@ export default {
       const sortParam = SORT.selected;
       const isSortAsc = SORT.asc;
       const searchTerm = SEARCH.selected.toLowerCase();
+      this.updateURL();
 
       return this.plants
         .filter(
@@ -172,8 +184,18 @@ export default {
        return gPlants
         // console.log(gPlants)
     },
-    isLearn() {
-       return this.$route.name === 'Learn'
+    queries(){
+      let qp = new URLSearchParams();
+
+      if(this.filters.SUN.selected.length > 0) qp.set('sun', this.filters.SUN.selected);
+      if(this.filters.MOISTURE.selected.length > 0) qp.set('moisture', this.filters.MOISTURE.selected);
+      if(this.filters.SOIL.selected.length > 0) qp.set('soil', this.filters.SOIL.selected);
+      if(this.filters.PH.selected.length > 0) qp.set('ph', this.filters.PH.selected);
+      if(this.filters.HARDINESSUSE.selected.length > 0) qp.set('h', this.filters.HARDINESSUSE.selected);
+
+      this.qp = qp.toString;;
+
+      return qp;
     }
   }, //close computed
   methods: {
@@ -330,7 +352,19 @@ export default {
           options: [...new Set(groupOpts)].sort(),
         },
       };
-    }//close function
+    },//close function
+    updateURL() {
+      let up = new URLSearchParams();
+
+      if(this.filters.SUN.selected.length > 0) up.set('sun', this.filters.SUN.selected);
+      if(this.filters.MOISTURE.selected.length > 0) up.set('moisture', this.filters.MOISTURE.selected);
+      if(this.filters.SOIL.selected.length > 0) up.set('soil', this.filters.SOIL.selected);
+      if(this.filters.PH.selected.length > 0) up.set('ph', this.filters.PH.selected);
+      if(this.filters.HARDINESSUSE.selected.length > 0) up.set('h', this.filters.HARDINESSUSE.selected);
+      
+      history.pushState(null, null, "?"+up.toString());
+
+    },
   }//close methods
 };//close export
 </script>
@@ -341,197 +375,12 @@ export default {
   background-color: rgba(61, 112, 104, .5);
   background-image: url("@/assets/growth_wh.png");
   background-size: 1920px;
+  grid-column: span 4;
   color: black;
-  display: flex;
+  display: block;
   justify-content: center;
   height: 200px;
   width: 100%;
-}
-
-.PlantFlow,
-.PlantForm {
-  display: block;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-ol {
-  list-style: none;
-}
-
-.container {
-  max-width: 1000px;
-  padding: 2%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.rectangle {
-  position: relative;
-  padding: 5px;
-}
-
-
-#top {
-    font-family: Helvetica Neue;
-    font-weight: 200;
-    font-size: 1.6em;
-    text-transform: uppercase;
-}
-
-#nested {
-    font-family: Helvetica Neue;
-    font-weight: 100;
-    font-size: 1.6em;
-    text-transform: uppercase;
-}
-
-.level-1,
-.level-1A  {
-  width: 35%;
-  background: black;
-  color: white;
-}
-
-.level-1A {
-  margin: 0 auto 20px;
-}
-
-.level-1 {
-  margin: 0 auto 220px;
-}
-
-.level-1::before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: .5px;
-  height: 200px;
-  background: black;
-}
-
-.level-2-wrapper {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.level-2-wrapper::before {
-  content: "";
-  position: absolute;
-  top: -20px;
-  left: 12.5%;
-  width: 75%;
-  height: 1px;
-  background: black;
-}
-
-.level-2-wrapper::after {
-  display: none;
-  content: "";
-  position: absolute;
-  left: -20px;
-  bottom: -20px;
-  width: calc(100% + 20px);
-  height: 1px;
-  background: black;
-}
-
-.level-2-wrapper li {
-  position: relative;
-}
-
-.level-2-wrapper > li::before {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: .5px;
-  height: 20px;
-  background: black;
-}
-
-.level-2 {
-  width: 70%;
-  margin: 0 auto;
-}
-
-.plant-form {
-  width: 40%;
-  clear: none;
-  float: left;
-}
-
-.plant-form-subset {
-  width: 60%;
-  clear: none;
-  float: left;
-}
-
-.libForm {
-  width: 100%;
-  margin: 0;
-}
-
-.field,
-.oneline {
-  display: inline;
-}
-
-.copy {
-  text-align: left;
-  width: 80%;
-}
-
-@media screen and (max-width: 700px) {
-  .rectangle {
-    padding: 20px 10px;
-  }
-
-  .level-1,
-  .level-2 {
-    width: 100%;
-  }
-
-  .level-1 {
-    margin-bottom: 20px;
-  }
-
-  .level-1::before,
-  .level-2-wrapper > li::before {
-    display: none;
-  }
-  
-  .level-2-wrapper,
-  .level-2-wrapper::after,
-  .level-2::after {
-    display: block;
-  }
-
-  .level-2-wrapper {
-    width: 100%;
-    margin: 0%;
-  }
-
-  .level-2-wrapper::before {
-    left: -20px;
-    width: .5px;
-    height: calc(100% + 40px);
-  }
-
-  .level-2-wrapper > li:not(:first-child) {
-    margin-top: 50px;
-  }
-}
-.plant-flow {
-  margin-bottom: 150px;
 }
 
 .cluster {
@@ -540,4 +389,5 @@ ol {
   display: flex;
   flex-direction: column;
 }
+
 </style>

@@ -20,34 +20,20 @@ body {
 }
 
 #page {
-  max-width: 1920;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 10px;
-  margin: 2% 5%;
   text-align: center;
 }
 
- .wrapper {
-    grid-row: span 100;
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-    padding: 4rem;
-    text-align: center;
-  }
-
-  .wrapper,
-  .PlantFlow,
-  .PlantForm,
-  .plantCards, 
-  .searchFilters {
-    grid-column: span 4;
-    width: 100%;
-    content-align: center;
-    display: flex;
-    place-items: flex-start;
-  }
+section {
+  grid-column: span 4;
+  margin: 2% 5%;
+  content-align: center;
+  grid-row: span 100;
+  place-items: flex-start;
+  max-width: 1920;
+}
 
   :root {
     --sun: rgba(242, 222, 44, 1);
@@ -75,11 +61,9 @@ a {
 }
 
 a:hover {
-  text-color: black;
-  background-color: var(--highlight);
+  color: var(--highlight);
   text-decoration: underline;
 }
-
 
 #external:hover {
   color: var(--external);
@@ -106,6 +90,10 @@ a:hover {
 
 .el-select-dropdown.is-multiple .el-select-dropdown__item.selected::after {
   background-color: black;
+}
+
+.oneline {
+  display: inline;
 }
 
 </style>

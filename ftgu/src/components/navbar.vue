@@ -1,14 +1,14 @@
 <template>
   <el-row class="nav">
       <div class="nav-split" id="source">
-        <router-link to="/root" class="nav-links">From the ground up</router-link>
+        <router-link :to="{name:'Root'}" class="nav-links">From the ground up</router-link>
       </div>
       <div class="nav-split" id="direction">
-        <router-link to="/learn" class="nav-links" id="menu-item">
+        <router-link :to="{name:'Learn'}" class="nav-links" id="menu-item">
           <span class="page-name" v-if="isLearn">Learn</span>
           <el-icon class="nav-item"><Histogram /></el-icon>
         </router-link>
-        <router-link to="/dig" class="nav-links" id="menu-item">
+        <router-link :to="{name:'Dig'}" class="nav-links" id="menu-item">
           <el-icon class="nav-item"><Grid /></el-icon>
           <span class="page-name" v-if="isDig">Dig</span>
         </router-link>

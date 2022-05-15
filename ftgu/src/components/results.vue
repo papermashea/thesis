@@ -21,34 +21,28 @@ export default {
 };
 </script>
 
-<style scoped>
-.oneline {
-  display: inline;
-  margin: 0;
-  padding: 0;
-}
-
-.type {
+<style>
+.res .type {
   font-size: .8em;
 }
 
-.description,
-.details {
+.res .description,
+.res .details {
   font-size: .7em;
 }
 
-.description {
+.res .description {
   font-weight: 600;
 }
 
-.description {
+.res .description {
   font-weight: 400;
 }
 
 .res {
   margin-top: 0;
   padding: 0;
-  width: 150%;
+  width: 100%;
   height: 250px;
 }
 
