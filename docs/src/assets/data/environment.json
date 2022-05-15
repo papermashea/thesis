@@ -1,0 +1,122 @@
+[
+  {
+    "name": "sun",
+    "test": "Start early in the morning when the sun is approaching the garden area. Every hour draw a rough line where the sun is shining or shadows are cast with a note as to the time. Repeat this every hour until the sun is past the area.",
+      "results": [
+        {
+          "id": 1,
+          "type": "None",
+          "description": "Less than 3 hours of sun per day.",
+          "details": "In environments with less light, plants grow more slowly and use less water. Avoid overwatering by feeling the soil.",
+          "infolink": "https://extension.psu.edu/planting-in-sun-or-shade",
+          "testlink": "https://104homestead.com/sun-map-101/"
+        },
+        {
+          "id": 2,
+          "type": "Partial",
+          "description": "3-6 hours of sun per day or 4-6 hours of inconsistent sun per day.",
+          "details": "These plants will not dry out as quickly; avoid overwatering by feeling the soil.",
+          "infolink": "https://extension.psu.edu/planting-in-sun-or-shade",
+          "testlink": "https://104homestead.com/sun-map-101/"
+        },
+        {
+          "id": 3,
+          "type": "Full",
+          "description": "6+ hours of sun per day.",
+          "details": "High-light areas can be warm, making plants dry out faster. Check these plants more frequently and water when soil is dry.",
+          "infolink": "https://extension.psu.edu/planting-in-sun-or-shade",
+          "testlink": "https://104homestead.com/sun-map-101/"
+        }
+      ]
+  },
+  {
+    "name": "soil",
+    "test": "Take half a cup of your soil, add a little water and mix until there are no lumps, drain excess moisture and form the soil into a ball in the palm of your hand.",
+      "results": [
+        {
+          "id": 1,
+          "type": "Light/Sandy",
+          "description": "Easily falls apart and contains gritty grains when rubbed.",
+          "details": "Sandy soil does not hold nutrients well but drains well.",
+          "infolink": "https://pfaf.org/user/permaculture_research_soil_advice_booklet_v.2.pdf",                          
+          "testlink": "https://s3.wp.wsu.edu/uploads/sites/2076/2018/04/C221-DIY-Soil-Testlink.pdf"
+        },
+        {
+          "id": 2,
+          "type": "Medium/Loamy",
+          "description": "Soil holds its shape but will easily break apart.",
+          "details": "Soil with roughly equal proportions of sand, silt, and clay.",
+          "infolink": "https://pfaf.org/user/permaculture_research_soil_advice_booklet_v.2.pdf",
+          "testlink": "https://s3.wp.wsu.edu/uploads/sites/2076/2018/04/C221-DIY-Soil-Testlink.pdf"
+        },
+        {
+          "id": 3,
+          "type": "Heavy/Clay",
+          "description": "Soil will hold its shape: it is hard sticky and elastic, fine and smooth textured.",
+          "details": "Clay excludes air and can become easily waterlogged but is extremely fertile as it holds nutrients well.",
+          "infolink": "https://pfaf.org/user/permaculture_research_soil_advice_booklet_v.2.pdf",
+          "testlink": "https://s3.wp.wsu.edu/uploads/sites/2076/2018/04/C221-DIY-Soil-Testlink.pdf"
+        }
+      ]
+  },
+  {
+    "name": "moisture",
+    "test": "Get a handful of soil, squeeze into a ball and attempt to poke a finger in it.",
+      "results": [
+        {
+          "id": 1,
+          "type": "Dry",
+          "description": "Doesn't form a ball or falls apart.",
+          "details": "Dry soil will need about 1 inch of water per week.",
+          "infolink": "https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/edu/?cid=nrcs142p2_054311",
+          "testlink": "https://www.youtube.com/watch?v=MzxNLR3n43k&ab_channel=UCDavisIPO"
+        },
+        {
+          "id": 2,
+          "type": "Moist",
+          "description": "Soil sticks together but falls apart when touched.",
+          "details": "Water regulates soil temperature and promotes healthy soil.",
+          "infolink": "https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/edu/?cid=nrcs142p2_054311",
+          "testlink": "https://www.youtube.com/watch?v=MzxNLR3n43k&ab_channel=UCDavisIPO"
+        },
+        {
+          "id": 3,
+          "type": "Wet/Water",
+          "description": "Continues to hold together and even molds to the shape.",
+          "details": "Working your soil when it's too wet or dry also damages the structure of the soil.",
+          "infolink": "https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/edu/?cid=nrcs142p2_054311",
+          "testlink": "https://www.youtube.com/watch?v=MzxNLR3n43k&ab_channel=UCDavisIPO"
+        }
+      ]
+  },
+  {
+    "name": "ph",
+    "test": "Place 2 tablespoons of soil in a bowl and moisten it with distilled water. Place another 2 tablespoons of soil in a bowl and add ½ cup vinegar. Add ½ cup baking soda to each.",
+      "results": [
+        {
+          "id": 1,
+          "type": "Acid",
+          "description": "If the baking soda mixture fizzes, you have acidic soil.",
+          "details": "Acidic (“sour”) soil is counteracted by applying finely ground limestone or wood ash.",
+          "infolink": "https://www.almanac.com/plant-ph",
+          "testlink": "https://www.almanac.com/content/3-simple-diy-soil-testlink"
+        },
+        {
+          "id": 2,
+          "type": "Neutral",
+          "description": "Soil holds its shape but will easily break apart.",
+          "details": "A pH value of 7 is neutral; plant roots absorb/access nutrients best when the pH is in the 5.5 to 7 range.",
+          "infolink": "https://www.almanac.com/plant-ph",
+          "testlink": "https://www.almanac.com/content/3-simple-diy-soil-testlink"
+        },
+        {
+          "id": 3,
+          "type": "Alkaline",
+          "description": "If the vinegar mixture fizzes, you have alkaline soil.",
+          "details": "Alkaline (“sweet”) soil is typically treated with gypsum (calcium sulfate), ground sulfur, or compost",
+          "infolink": "https://www.almanac.com/plant-ph",
+          "testlink": "https://www.almanac.com/content/3-simple-diy-soil-testlink"
+        }
+      ]
+  }
+]
