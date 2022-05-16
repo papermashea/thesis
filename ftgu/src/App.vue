@@ -28,7 +28,7 @@ body {
 
 section {
   grid-column: span 4;
-  margin: 2% 5%;
+  margin: 1% 5%;
   content-align: center;
   grid-row: span 100;
   place-items: flex-start;

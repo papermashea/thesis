@@ -23,7 +23,7 @@
       sun </p>
     </div>
 
-    <!-- MOISTURE FILTER -->
+    <!-- MOISTURE+SOIL FILTER -->
     <div class="field">
       <p class="mad-lib">and
       <div class="filter tag-filter oneline">
@@ -77,11 +77,11 @@
             :value="item"
           />
         </el-select>
-      </div>
+        </div>
       pH.</p>
-    </div>
+     </div>
 
-    <!-- HARDINESS GROUP FILTER -->
+    <!-- HARDINESS+TOLERANCES GROUP FILTER -->
     <div class="field">
       <p class="mad-lib">I'd like plants that are
       <div class="filter tag-filter oneline">
@@ -90,7 +90,7 @@
           collapse-tags
           v-model="filterHuse.selected"
           @change="(options) => onFilterChange('HARDINESSUSE', options)"
-          placeholder="able to grow..."
+          placeholder="grown..."
         >
           <el-option
             v-for="item in filterHuse.options"
@@ -100,7 +100,26 @@
           />
         </el-select>
       </div>
-      .</p>
+      </p> 
+    </div>
+    <div class="field">
+      <p class="mad-lib">and
+        <el-select
+          multiple
+          collapse-tags
+          v-model="filterTol.selected"
+          @change="(options) => onFilterChange('TOLERANCES', options)"
+          placeholder="somewhat..."
+          class="tol"
+        >
+          <el-option
+            v-for="item in filterTol.options"
+            class="tol"
+            :key="item"
+            :label="item"
+            :value="item"
+          />
+        </el-select> tolerant.</p>
     </div>
 
   </div>
@@ -132,11 +151,11 @@ export default {
     filterPh() {
       return this.filters.PH;
     },
-    filterSearch() {
-      return this.filters.SEARCH;
-    },  
     filterHuse() {
       return this.filters.HARDINESSUSE;
+    },
+    filterTol() {
+      return this.filters.TOLERANCES;
     },
   },//close computed
 };
@@ -164,7 +183,7 @@ export default {
   float: left;
   text-align: left;
   height: 40px;
-  max-width: 100%;
+  width: 100%;
   margin-bottom: 10px;
 }
 

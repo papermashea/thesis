@@ -24,6 +24,11 @@ export const FILTERS = {
     options: [],
     selected: [],
   },
+  TOLERANCES: {
+    type: "MULTI_SELECT",
+    options: [],
+    selected: [],
+  },
   HARDINESS: {
     type: "RANGE",
     options: [],

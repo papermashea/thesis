@@ -1,40 +1,45 @@
 <template>
-    <div class="wrapper">
-     <p class="level-1A" id="top">Find Plant Patterns</p>
-      <p class="container">
-        Learn about plant <a href="/#/search" class="definition"> types</a>, <a href="/#/search" class="definition"> tolerances</a> and <a href="/#/search" class="definition">uses</a> by exploring patterns within these groups. You can see for yourself what kinds of plants you'd like to see in your garden, and download more information on each plant to take with you out into the world.
-      </p>
-      <div class="code">
-        <div class="legend" id="color">
-          <div class="color-legend"></div>
-          <div class="label">
-            <p class="color-key" id="low">Least edible</p><p class="color-key" id="high">Most edible</p>
+    <div class="test-container">
+      <p class="level-1 rectangle" id="top">Find Plant Patterns</p>
+
+      <ol class="level-2-wrapper">
+        <li>
+          <div class="level-2 rectangle" >
+            <div class="code">
+              <div class="legend" id="color">
+                <div class="color-legend"></div>
+                <div class="label">
+                  <p class="color-key" id="low">Least edible</p><p class="color-key" id="high">Most edible</p>
+                </div>
+              </div>
+            </div>          
           </div>
-        </div>
-        <div class="legend" id="size">
-            <div class="size-legend">
-              <div class="circle" id="small"></div>
+        </li>
+        <li id="white">
+            <div class="level-2">
             </div>
-            <div class="size-legend">
-              <div class="circle" id="large"></div>
+        </li>
+        <li id="white">
+            <div class="level-2">
             </div>
-          <div class="label">
-            <p class="size-key" id="low">Few uses</p><p class="size-key" id="high">Most uses</p>
-          </div>
-        </div>
-      </div>
-      <div class="inputs">
-        <div class="sun">
-          <!-- <textarea 
-          class="tag"
-          rows="2" 
-          cols="4"
-          v-model="filterSun.selected" 
-          @change="(options) => onFilterChange('SUN', options)"
-          placeholder="[light level]"
-          >{{filterSun.selected}}</textarea> -->
-        </div>
-      </div>
+        </li>
+        <li>
+            <div class="level-2 rectangle" >
+              <div class="legend" id="size">
+                <div class="size-legend">
+                  <div class="circle" id="small"></div>
+                  </div>
+                  <div class="size-legend">
+                    <div class="circle" id="large"></div>
+                  </div>
+                  <div class="label">
+                    <p class="size-key" id="low">Few uses</p><p class="size-key" id="high">Most uses</p>
+                  </div>
+              </div>
+
+            </div>
+        </li>
+      </ol>
     </div>
 </template>
 
@@ -60,13 +65,9 @@ export default {
 }
 
 .legend {
-  margin: 4% 0 0 0;
+  margin: 4% 0 0 20%;
   width: 100%;
   float: left
-}
-
-.legend#size {
-  margin: 1% 0 0 0;
 }
 
 .label {

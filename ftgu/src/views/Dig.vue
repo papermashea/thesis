@@ -90,7 +90,7 @@ export default {
   mounted() {
     this.plants = plants.map((p) => ({
       ...p,
-      searchTarget: [p.latinname, p.commonname, p.synonyms, p.edibleuses, p.medicinaluses, p.materialuses, p.synonyms, p.propdetails, p.cultivationdetails, p.range, p.indigenoususe].join(" ").toLowerCase(),
+      searchTarget: [p.latinname, p.commonname, p.synonyms, p.edibleuses, p.medicinaluses, p.materialuses, p.tolerances, p.synonyms, p.propdetails, p.cultivationdetails, p.range, p.indigenoususe].join(" ").toLowerCase(),
     }));
     this.populateFilters();
   },
@@ -105,7 +105,7 @@ export default {
       if (!this.plants.length) {
         return [];
       }
-      const { SUN, SOIL, MOISTURE, PH, HARDINESSUSE, HARDINESS, GROUP, SIZE, PROP, GROWTH, SCENT, POLLINATORS, SEARCH } = this.filters;
+      const { SUN, SOIL, MOISTURE, PH, HARDINESSUSE, HARDINESS, TOLERANCES, GROUP, SIZE, PROP, GROWTH, SCENT, POLLINATORS, SEARCH } = this.filters;
       const { SORT } = this.params;
       const sortParam = SORT.selected;
       const isSortAsc = SORT.asc;
@@ -127,6 +127,8 @@ export default {
             PH.selected.some((phOpt) => p.ph.includes(phOpt))) &&
           (!HARDINESSUSE.selected.length ||
             HARDINESSUSE.selected.some((huseOpt) => p.hardinessuse.includes(huseOpt))) &&
+          (!TOLERANCES.selected.length ||
+            TOLERANCES.selected.some((tolOpt) => p.tolerances.includes(tolOpt))) &&
           (!GROUP.selected.length ||
             GROUP.selected.some((groupOpt) => p.group.includes(groupOpt))) &&
           (!SIZE.selected.length ||
@@ -222,6 +224,15 @@ export default {
           ...this.filters,
           HARDINESSUSE: {
             ...this.filters.HARDINESSUSE,
+            selected,
+          },
+        };
+      }
+      if (id === "TOLERANCES") {
+        this.filters = {
+          ...this.filters,
+          TOLERANCES: {
+            ...this.filters.TOLERANCES,
             selected,
           },
         };
@@ -326,6 +337,7 @@ export default {
       if(this.filters.SOIL.selected.length > 0) qp.set('soil', this.filters.SOIL.selected);
       if(this.filters.PH.selected.length > 0) qp.set('ph', this.filters.PH.selected);
       if(this.filters.HARDINESSUSE.selected.length > 0) qp.set('ph', this.filters.HARDINESSUSE.selected);
+      if(this.filters.TOLERANCES.selected.length > 0) qp.set('tol', this.filters.TOLERANCES.selected);
       
       history.replaceState(null, null, "?"+qp.toString());
 
@@ -338,6 +350,7 @@ export default {
       let soilOpts = [];
       let moistureOpts = [];
       let phOpts = [];
+      let tolOpts = [];
       let huseOpts = [];
       let hardyRange = [Infinity, -Infinity];
 
@@ -350,12 +363,13 @@ export default {
 
 
       for (let i = 0; i < this.plants.length; i++) {
-        const { sun, soil, moisture, ph, hardinessuse, hardiness, group, size, proptype, growth, scent, pollinators } = this.plants[i];
+        const { sun, soil, moisture, ph, hardinessuse, tolerances, hardiness, group, size, proptype, growth, scent, pollinators } = this.plants[i];
         sunOpts = [...sunOpts, ...sun].filter(Boolean);
         soilOpts = [...soilOpts, ...soil].filter(Boolean);
         moistureOpts = [...moistureOpts, ...moisture].filter(Boolean);
         phOpts = [...phOpts, ...ph].filter(Boolean);
         huseOpts = [...huseOpts, hardinessuse].filter(Boolean);
+        tolOpts = [...tolOpts, ...tolerances].filter(Boolean);
         hardyRange = [
           Math.min(hardiness, hardyRange[0]),
           Math.max(hardiness, hardyRange[1]),
@@ -390,6 +404,10 @@ export default {
         HARDINESSUSE: {
           ...this.filters.HARDINESSUSE,
           options: [...new Set(huseOpts)],
+        },
+        TOLERANCES: {
+          ...this.filters.TOLERANCES,
+          options: [...new Set(tolOpts)],
         },
         HARDINESS: {
           ...this.filters.HARDINESS,
@@ -457,6 +475,7 @@ export default {
           ovlink: o.ovlink,
           pfaflink: o.pfaflink,
           propdetails: o.propdetails,
+          pollinators: o.pollinators,
           proptype: o.proptype,
           range: o.range,
           scent: o.scent,
@@ -471,6 +490,7 @@ export default {
           moisture: o.moisture,
           ph: o.ph,
           type: o.type,
+          tolerances: o.tolerances,
           usda: o.usda,
           usdalink: o.usdalink,
           wslink: o.wslink,

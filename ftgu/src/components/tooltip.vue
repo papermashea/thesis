@@ -4,11 +4,10 @@
     class="tooltip"
   >
     <div class="tt-current" />
-    <div class="tt-over" />
-    
     <div class="tt-ed" />
     <div class="tt-med" />
-    <div class="tt-mat" />
+    <div class="tt-over" />
+    
   </div>
 </template>
 
@@ -48,20 +47,16 @@ export default {
         .text(`${this.details.name} / `+`${this.details.cname}`)
 
       tooltip
-        .select('.tt-over')
-        .text(`mostly `+`${this.details.hardinessuse}`)
-
-      tooltip
         .select('.tt-ed')
-        .text(`${format(this.details.edible)}`+` edible uses`)
+        .text(`Rated `+`${format(this.details.edible)}`+` out of 5 for edible uses and`)
 
       tooltip
         .select('.tt-med')
-        .text(`${format(this.details.medicinal)}`+` medicinal uses`)
+        .text(`rated`+`${format(this.details.medicinal)}`+` and `+`${format(this.details.material)}`+` out of 5 for medicinal and material uses.`)
 
       tooltip
-        .select('.tt-mat')
-        .text(`${format(this.details.material)}`+` material uses`)
+        .select('.tt-over')
+        .text(`Mostly `+`${this.details.hardinessuse}`)
 
       const tooltipElement = tooltip.node().getBoundingClientRect()
       const { height } = tooltipElement
@@ -101,11 +96,20 @@ export default {
   margin: 0;
 }
 
-.tt-over {
-  padding-bottom: 2px;
-}
 .tt-current {
   font-size: 1.2em;
   font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.tt-over {
+  font-size: .8em;
+  font-style: oblique;
+  padding-top: 10px;
+}
+
+.tt-ed,
+.tt-med {
+  font-size: .8em;
 }
 </style>

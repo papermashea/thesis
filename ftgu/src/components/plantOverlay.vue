@@ -79,10 +79,22 @@
               </table>
 
               <div class="range">
-                <el-row class="info-head"><p>Habitat</p></el-row>
-                  <el-row class="info-text"><p>{{ plantDetails.habitat }}</p></el-row>
-                <el-row class="info-head"><p>Location</p></el-row>
-                  <el-row class="info-text"><p>{{ plantDetails.range }}</p></el-row>
+                <div class="area">
+                  <p>Habitat</p>
+                    <p>{{ plantDetails.habitat }}</p>
+                </div>
+                <div class="area">
+                  <p>Location</p>
+                    <p>{{ plantDetails.range }}</p>
+                </div>
+                <div class="area" v-if="plantDetails.pollinators !== ''">
+                  <p>Pollinated by:</p>
+                    <a v-for="pol in plantDetails.pollinators" class="pollinator-list">{{ pol }}</a>
+                </div>
+                <div class="area" v-if="plantDetails.wind !== 'false'">
+                  <p>Tolerances:</p>
+                    <p>{{ plantDetails.wind }}</p>
+                </div>
               </div>
             </div>
 
@@ -219,18 +231,27 @@ export default {
 }
 
 .overview{
-  height: 300px;
+  height: 400px;
   width: 100%;
+  padding: 20px 0;
+  display: block;
 }
 
 .deets{
+  max-height: 70%;
   width: 30%;
   float: left;
 }
 
 .range {
   width: 70%;
+  max-height: 70%;
   float: left;
+  text-align: left;
+}
+
+.area {
+
 }
 
 .plant-info {
@@ -238,15 +259,8 @@ export default {
   padding: 20px;
 }
 
-.info-head {
-  height: 1em;
-  margin: 5px, 0;
-  text-align: left;
-}
-
-.info-text {
-  text-align: left;
-  margin-bottom: 20px;
+.pollinator-list {
+  cursor: none;
 }
 
 .haz {

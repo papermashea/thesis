@@ -10,41 +10,64 @@
         v-bind:id="factor.name">
           <p class="factor" id="nested">{{ factor.name}} </p>
             <p class="test"> {{ factor.test }} </p>
-            <div class="ranges">
+<!--             <div class="ranges">
               <div class="results-button" v-for="(res, index) in factor.results">
                 <el-button
                 circle
-                @click="showResults(res)"
+                @click="show == true"
                 :class="factor.name"
                 :id="res.id"
                 :style="{
                   opacity: (index+.3)/2,
                 }"
                 >
-                <div :key="factor.name" v-if="factor.name === 'ph'"><el-icon class="res-icon"><coin /></el-icon></div>
-                <div :key="factor.name" v-else-if="factor.name == 'moisture'"><el-icon class="res-icon"><pouring /></el-icon></div>
-                <div :key="factor.name" v-else-if="factor.name == 'soil'"><el-icon class="res-icon"><picture-rounded /></el-icon></div>
-                <div :key="factor.name" v-else="factor.name == 'sun'"><el-icon class="res-icon"><sunny /></el-icon></div>            
+                  <div :key="factor.name" v-if="factor.name === 'ph'"><el-icon class="res-icon"><coin /></el-icon></div>
+                  <div :key="factor.name" v-else-if="factor.name == 'moisture'"><el-icon class="res-icon"><pouring /></el-icon></div>
+                  <div :key="factor.name" v-else-if="factor.name == 'soil'"><el-icon class="res-icon"><picture-rounded /></el-icon></div>
+                  <div :key="factor.name" v-else="factor.name == 'sun'"><el-icon class="res-icon"><sunny /></el-icon></div>            
                 </el-button>
-                </div>
-            </div>
-            <!-- <Results v-bind="{resultDetails}" :key="resultsDetails[factor.name]" :class="factor.name" /> -->
-            <Results :class="factor.name" v-if="factor.name === 'sun'" v-bind="factor.results[0]" :id="factor.results.id"
-            />
-            <Results :class="factor.name" v-else-if="factor.name === 'moisture'" v-bind="factor.results[0]" 
-            />
-            <Results :class="factor.name" v-else-if="factor.name === 'soil'" v-bind="factor.results[0]" 
-            />
-            <Results :class="factor.name" v-else="factor.name === ph" v-bind="factor.results[0]" 
-            />
-            </div>
+              </div>
+              </div> -->
+              <el-tabs v-model="activeName" class="results-cards" @tab-click="handleClick">
+                <el-tab-pane v-for="(res, index) in factor.results" :class="factor.name" :id="res.id" :name="res.id">
+                    <template #label>
+                      <span class="custom-tabs-label">
+                        <div :key="factor.name" class="icon-circle" v-if="factor.name === 'ph'"><el-icon class="res-icon"><coin /></el-icon></div>
+                        <div :key="factor.name" class="icon-circle" v-else-if="factor.name == 'moisture'"><el-icon class="res-icon"><pouring /></el-icon></div>
+                        <div :key="factor.name" class="icon-circle" v-else-if="factor.name == 'soil'"><el-icon class="res-icon"><picture-rounded /></el-icon></div>
+                        <div :key="factor.name" class="icon-circle" v-else="factor.name == 'sun'"><el-icon class="res-icon"><sunny /></el-icon></div> 
+                      </span>
+                    </template>
+                  <p class="type">{{res.type}}</p>
+                  <p class="description">{{res.description}}</p>
+                  <p class="details">{{res.details}}</p>
+                  <a class="oneline" id="external" :href=infolink target="_blank"> <button type="button" class="btn btn-light">info </button></a>
+                  <a class="oneline" id="external" :href=testlink target="_blank"> <button type="button" class="btn btn-light">tests </button></a>
+                </el-tab-pane>
+              </el-tabs>
+
+             </div>
+<!--             <Results v-show="true" v-bind:currentElement="factor.name" v-bind="factor.results[0]" :id="factor.results.id"/>
+            <Results v-show="false" v-bind:currentElement="factor.name" v-bind="factor.results[1]" :id="factor.results.id"/>
+            <Results v-show="false" v-bind:currentElement="factor.name" v-bind="factor.results[2]" :id="factor.results.id"/> -->
       </li>
     </ol>
   </div>
 </div>
 </template>
 
-<script>
+<script lang="ts" setup>
+import { ref } from 'vue';
+import type { TabsPaneContext } from 'element-plus'
+
+// const activeName = ref('first')
+
+// const handleClick = (tab: TabsPaneContext, event: Event) => {
+//   console.log(tab, event)
+
+</script>
+
+<script lang="ts">
 import environmentData from "@/assets/data/environment.json";
 import Results from "@/components/Results.vue";
 
@@ -56,69 +79,10 @@ export default {
   data(){
     return {
       factors: environmentData,
-      resArray: environmentData.results,
       resultDetails: {},
     }
   },//close data
   methods: {
-    showResults(r) {
-
-      // const resultDetails = f
-      // const resultDetails = r
-      const resultDetails = {
-        // sun:{
-        type: r.type,
-        description: r.description,
-        details: r.details,
-        infolink: r.infolink,
-        testlink: r.testlink,
-        // name: f
-      }
-
-      // const factor = f,
-      // if factor = "sun"
-
-      // const resultDetails = {
-        // sun: {},
-        // moisture: {},
-        // soil: {},
-        // ph: {},
-        // sun: {
-          // type: r.type,
-          // description: r.description,
-          // details: r.details,
-          // infolink: r.infolink,
-          // testlink: r.testlink,
-        // },
-        // moisture: {
-        //   type: r.type,
-        //   description: r.description,
-        //   details: r.details,
-        //   infolink: r.infolink,
-        //   testlink: r.testlink,          
-        // },
-        // soil: {
-        //   type: r.type,
-        //   description: r.description,
-        //   details: r.details,
-        //   infolink: r.infolink,
-        //   testlink: r.testlink,          
-        // },
-        // ph: {
-        //   type: r.type,
-        //   description: r.description,
-        //   details: r.details,
-        //   infolink: r.infolink,
-        //   testlink: r.testlink,          
-        // },
-      // }
-
-
-    //   console.log(resultDetails)
-      this.resultDetails = resultDetails
-
-      return { resultDetails }
-    }
   }//close methods
 };
 
@@ -172,7 +136,7 @@ ol {
 }
 
 .level-1 {
-  margin: 0 auto 220px;
+  margin: 0 auto 140px;
 }
 
 .level-1::before {
@@ -182,7 +146,7 @@ ol {
   left: 50%;
   transform: translateX(-50%);
   width: .5px;
-  height: 200px;
+  height: 120px;
   background: black;
 }
 
@@ -228,6 +192,17 @@ ol {
   background: black;
 }
 
+.level-2-wrapper > #white::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: .5px;
+  height: 20px;
+  background: white;
+}
+
 .level-2 {
   width: 90%;
   margin: 0 auto;
@@ -237,6 +212,7 @@ ol {
   font-weight: 200;
   font-size: .8em;
   height: 130px;
+  padding: 10px 60px;
   text-align: center;
   display:block;
 }
@@ -273,12 +249,37 @@ ol {
   float: left;
 }
 
+.res .type {
+  font-size: 1em;
+}
+
+.res .description,
+.res .details {
+  font-size: 1em;
+}
+
+.res .description {
+  font-weight: 600;
+}
+
+.res .description {
+  font-weight: 400;
+}
+
+.res {
+  margin-top: 0;
+  padding: 0;
+  width: 100%;
+  height: 200px;
+  position: absolute;
+}
+
 .res-icon svg {
   height: 1em;
   width: 1em;
   padding: 0;
   margin: 0;
-  color: white;
+  color: black;
 }
 
 .el-button.sun,

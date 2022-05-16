@@ -33,10 +33,10 @@
       </div>
     </section>
     <section>
-<!--     <Information 
+    <Information 
       :filters="filters"
       :onFilterChange="onFilterChange"
-    /> -->
+    />
     <Tooltip />
     <PlantPack 
       class="collection-vis"
@@ -91,7 +91,7 @@ export default {
   mounted() {
     this.plants = plants.map((p) => ({
       ...p,
-      searchTarget: [p.edibleuses, p.medicinaluses, p.materialuses, p.synonyms, p.propdetails, p.cultivationdetails, p.range, p.indigenoususe].join(" ").toLowerCase(),
+      searchTarget: [p.edibleuses, p.medicinaluses, p.materialuses, p.synonyms, p.propdetails, p.cultivationdetails, p.tolerances, p.range, p.indigenoususe].join(" ").toLowerCase(),
     }));
     this.populateFilters();
   },
@@ -106,7 +106,7 @@ export default {
       if (!this.plants.length) {
         return [];
       }
-      const { SUN, SOIL, MOISTURE, PH, HARDINESSUSE, HARDINESS, GROUP, SEARCH } = this.filters;
+      const { SUN, SOIL, MOISTURE, PH, HARDINESSUSE, HARDINESS, TOLERANCES, GROUP, SEARCH } = this.filters;
       const { SORT } = this.params;
       const sortParam = SORT.selected;
       const isSortAsc = SORT.asc;
@@ -128,6 +128,8 @@ export default {
               PH.selected.some((phOpt) => p.ph.includes(phOpt))) &&
             (!HARDINESSUSE.selected.length ||
               HARDINESSUSE.selected.some((huseOpt) => p.hardinessuse.includes(huseOpt))) &&
+            (!TOLERANCES.selected.length ||
+              TOLERANCES.selected.some((tolOpt) => p.tolerances.includes(tolOpt))) &&
             (!GROUP.selected.length ||
               GROUP.selected.some((groupOpt) => p.group.includes(groupOpt))) &&
             (!searchTerm || p.searchTarget.indexOf(searchTerm) !== -1)
@@ -192,6 +194,7 @@ export default {
       if(this.filters.SOIL.selected.length > 0) qp.set('soil', this.filters.SOIL.selected);
       if(this.filters.PH.selected.length > 0) qp.set('ph', this.filters.PH.selected);
       if(this.filters.HARDINESSUSE.selected.length > 0) qp.set('h', this.filters.HARDINESSUSE.selected);
+      if(this.filters.TOLERANCES.selected.length > 0) qp.set('h', this.filters.TOLERANCES.selected);
 
       this.qp = qp.toString;;
 
@@ -245,6 +248,15 @@ export default {
           },
         };
       }
+      if (id === "TOLERANCES") {
+        this.filters = {
+          ...this.filters,
+          TOLERANCES: {
+            ...this.filters.TOLERANCES,
+            selected,
+          },
+        };
+      }      
       if (id === "HARDINESS") {
         this.filters = {
           ...this.filters,
@@ -301,17 +313,19 @@ export default {
       let moistureOpts = [];
       let phOpts = [];
       let huseOpts = [];
+      let tolOpts = [];
       let hardyRange = [Infinity, -Infinity];
 
       let groupOpts = [];
 
       for (let i = 0; i < this.plants.length; i++) {
-        const { sun, soil, moisture, ph, hardinessuse, hardiness, group } = this.plants[i];
+        const { sun, soil, moisture, ph, hardinessuse, hardiness, tolerances, group } = this.plants[i];
           sunOpts = [...sunOpts, ...sun].filter(Boolean);
           soilOpts = [...soilOpts, ...soil].filter(Boolean);
           moistureOpts = [...moistureOpts, ...moisture].filter(Boolean);
           phOpts = [...phOpts, ...ph].filter(Boolean);
           huseOpts = [...huseOpts, hardinessuse].filter(Boolean);
+          tolOpts = [...tolOpts, ...tolerances].filter(Boolean);
           hardyRange = [
             Math.min(hardiness, hardyRange[0]),
             Math.max(hardiness, hardyRange[1]),
@@ -342,6 +356,10 @@ export default {
           ...this.filters.HARDINESSUSE,
           options: [...new Set(huseOpts)],
         },
+        TOLERANCES: {
+          ...this.filters.TOLERANCES,
+          options: [...new Set(tolOpts)],
+        },
         HARDINESS: {
           ...this.filters.HARDINESS,
           options: hardyRange,
@@ -361,6 +379,7 @@ export default {
       if(this.filters.SOIL.selected.length > 0) up.set('soil', this.filters.SOIL.selected);
       if(this.filters.PH.selected.length > 0) up.set('ph', this.filters.PH.selected);
       if(this.filters.HARDINESSUSE.selected.length > 0) up.set('h', this.filters.HARDINESSUSE.selected);
+      if(this.filters.TOLERANCES.selected.length > 0) up.set('tol', this.filters.TOLERANCES.selected);
       
       history.pushState(null, null, "?"+up.toString());
 
@@ -370,11 +389,16 @@ export default {
 </script>
 
 <style>
+
 .cluster {
   max-width: 950px;
-  margin: 0 auto;
+  margin-top: -100px;
   display: flex;
   flex-direction: column;
+}
+
+.circle-pack {
+  margin-top: -100px;
 }
 
 </style>

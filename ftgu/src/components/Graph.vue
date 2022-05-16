@@ -110,15 +110,20 @@ export default {
   stroke: 2px solid rgba(61, 112, 104, 1);
 }
 
-.graphCol,
+.graphCol {
+  width: 33%;
+  display: block;
+  float: left;
+}
+
 .numCol {
-  width: 50%;
+  width: 67%;
   display: block;
   float: left;
 }
 
 .num-block{
-  margin: 0 0 10% 10%;
+  margin: 0 10% 2% 0;
   height: 25%;
   text-align: right;
 }
@@ -130,11 +135,12 @@ export default {
 }
 
 .num1 {
-  font-size: 2em;
+  font-size: 2.2em;
 }
 
 .num2 {
-  font-size: 1.6em;
+  font-size: 1em;
+  font-color: black!important;
 }
 
 .num-label {
@@ -145,9 +151,9 @@ export default {
 }
 
 .label-line {
-  width: 150%;
+  width: 122%;
   border-bottom: 1px dotted black;
-  margin: 0 0 0 -65%;
+  margin: 0 0 0 -27%;
   padding: 15px 10px 0 0;
   float: left;
 }

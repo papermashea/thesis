@@ -106,6 +106,27 @@
         </el-select>
       </div>
 
+      <!-- TOLERANCES FILTER -->
+      <div class="filter tag-filter oneline">
+        <div class="label" v-show="filterTol.selected.length > 0">tolerances</div>
+        <el-select
+          multiple
+          collapse-tags
+          v-model="filterTol.selected"
+          @change="(options) => onFilterChange('TOLERANCES', options)"
+          placeholder="tolerances"
+          class="tol"
+        >
+          <el-option
+            v-for="item in filterTol.options"
+            class="tol"
+            :key="item"
+            :label="item"
+            :value="item"
+          />
+        </el-select>
+      </div>
+
       <!-- HARDINESS RANGE FILTER -->
 <!--       <div class="filter oneline">
         <el-slider 
@@ -153,9 +174,12 @@ export default {
     filterHuse() {
       return this.filters.HARDINESSUSE;
     },
-    filterHardiness() {
-      return this.filters.HARDINESS;
+    filterTol() {
+      return this.filters.TOLERANCES;
     },
+    // filterHardiness() {
+    //   return this.filters.HARDINESS;
+    // },
   },//close computed
 };
 </script>
