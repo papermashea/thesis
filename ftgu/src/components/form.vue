@@ -25,7 +25,7 @@
 
     <!-- MOISTURE+SOIL FILTER -->
     <div class="field">
-      <p class="mad-lib">and
+      <p class="mad-lib">with 
       <div class="filter tag-filter oneline">
         <el-select
           multiple
@@ -41,6 +41,13 @@
             :value="item"
           />
         </el-select>
+        </div>
+      </p>
+    </div>
+
+     <div class="field">
+      <p class="mad-lib">
+      <div class="filter tag-filter oneline">
         <el-select
           multiple
           collapse-tags
@@ -55,9 +62,9 @@
             :value="item"
           />
         </el-select>
+        </div>
+        soil, </p>
       </div>
-      soil </p>
-    </div>
 
     <!-- PH LEVEL -->
     <div class="field">

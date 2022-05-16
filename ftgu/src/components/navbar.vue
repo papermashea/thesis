@@ -32,6 +32,7 @@
 .nav, 
 .foot {
   font-size: 2em;
+ font-family: var(--technical); 
 }
 
 .nav-split {
@@ -59,20 +60,23 @@
     text-decoration: none;
     max-width: 100%;
     padding: 1% 2%; 
+    font-family: var(--technical);
   }
 
   .nav-links,
   .nav-item svg {
     color: white;
+   font-family: var(--technical); 
   }
 
   .nav-links#menu-item {
-    padding-left: 100%
+    padding-left: 80%;
   }
 
   .nav-links:hover,
   .nav-item svg:hover {
     color: var(--highlight);
+    font-family: var(--technical);
     background-color: black;
     text-decoration: underline;
   }

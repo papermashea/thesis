@@ -87,13 +87,13 @@ img:hover {
   height: 650px;
   width: 50%;
   position: absolute;
-  background-color: rgba(255,255,255,.8);
+  background-color: rgba(255,255,255,.9);
   grid-column: span 4;
 }
 
 #slide-text {
   text-align: left;
-  width: 60%;
+  width: 75%;
   position: absolute;
   padding: 1% 15%;
 }
@@ -107,11 +107,11 @@ img:hover {
 }
 
 .tools {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .introduction {
-  margin: 30px 0px;
+  margin: 20px 0px;
 }
 
 #ex-resources {

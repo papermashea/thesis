@@ -28,8 +28,8 @@
                     <p class="type">{{res.type}}</p>
                     <p class="description">{{res.description}}</p>
                     <p class="details">{{res.details}}</p>
-                    <div class="res-link"><a id="external" :href="res.testlink" target="_blank">{{factor.name}} tests <el-icon><DocumentCopy /></el-icon></a></div>
-                    <div class="res-link"><a id="external" :href="res.infolink" target="_blank">{{factor.name}} info <el-icon><Link /></el-icon></a></div>
+                    <div class="res-link"><a :href="res.testlink" target="_blank">{{factor.name}} tests <el-icon><DocumentCopy /></el-icon></a></div>
+                    <div class="res-link"><a :href="res.infolink" target="_blank">{{factor.name}} info <el-icon><Link /></el-icon></a></div>
                   </div>
                 </el-tab-pane>
               </el-tabs>
@@ -195,9 +195,9 @@ ol {
 
 .test {
   font-weight: 200;
-  font-size: 1em;
+  font-size: .9em;
   height: 140px;
-  padding: 10px 60px;
+  padding: 10px 0px;
   text-align: center;
   display:block;
 }
@@ -302,7 +302,7 @@ ol {
 }
 
 .details {
-  font-size: .9em;
+  font-size: .7em;
   height: 40%;
 }
 

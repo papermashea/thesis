@@ -40,7 +40,7 @@
   </section>
 
   <div class="load">
-    <p class="level-1 rectangle" id="top" @click="loadMore"><el-icon><Plus /></el-icon>load more<el-icon><Plus /></el-icon></p>
+    <p class="level-1 function" id="top" @click="loadMore"><el-icon color="white"><Plus /></el-icon>load more<el-icon color="white"><Plus /></el-icon></p>
   </div>
 
 </div>
@@ -551,7 +551,7 @@ export default {
   float: left;
   clear: none;
   text-align: right;
-  padding: 0 20px;
+  padding: 5px 20px;
 }
 
 .count-label {
@@ -630,9 +630,10 @@ export default {
   cursor: pointer;
 }
 
-.rectangle {
+.function {
   position: relative;
   padding: 5px 0;
+  margin: 50% 0;
 }
 
 #top {
