@@ -1,5 +1,5 @@
 <template>
-    <div class="test-container">
+    <div class="test-container" id="pattern">
       <p class="level-1 rectangle" id="top">Find Plant Patterns</p>
 
       <ol class="level-2-wrapper">
@@ -62,6 +62,15 @@ export default {
 .code {
   width: 50%;
   float: left;
+}
+
+#pattern {
+  height: 300px;
+  z-index: -10;
+}
+
+#pattern .level-2-wrapper {
+  min-height: 0px;
 }
 
 .legend {

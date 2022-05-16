@@ -30,7 +30,7 @@
   <section>
     <div class="search-results">
       <div v-for="(p, index) in plantsLoaded" :key="index" :id="p.id">
-        <PlantCard :latinname="p.latinname" :commonname="p.commonname" :synonyms="p.synonyms" :imgthb="p.imgthb" :growth="p.growth" :type="p.type" :proptype="p.proptype" :onFilterChange="onFilterChange" @click="drawer = true; plantPass(p)"/>
+        <PlantCard :latinname="p.latinname" :commonname="p.commonname" :synonyms="p.synonyms" :imgthb="p.imgthb" :type="p.type" :hazards="p.hazards" :hardinessuse="p.hardinessuse" :onFilterChange="onFilterChange" @click="drawer = true; plantPass(p)"/>
       </div>
       <el-drawer v-model="drawer" direction="rtl" size="50%">
         <PlantOverlay v-if="drawer = true"
@@ -444,38 +444,42 @@ export default {
       // console.log(o.id)
       const plantDetails = {
           commonname: o.commonname,
-          cultivationdetails: o.cultivationdetails,
           cultivationcite: o.cultivationcite,
-          edibleuses: o.edibleuses,
+          cultivationdetails: o.cultivationdetails,
           ediblecite: o.ediblecite,
           ediblerating: o.ediblerating,
+          edibleuses: o.edibleuses,
           family: o.family,
           flowerendmonth: o.flowerendmonth,
           flowerstartmonth: o.flowerstartmonth,
           flowertype: o.flowertype,
           growth: o.growth,
           habitat: o.habitat,
+          hardiness: o.hardiness,
           hardinessuse: o.hardinessuse,
+          hazards: o.hazards,
+          hazardscite: o.hazardscite,
           height: o.height,
           id: o.id,
           img: o.img,
           imgcreator: o.imgcreator,
+          imglink: o.imglink,
           imgthb: o.imgthb,
           indigenoususe: o.indigenoususe,
-          hazards: o.hazards,
-          hazardscite: o.hazardscite,
           latinname: o.latinname,
           leaftype: o.leaftype,
-          materialuses: o.materialuses,
           materialcite: o.materialcite,
           materialrating: o.materialrating,
-          medicinaluses: o.medicinaluses,
+          materialuses: o.materialuses,
           medicinalcite: o.medicinalcite,
           medicinalrating: o.medicinalrating,
+          medicinaluses: o.medicinaluses,
+          moisture: o.moisture,
           ovlink: o.ovlink,
           pfaflink: o.pfaflink,
-          propdetails: o.propdetails,
+          ph: o.ph,
           pollinators: o.pollinators,
+          propdetails: o.propdetails,
           proptype: o.proptype,
           range: o.range,
           scent: o.scent,
@@ -484,17 +488,15 @@ export default {
           seedendmonth: o.seedendmonth,
           seedstartmonth: o.seedstartmonth,
           size: o.size,
-          synonyms: o.synonyms,
-          sun: o.sun,
           soil: o.soil,
-          moisture: o.moisture,
-          ph: o.ph,
-          type: o.type,
+          sun: o.sun,
+          synonyms: o.synonyms,
           tolerances: o.tolerances,
+          type: o.type,
           usda: o.usda,
           usdalink: o.usdalink,
-          wslink: o.wslink,
           width: o.width,
+          wslink: o.wslink,
       }
 
       // console.log(plantDetails)

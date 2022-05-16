@@ -53,7 +53,7 @@
 	      </text>
     </g>
     </svg>
-    <el-drawer v-model="drawer" direction="rtl" size="50%">
+    <el-drawer v-model="drawer" direction="rtl" size="50%" :with-header="false">
       <PlantOverlay v-if="drawer = true"
       v-bind="{plantDetails}"/>
     </el-drawer>
@@ -127,36 +127,41 @@ export default {
       console.log(o.id)
       const plantDetails = {
           commonname: o.commonname,
-          cultivationdetails: o.cultivationdetails,
           cultivationcite: o.cultivationcite,
-          edibleuses: o.edibleuses,
+          cultivationdetails: o.cultivationdetails,
           ediblecite: o.ediblecite,
           ediblerating: o.ediblerating,
+          edibleuses: o.edibleuses,
           family: o.family,
           flowerendmonth: o.flowerendmonth,
           flowerstartmonth: o.flowerstartmonth,
           flowertype: o.flowertype,
           growth: o.growth,
           habitat: o.habitat,
+          hardiness: o.hardiness,
           hardinessuse: o.hardinessuse,
+          hazards: o.hazards,
+          hazardscite: o.hazardscite,
           height: o.height,
           id: o.id,
           img: o.img,
           imgcreator: o.imgcreator,
+          imglink: o.imglink,
           imgthb: o.imgthb,
           indigenoususe: o.indigenoususe,
-          hazards: o.hazards,
-          hazardscite: o.hazardscite,
           latinname: o.latinname,
           leaftype: o.leaftype,
-          materialuses: o.materialuses,
           materialcite: o.materialcite,
           materialrating: o.materialrating,
-          medicinaluses: o.medicinaluses,
+          materialuses: o.materialuses,
           medicinalcite: o.medicinalcite,
           medicinalrating: o.medicinalrating,
+          medicinaluses: o.medicinaluses,
+          moisture: o.moisture,
           ovlink: o.ovlink,
           pfaflink: o.pfaflink,
+          ph: o.ph,
+          pollinators: o.pollinators,
           propdetails: o.propdetails,
           proptype: o.proptype,
           range: o.range,
@@ -166,16 +171,15 @@ export default {
           seedendmonth: o.seedendmonth,
           seedstartmonth: o.seedstartmonth,
           size: o.size,
-          synonyms: o.synonyms,
-          sun: o.sun,
           soil: o.soil,
-          moisture: o.moisture,
-          ph: o.ph,
+          sun: o.sun,
+          synonyms: o.synonyms,
+          tolerances: o.tolerances,
           type: o.type,
           usda: o.usda,
           usdalink: o.usdalink,
-          wslink: o.wslink,
           width: o.width,
+          wslink: o.wslink,
       }
 
       // console.log(plantDetails)

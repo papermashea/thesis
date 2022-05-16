@@ -1,7 +1,7 @@
 <template>
   <el-row class="nav">
       <div class="nav-split" id="source">
-        <router-link :to="{name:'Root'}" class="nav-links">From the ground up</router-link>
+        <router-link :to="{name:'Root'}" class="nav-links" id="home-link">From the ground up</router-link>
       </div>
       <div class="nav-split" id="direction">
         <router-link :to="{name:'Learn'}" class="nav-links" id="menu-item">
@@ -37,6 +37,10 @@
 .nav-split {
   clear: none;
   display: flex;
+}
+
+#home-link {
+  font-family: var(--technical);
 }
 
 #source {

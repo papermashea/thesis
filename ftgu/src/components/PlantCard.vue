@@ -2,6 +2,7 @@
   <div class="plant-card">
     <el-card 
     :body-style="{ padding: '0px' }"
+    :id="ediblerating"
     shadow="hover">
         <el-image :src=imgthb class="card-image" fit="cover" lazy>
           <template #error>
@@ -9,21 +10,20 @@
           </template>
         </el-image>
         <div class="card-text">
-          <p class="scientific-name">
-            {{ this.latinname }} 
-          </p>
+          <h3 class="scientific-name">
+            {{ this.latinname }} <el-icon v-show="this.hazards !== 'none known'" fill="black" size="10" class="hazards"><Warning /></el-icon>
+          </h3>
           <p class="other-names">
             <span v-if="this.commonname !== ''">aka</span>
             <span v-else-if="this.synonyms !== ''">aka</span>
             {{ this.commonname }}
-            <span v-if="this.commonname !== '' && this.synonyms !== '' && this.synonyms.length < 80">,</span> 
-            <span v-if="this.synonyms.length < 80">
+            <span v-show="this.commonname !== '' && this.synonyms !== '' && this.synonyms.length < 80">,</span> 
+            <span v-show="this.synonyms.length < 80">
             {{ this.synonyms }}
           </span>
           </p>
             <div class="flag">
-              <p class="tag" v-if="this.type !== ''">{{ this.type }}</p>
-              <p class="tag">{{ this.proptype }}</p>
+              <p class="tag">{{ this.type }} mostly {{ this.hardinessuse }}</p>
             </div>
           </div>
     </el-card>
@@ -41,13 +41,14 @@ export default {
 
   props: {
     id: String,
+    imgthb: String,
+    hazards: String,
+    ediblerating: Number,
     latinname: String,
     commonname: String,
     synonyms: String,
     type: String,
-    proptype: String,
-    ediblerating: Number,
-    imgthb: String,
+    hardinessuse: Number,
   },
 }
 
@@ -57,6 +58,26 @@ export default {
 .card-image {
   width: 320px;
   height: 240px;
+}
+
+.el-card__body#1 {
+  background-color: rgba(61, 112, 104, .5);
+}
+
+.el-card__body#2 {
+  background-color: rgba(48, 145, 114, .5);
+}
+
+.el-card__body#3 {
+  background-color: rgba(32, 195, 135, .5);
+}
+
+.el-card__body#4 {
+  background-color: rgba(75, 218, 69, .5);
+}
+
+.el-card__body#5 {
+  background-color: rgba(115, 240, 9, .5);
 }
 
 .error-image {
@@ -84,11 +105,10 @@ export default {
 
 .flag {
   font-size: .7em;
+  float: center;
 }
 
 .tag {
-  width: 50%;
-  float: left;
 }
 
 </style>

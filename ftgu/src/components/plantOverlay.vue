@@ -1,6 +1,5 @@
 <template>
   <div class="plant-overlay">
-    <el-scrollbar max-height="1000px">
       <div class="plantprint" :id="plantDetails.id">
         <el-image class="over-image" :src="plantDetails.imgthb" fit="cover">
             <template #error>
@@ -8,8 +7,8 @@
           </template>
         </el-image>
           <div class="plant-info">
-            <h2>{{ plantDetails.latinname }}</h2>
-            <h4>{{ plantDetails.commonname }}</h4>
+            <h2>{{ plantDetails.latinname }} <a id="dwld" @click="generatePrint"><el-icon class="download" fill="var(--low-edible)"><download /></el-icon></a></h2>
+            <h3><span v-if="plantDetails.commonname!==''">{{ plantDetails.commonname }} - </span> {{ plantDetails.type }}</h3>
             <div class="plant-variables" data-html2canvas-ignore="true">
               <div class="factor-nodes" id="sun">
                 <p>Sun
@@ -59,90 +58,109 @@
             </div>
             <div class="overview">
               <table class="deets">
+                <tr class="full-tab">Hardiness: {{plantDetails.hardiness}}; {{plantDetails.hardinessuse}}</tr>
                 <tr>
-                  <td>{{plantDetails.size}}</td>
-                  <td>{{plantDetails.type}}</td>
-                </tr>
-                <tr>
-                  <td v-if="plantDetails.height !== ''">{{plantDetails.height}}m tall</td>
+                  <td class="half-tab" v-if="plantDetails.height !== ''">{{plantDetails.height}}m tall</td>
                   <td v-if="plantDetails.width !== ''">{{plantDetails.width}}m wide</td>
                 </tr>
                 <tr v-if="plantDetails.flowerstartmonth !== ''">
-                  <td>Flowering:</td>
-                  <td>{{plantDetails.flowerstartmonth}}</td>
+                  <td>Flowering: {{plantDetails.flowerstartmonth}}</td>
                 </tr>
                 <tr v-if="plantDetails.seedstartmonth !== ''">
-                  <td>Harvest:</td>
-                  <td>{{plantDetails.seedstartmonth}}</td>
+                  <td>Harvest: {{plantDetails.seedstartmonth}}</td>
                 </tr>
-
+                <tr>
+                  <td id="reference">USDA:<a :href="plantDetails.usdalink">{{plantDetails.usda}}</a></td>
+                </tr>
+                <tr>
+                  <td id="reference">PFAF <a :href="plantDetails.pfaflink"><el-icon><TopRight /></el-icon></a></td>
+                </tr>
+                <tr>
+                  <td id="reference">Wiki <a :href="plantDetails.wslink"><el-icon><TopRight /></el-icon></a></td>
+                </tr>
               </table>
-
               <div class="range">
                 <div class="area">
-                  <p>Habitat</p>
+                  <p id="range-head">Habitat</p>
                     <p>{{ plantDetails.habitat }}</p>
                 </div>
                 <div class="area">
-                  <p>Location</p>
+                  <p id="range-head">Location</p>
                     <p>{{ plantDetails.range }}</p>
                 </div>
-                <div class="area" v-if="plantDetails.pollinators !== ''">
-                  <p>Pollinated by:</p>
-                    <a v-for="pol in plantDetails.pollinators" class="pollinator-list">{{ pol }}</a>
-                </div>
-                <div class="area" v-if="plantDetails.wind !== 'false'">
-                  <p>Tolerances:</p>
-                    <p>{{ plantDetails.wind }}</p>
+                <div class="area" v-show="plantDetails.indigenoususe !== ''">
+                  <p id="range-head">Documented indigenous locations:</p>
+                    <p>{{ plantDetails.indigenoususe }} </p>
                 </div>
               </div>
             </div>
 
-            <el-row class="info-head"><p>Plant: {{plantDetails.proptype}}</p></el-row>
-              <el-row class="info-text"><p>{{ plantDetails.cultivationdetails }}<a v-for="c in plantDetails.cultivationcite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
-            <el-row class="info-head"><p>Cultivation</p></el-row>
-              <el-row class="info-text"><p>{{ plantDetails.cultivationdetails }}<a v-for="c in plantDetails.cultivationcite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
-            
             <div class="haz" v-if="plantDetails.hazards !== 'none known'">
             <el-row class="hazards">
               <p class="haz-header"><el-icon fill="black" class="hazards"><Warning /></el-icon>Hazards<el-icon fill="black" class="hazards"><Warning /></el-icon></p>
               <p>{{plantDetails.hazards}}<a v-for="c in plantDetails.hazardscite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
             </div>
-            
-            <div class="edible" v-if="plantDetails.medicinalrating > 0">
-              <el-row class="info-head"><p>Edible uses</p></el-row>
-               <el-row class="info-text"><p>{{ plantDetails.edibleuses }}
+  
+            <el-row id="info-head"><p>Cultivation</p></el-row>
+              <el-row id="info-text"><p>{{ plantDetails.cultivationdetails }}<a v-for="c in plantDetails.cultivationcite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
+
+            <el-row id="info-head"><p>Plant: {{plantDetails.proptype}}</p></el-row>
+              <el-row id="info-text"><p>{{ plantDetails.cultivationdetails }}<a v-for="c in plantDetails.cultivationcite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
+
+            <div class="pol-tol">
+              <p v-show="plantDetails.pollinators!==''">Pollinated by: 
+                <span v-for="pol in plantDetails.pollinators" class="tp-list">{{ pol }} </span></p>
+              <p v-show="plantDetails.tolerances!==''">& tolerant of: <span v-for="tol in plantDetails.tolerances" class="tp-list">{{ tol }} </span></p>
+            </div>            
+<!--             <div class="edible" v-if="plantDetails.ediblerating > 0">
+              <el-row id="info-head"><p>Edible uses</p></el-row>
+               <el-row id="info-text"><p>{{ plantDetails.edibleuses }}
                   <a v-for="c in plantDetails.ediblecite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
             </div>
             <div class="medicinal" v-if="plantDetails.medicinalrating !== 0">
-              <el-row class="info-head"><p>Medcinal uses</p></el-row>
-               <el-row class="info-text"><p>{{ plantDetails.medicinaluses }}
+              <el-row id="info-head"><p>Medcinal uses</p></el-row>
+               <el-row id="info-text"><p>{{ plantDetails.medicinaluses }}
                   <a v-for="c in plantDetails.medicinalcite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
             </div>
             <div class="material" v-if="plantDetails.materialrating !== 0">
-              <el-row class="info-head"><p>Material uses</p></el-row>
-               <el-row class="info-text"><p>{{ plantDetails.materialuses }}
+              <el-row id="info-head"><p>Material uses</p></el-row>
+               <el-row id="info-text"><p>{{ plantDetails.materialuses }}
                   <a v-for="c in plantDetails.materialcite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
             </div>
-          </div>
+          </div> -->
       
-<!--         <el-collapse v-model="activeNames" @change="handleChange"> -->
-<!--           <el-collapse-item title="Edible uses" class="edible" name="1"> -->
-<!--             <p class="edible">{{ plantDetails.edibleuses }}</p> -->
-<!--           </el-collapse-item> -->
-<!--           <el-collapse-item title="Medicinal uses" class="medicinal" name="2"> -->
-<!--             <p class="medicinal">{{ plantDetails.medicinaluses }}</p> -->
-<!--           </el-collapse-item> -->
-<!--           <el-collapse-item title="Material uses" class="material" name="3"> -->
-<!--             <p class="material">{{ plantDetails.materialuses }}</p> -->
-<!--           </el-collapse-item> -->
-<!--         </el-collapse> -->
-        </div>
-        <a class="dwld" @click="generatePrint"><el-icon class="download" fill="var(--low-edible)"><download /></el-icon></a>
+        <el-collapse v-model="activeNames" @change="handleChange">
+          <el-collapse-item title="Edible uses" class="edible" name="1">
+              <el-row id="info-text"><p>{{ plantDetails.edibleuses }}
+                  <a v-for="c in plantDetails.ediblecite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
+          </el-collapse-item>
+          <el-collapse-item title="Medicinal uses" class="medicinal" name="2">
+               <el-row id="info-text"><p>{{ plantDetails.medicinaluses }}
+                  <a v-for="c in plantDetails.medicinalcite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
+          </el-collapse-item>
+          <el-collapse-item title="Material uses" class="material" name="3">
+               <el-row id="info-text"><p>{{ plantDetails.materialuses }}
+                  <a v-for="c in plantDetails.materialcite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
+          </el-collapse-item>
+        </el-collapse>
+      </div>
+      <div class="foot-links">
+        <a class="credits" :href="img" target="_blank" id="credit">Header image from {{plantDetails.imgcreator}}, courtesy of Openverse</a>
+        <a id="dwld" @click="generatePrint"><el-icon class="download" fill="var(--low-edible)"><download /></el-icon></a>
+      </div>
       <img :src="output">
-    </el-scrollbar>
+    </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const activeNames = ref(['1'])
+// const handleChange = (val: string[]) => {
+//   console.log(val)
+// }
+</script>
 
 
 <script lang="ts">
@@ -190,9 +208,14 @@ export default {
 </script>
 
 <style>
+.el-drawer__body {
+  padding: 0;
+}
+
 .over-image {
   height: 500px;
   width: 100%;
+  object-fit: cover;
 }
 
 .el-drawer__body {
@@ -201,6 +224,8 @@ export default {
 
 .plant-variables {
   width: 100%;
+  height: 30px;
+  margin: 20px 0;
 }
 
 .factor-nodes {
@@ -230,28 +255,55 @@ export default {
   stroke-width: .5px;
 }
 
+table {
+  border: .5px solid;
+}
+
+.full-tab {
+  width: 100%;
+  height: 20px;
+}
+
 .overview{
-  height: 400px;
+  height: 250px;
   width: 100%;
   padding: 20px 0;
-  display: block;
 }
 
 .deets{
-  max-height: 70%;
+  height: 100%;
   width: 30%;
   float: left;
+  position: relative;
+  text-align: left;
+}
+
+#reference {
+  text-align: center;
+  font-style: oblique;
 }
 
 .range {
-  width: 70%;
-  max-height: 70%;
+  width: 65%;
+  margin-left: 3%;
+  height: 100%;
   float: left;
   text-align: left;
 }
 
 .area {
+  padding-bottom: 10px;
+}
 
+#info-head,
+#range-head  {
+  text-align: left;
+  font-weight: 400;
+}
+
+#info-text {
+  text-align: left;
+  padding-bottom: 20px;
 }
 
 .plant-info {
@@ -259,13 +311,10 @@ export default {
   padding: 20px;
 }
 
-.pollinator-list {
-  cursor: none;
-}
-
 .haz {
   background-color: var(--highlight);
-  padding: 0;
+  padding: 10px 20px;
+  margin: 20px 0;
 }
 
 .haz-header {
@@ -273,12 +322,32 @@ export default {
   width: 100%;
 }
 
+.tol-pol {
+  margin: 15px 0;
+}
+
+.el-collapse {
+  margin-top: 10px;
+}
+
 .citations {
   font-size: .6em;
   vertical-align: super;
 }
 
-.download {
-  pointer: arrow;
+.foot-links {
+  width: 100%;
 }
+
+#dwld {
+  float: right;
+}
+
+#credit {
+  width: 70%;
+  font-size: .8em;
+  float: left;
+  text-align: left;
+}
+
 </style>
