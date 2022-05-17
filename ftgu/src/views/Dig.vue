@@ -110,7 +110,7 @@ export default {
       const sortParam = SORT.selected;
       const isSortAsc = SORT.asc;
       const searchTerm = SEARCH.selected.toLowerCase();
-      this.updateURL();
+      // this.updateURL();
 
       return this.plants
         .filter(
@@ -339,7 +339,7 @@ export default {
       if(this.filters.HARDINESSUSE.selected.length > 0) qp.set('ph', this.filters.HARDINESSUSE.selected);
       if(this.filters.TOLERANCES.selected.length > 0) qp.set('tol', this.filters.TOLERANCES.selected);
       
-      history.replaceState(null, null, "?"+qp.toString());
+      // history.replaceState(null, null, "?"+qp.toString());
 
     },
     populateFilters() {

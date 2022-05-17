@@ -4,6 +4,6 @@ npm run build
 git init
 git add -A
 git commit -m 'deploy'
-git push -f https://github.com/visualizedata/thesis.git master:gh-pages
+git push -f https://github.com/papermashea/thesis.git gh-pages
 rm -rf .git
 cd -

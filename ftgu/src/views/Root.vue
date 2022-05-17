@@ -75,7 +75,7 @@ export default {
 img {
   filter: grayscale(100%);
   object-fit: cover;
-  height: 650px;
+  height: 100%;
   width: 100%;
 }
 

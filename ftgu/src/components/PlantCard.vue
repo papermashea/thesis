@@ -60,26 +60,6 @@ export default {
   height: 240px;
 }
 
-.el-card__body#1 {
-  background-color: rgba(61, 112, 104, .5);
-}
-
-.el-card__body#2 {
-  background-color: rgba(48, 145, 114, .5);
-}
-
-.el-card__body#3 {
-  background-color: rgba(32, 195, 135, .5);
-}
-
-.el-card__body#4 {
-  background-color: rgba(75, 218, 69, .5);
-}
-
-.el-card__body#5 {
-  background-color: rgba(115, 240, 9, .5);
-}
-
 .error-image {
   width: 100%;
   height: 100%;

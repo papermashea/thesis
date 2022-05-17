@@ -111,7 +111,7 @@ export default {
       const sortParam = SORT.selected;
       const isSortAsc = SORT.asc;
       const searchTerm = SEARCH.selected.toLowerCase();
-      this.updateURL();
+      // this.updateURL();
 
       return this.plants
         .filter(
