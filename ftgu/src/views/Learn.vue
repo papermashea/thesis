@@ -56,8 +56,7 @@ import { hierarchy, pack } from 'd3-hierarchy'
 import { FILTERS, PARAMS } from "../global";
 
 import Navbar from "@/components/Navbar.vue";
-import Introduction from "@/components/introduction.vue";
-import introImage from "@/assets/mapPreview.png"
+import Introduction from "@/components/Introduction.vue";
 import PlantFlow from "@/components/PlantFlow.vue";
 import Form from "@/components/Form.vue";
 import Graph from "@/components/Graph.vue";
