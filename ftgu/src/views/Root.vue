@@ -15,7 +15,7 @@
         </div>
       </div>
   <div class="load">
-    <p class="level-1 rectangle" id="top"><a href="/learn" id="internal">Find plants<el-icon><el-icon><DArrowRight /></el-icon></el-icon></a></p>
+    <p class="level-1 rectangle" id="top"><router-link :to="{name:'Root'}" class="nav-links" id="internal">Find plants<el-icon><el-icon><DArrowRight /></el-icon></el-icon></router-link></p>
   </div>
 
 
