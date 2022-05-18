@@ -32,7 +32,7 @@
 .nav, 
 .foot {
   font-size: 2em;
- font-family: var(--technical); 
+  font-family: var(--technical); 
 }
 
 .nav-split {
@@ -66,11 +66,11 @@
   .nav-links,
   .nav-item svg {
     color: white;
-   font-family: var(--technical); 
+    font-family: var(--technical); 
   }
 
   .nav-links#menu-item {
-    padding-left: 80%;
+    padding-left: 20%;
   }
 
   .nav-links:hover,
@@ -80,6 +80,51 @@
     background-color: black;
     text-decoration: underline;
   }
+
+
+@media screen and (max-width: 900px) {
+  .nav, 
+  .foot {
+    font-size: 1.2em;
+    font-family: var(--technical); 
+  }
+  
+  .nav-split {
+    width: 50%;
+    text-align: left;
+    float: left;
+  }
+
+  .nav-links#menu-item {
+    padding-left: 20%;
+  }
+  
+  #source {
+    padding: 5px 0;
+    margin-left: 5%;
+    width: 60%;
+    float: left;
+  }
+
+  #direction {
+    padding: 5px 0;
+    margin-left: 4%;
+    margin-right: 1%;
+    width: 30%;
+    float: right;
+  }
+
+  #footer-link {
+    display: block;
+    color: var(--highlight);
+    text-align: left;
+  }
+
+  #to-top {
+    margin-left: 100%;
+  }
+}
+
 
 
 </style>

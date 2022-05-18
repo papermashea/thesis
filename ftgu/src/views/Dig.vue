@@ -654,14 +654,65 @@ export default {
   vertical-align: baseline;
 }
 
-@media (max-width: 399px) {
-  .filters {
-    width: 100%;
-    margin: 0px;
+@media (max-width: 900px) {
+  .search-filters {
+    height: 500px!important;
   }
-  .search-filter,
-  .tag-filter {
+
+  .search-filters,
+  .search-results,
+  .plant-counts {
+    width: max-100%;
+    grid-column: span 1;
+    display: block;
+    margin: 1%;
+  }
+
+  .group-label,
+  .search-label,
+  .search-field {
+    width: 90%;
+    text-align: left;
+  }
+
+  .filter {
+    width: 50%;
+  }
+
+  .search-results {
+    height: auto;
+    margin-top: 20%;
+  }
+  .group-label {
+    clear: right;
+  }
+
+  .plant-counts,
+  .plant-counts p {
+    margin: 10px 0 0 0;
+    padding: 0;
+    text-align: left;
+    float: left;
+  }
+
+  .load {
+    align-items: center;
+    background-color: rgba(61, 112, 104, .5);
+    background-image: url("@/assets/growth_wh.png");
+    grid-column: span 1;
+    color: black;
+    position: static;
+    height: 200px;
     width: 100%;
   }
+
+  .load .level-1 {
+    font-size: .8em;
+    width: 90%;
+    background: black;
+    color: white;
+    margin: 0;
+  }
+
 }
 </style>

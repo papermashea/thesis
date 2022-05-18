@@ -1,7 +1,7 @@
 <template>
   <el-row class="foot">
     <div class="nav-split" id="source">
-      <p class="footbar" id="footer-link">Primary source: <a class="nav-links" id="#footer-link" href="https://pfaf.org/user/Default.aspx" target="_blank">Plants for a Future</a> - 2022</p>
+      <p class="footbar">Primary source: <a class="nav-links" id="footer-link" href="https://pfaf.org/user/Default.aspx" target="_blank">Plants for a Future</a> - 2022</p>
     </div>
     <div class="nav-split" id="direction">
       <router-link to @click="moveUp" class="nav-links">
@@ -35,11 +35,12 @@
   padding-left: 100%;
 }
 
-#footer-link {
+#footbar {
   font-family: var(--technical)!important;
 }
 
 #turn-up {
   transform: rotate(-0.25turn);
 }
+
 </style>

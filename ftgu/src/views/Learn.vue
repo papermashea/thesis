@@ -400,4 +400,115 @@ export default {
   margin-top: -50px;
 }
 
+@media screen and (max-width: 900px) {
+  .banner {
+      align-items: center;
+      background-color: rgba(61, 112, 104, .5);
+      background-image: url("@/assets/growth_wh.png");
+      grid-column: span 1;
+      color: black;
+      position: static;
+      height: 100px;
+      width: 100%;
+  }
+
+  .rectangle {
+    padding: 20px 10px;
+  }
+
+  .level-1,
+  .level-2 {
+    width: 90%;
+  }
+
+  .level-1 {
+    margin-bottom: 20px;
+  }
+
+  .level-1::before,
+  .level-2-wrapper > li::before {
+    display: none;
+  }
+
+  .level-2-wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .level-2-wrapper,
+  .level-2-wrapper::after,
+  .level-2::after {
+    display: block;
+  }
+
+  .level-2-wrapper {
+    width: 100%;
+    margin: 0% 0% 10% 0%;
+  }
+
+  .level-2-wrapper::before {
+    left: -20px;
+    width: .5px;
+    height: calc(100% + 40px);
+  }
+
+  .level-2-wrapper > li:not(:first-child) {
+    margin-top: 50px;
+  }
+
+  #top {
+      font-size: 1.2em;
+  }
+
+  #nested {
+      font-size: 1em;
+  }
+
+  .plant-form {
+    content-align: center;
+    width: 100%;
+  }
+
+  .plant-form-subset {
+    width: 100%;
+  }
+
+  .graphCol, 
+  .numCol {
+    width: 90%;    
+    margin: 3% 5%;
+  }
+
+  .num-block {
+    margin: 0;
+    height: 25%;
+    width: 100%;
+    text-align: middle;
+  }
+
+  .num-label {
+    margin-left: 0;
+    width: 100%
+  }
+
+  .label-line {
+    display: none;
+  }
+
+  #pattern .level-2-wrapper::before,
+  #pattern .level-2-wrapper::after {
+    background: none;
+  }
+
+  .legend {
+    margin: 0;
+  }
+
+  .circle-pack svg {
+    width: 500px;
+    height: 600px;
+    viewbox: 0, 0, 500 800;
+  }
+
+}
+
 </style>

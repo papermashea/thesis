@@ -12,7 +12,7 @@
             <div class="plant-variables" data-html2canvas-ignore="true">
               <div class="factor-nodes" id="sun">
                 <p>Sun
-                <svg height="22" width="60">
+                <svg height="22" width="60" data-html2canvas-ignore="true">
                   <circle class="dot" id="sun" r="10" cx="10" cy="10" opacity=".4" v-if="(plantDetails.sun).includes('none')"/>
                     <circle class="dot" r="10" cx="10" cy="10" v-else id="empty"/>
                   <circle class="dot" id="sun" r="10" cx="30" cy="10" opacity=".7" v-if="(plantDetails.sun).includes('partial')"/>
@@ -23,7 +23,7 @@
               </div>
               <div class="factor-nodes" id="moisture">
                 <p>Moisture
-                <svg height="22" width="60">
+                <svg height="22" width="60" data-html2canvas-ignore="true">
                   <circle class="dot" id="moisture" r="10" cx="10" cy="10" opacity=".4" v-if="(plantDetails.moisture).includes('dry')"/>
                     <circle class="dot" r="10" cx="10" cy="10" v-else id="empty"/>
                   <circle class="dot" id="moisture" r="10" cx="30" cy="10" opacity=".7" v-if="(plantDetails.moisture).includes('moist')"/>
@@ -34,7 +34,7 @@
               </div>
               <div class="factor-nodes" id="soil">
                 <p>Soil
-                <svg height="22" width="60">
+                <svg height="22" width="60" data-html2canvas-ignore="true">
                   <circle class="dot" id="soil" r="10" cx="10" cy="10" opacity=".4" v-if="(plantDetails.soil).includes('light')"/>
                     <circle class="dot" r="10" cx="10" cy="10" v-else id="empty"/>
                   <circle class="dot" id="soil" r="10" cx="30" cy="10" opacity=".7" v-if="(plantDetails.soil).includes('medium')"/>
@@ -45,7 +45,7 @@
               </div>
               <div class="factor-nodes" id="ph">
                 <p>pH
-                <svg height="22" width="60">
+                <svg height="22" width="60" data-html2canvas-ignore="true">
                   <circle class="dot" id="ph" r="10" cx="10" cy="10" opacity=".4" v-if="(plantDetails.ph).includes('acid')"/>
                     <circle class="dot" r="10" cx="10" cy="10" v-else id="empty"/>
                   <circle class="dot" id="ph" r="10" cx="30" cy="10" opacity=".7" v-if="(plantDetails.ph).includes('neutral')"/>
@@ -128,8 +128,9 @@
                   <a v-for="c in plantDetails.materialcite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
             </div>
           </div> -->
-      
-        <el-collapse v-model="activeNames" @change="handleChange">
+        <!-- <p > Edible uses:</p> -->
+        <!-- <el-collapse v-model="activeNames" @change="handleChange"> -->
+        <el-collapse v-model="activeNames">
           <el-collapse-item title="Edible uses" class="edible" name="1">
               <el-row id="info-text"><p>{{ plantDetails.edibleuses }}
                   <a v-for="c in plantDetails.ediblecite" class="citations" id="external" href="https://pfaf.org/user/cmspage.aspx?pageid=174" target="_blank">{{c}}</a></p></el-row>
@@ -348,6 +349,21 @@ table {
   font-size: .8em;
   float: left;
   text-align: left;
+}
+
+.hide {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  .el-drawer,
+  .open {
+    width: 100%!important;
+  }
+
+  .el-drawer__body {
+    width: 90%;
+  }
 }
 
 </style>

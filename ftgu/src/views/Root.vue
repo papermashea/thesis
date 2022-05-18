@@ -20,7 +20,7 @@
         </div>
       </div>
   <div class="load">
-    <p class="level-1 rectangle" id="top"><router-link :to="{path:'/learn'}" class="nav-links" id="internal">Find plants<el-icon><el-icon><DArrowRight /></el-icon></el-icon></router-link></p>
+    <p class="level-1 rectangle" id="top"><router-link :to="{path:'/learn'}" id="internal">Find plants<el-icon id="turn" color="white" size="20"><Back /></el-icon></router-link></p>
   </div>
 
 
@@ -90,8 +90,8 @@ img:hover {
 }
 
 #slide-over {
-  height: 100%;
-  width: 50%;
+  height: 80%;
+  width: 60%;
   position: absolute;
   background-color: rgba(255,255,255,.9);
   grid-column: span 2;
@@ -101,15 +101,15 @@ img:hover {
   text-align: left;
   width: 75%;
   position: absolute;
-  padding: 1% 0% 1% 15%;
-}
-
-.tools {
-  padding-bottom: 10px;
+  padding: 5% 0% 1% 15%;
 }
 
 .introduction {
-  margin: 20px 0px;
+  margin: 5% 0;
+}
+
+.tools {
+  padding-bottom: 5%;
 }
 
 #ex-resources {
@@ -127,23 +127,23 @@ img:hover {
 
 #outward {
   color: white;
-  padding: 5px;
+  padding: 10px;
 }
 
 #outward:hover {
   color: white;
-  padding: 5px;
+  padding: 10px;
 }
 
-.level-1 {
+.load .level-1 {
   width: 35%;
   background: black;
   color: white;
   margin: 0;
 }
 
-.level-1 {
-  margin: 0 auto 140px;
+.load .level-1 {
+  margin: 50% 0;
 }
 
 .load {
@@ -164,12 +164,6 @@ img:hover {
   cursor: pointer;
 }
 
-.rectangle {
-  position: relative;
-  padding: 5px 0;
-  margin: 0;
-}
-
 #internal {
   text-decoration: none;
   color:white;
@@ -184,9 +178,98 @@ img:hover {
   color:white;
 }
 
-#internal .el-icon {
-  padding: 0 30px;
+#turn {
+  padding: 0 10px;
+  transform: rotate(0.5turn);
   vertical-align: baseline;
+}
+
+.level-1-wrapper::before,
+.level-1-wrapper::after {
+  background: none;
+}
+
+@media screen and (min-width: 901px) and (max-width: 1400px) {
+  #slide-over {
+    height: 50%;
+    width: 90%;
+    background-color: rgba(255,255,255,.9);
+  }
+
+  #slide-text {
+    width: 90%;
+    margin: 0;
+    font-size: .8em;
+    position: static;
+    margin: 0 5%;
+    padding: 1%;
+  }
+
+  .introduction {
+    margin: 5px;
+  }
+
+  .tools {
+    padding-top: 1%;
+    padding-bottom: 1%;
+  }
+
+}
+
+@media screen and (max-width: 900px) {
+  .slide {
+    align-items: center;
+    grid-column: span 1;
+    width: 100%;
+    height: 100%;
+    position: static;
+  }
+
+
+  img {
+    filter: grayscale(0%);
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    position: static;
+  }
+
+  #slide-over {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255,255,255,0);
+    grid-column: span 1;
+    position: static;
+  }
+
+  #slide-text {
+    text-align: center;
+    width: 90%;
+    margin: 0;
+    font-size: .8em;
+    position: static;
+    margin: 0 5%;
+    padding: 1%;
+  }
+
+  .load {
+    align-items: center;
+    background-color: rgba(61, 112, 104, .5);
+    background-image: url("@/assets/growth_wh.png");
+    grid-column: span 1;
+    color: black;
+    position: static;
+    height: 200px;
+    width: 100%;
+  }
+
+  .load .level-1 {
+    font-size: .8em;
+    width: 90%;
+    background: black;
+    color: white;
+    margin: 0;
+  }
 }
 
 </style>

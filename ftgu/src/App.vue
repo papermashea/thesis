@@ -10,6 +10,8 @@ const emitter = mitt();
 <style>
 body {
   margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 #app {
@@ -108,6 +110,26 @@ a:hover {
 
 .oneline {
   display: inline;
+}
+
+@media screen and (max-width: 900px) {
+  #page {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: 10px;
+    text-align: center;
+    margin: 0;
+    float: left;
+  }
+
+  section {
+    grid-column: span 4;
+    content-align: center;
+    place-items: flex-start;
+    width: 100%;
+    clear: right;
+  }
+
 }
 
 </style>
