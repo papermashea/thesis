@@ -70,12 +70,13 @@ a {
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 2px 0px;
 }
 
 a:hover {
-  color: var(--highlight);
-  text-decoration: underline;
+  color:var(--highlight);
+  text-decoration: none;
+  background-color: (--low-edible);
 }
 
 #external:hover {

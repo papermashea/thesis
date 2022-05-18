@@ -4,9 +4,14 @@
       <div class="slide" v-if="selectedImage"><img style="width:100%" :src="selectedImage" alt=""></div>
       <div id="slide-over">
         <div id="slide-text">
-          <p class="introduction">Want to grow your own food? It can be hard to know where to start. Your plant-powered journey can begin here by digging through <a :to="{name:'Learn'}">5,913 plants</a> with documented edible properties suitable for growing indoors or outdoors in a temperate climate. Learn about the environmental factors that will impact success, dig through the ecological variables that are most impactful to your area, and take this information with you as you go out and talk to plant people in your community.</p>
-          <p class="introduction">From the Ground Up explores plant data collected by the environmentalists at <a href="https://pfaf.org/user/Default.aspx" target="_blank">Plants for a Future</a>, an organization dedicated to researching and providing information on ecologically sustainable horticulture for more than 30 years. You will also find resources from the <a href="plants.usda.gov" target="_blank">USDA</a>, the <a href="https://garden.org/" target="_blank">National Garden Association</a>, the Farmer’s Almanac, and a number of educational extensions. The depth of information available about plants, gardening, and growing food is immense and many of the best resources available include books, videos, and people.</p>
-          <p class="introduction">The interactions and information presented have been shaped by conversations with neighbors at Roots, Natty Garden, Umoja Learning Garden, Good Life Garden, BK Rot. Growing food in New York City has a long history of communities learning together and sharing resources. If you’re interested in growing food in the New York City area, these tools may help you get started:</p>
+          <h4 class="intro-header">Grow to-go</h4>
+          <p class="introduction">Want to grow your own food? It can be hard to know where to start. Your plant-powered journey can begin here by digging through <router-link :to="{path:'/learn'}">5,913 plants</router-link> with documented edible properties suitable for growing indoors or outdoors in a temperate climate, which is applies to most of the United States. Learn about the environmental factors that will impact success, dig through the ecological variables that are most impactful to your area, and take this information with you as you go out and talk to plant people in your community.</p>
+         
+          <h4 class="intro-header">Start with the roots</h4>
+          <p class="introduction">From the Ground Up explores plant data collected by the environmentalists at <a href="https://pfaf.org/user/Default.aspx" target="_blank">Plants for a Future</a>, an organization dedicated to researching and providing information on ecologically sustainable horticulture for more than 30 years. The plants described here are rated by <a href="https://planthardiness.ars.usda.gov/" target="_blank">UK hardiness</a>, which largely map to the <a href="https://pfaf.org/user/cmspage.aspx?pageid=134" target="_blank">USDA hardiness zones</a>.You will also find resources from the <a href="plants.usda.gov" target="_blank">USDA</a>, the <a href="https://garden.org/" target="_blank">National Garden Association</a>, <a href="https://www.farmersalmanac.com/" target="_blank">The Farmer’s Almanac</a>, and a number of educational extensions. The depth of information available about plants, gardening, and growing food is immense and many of the best resources available include <a href="https://pfaf.org/user/shop.aspx" target="_blank">books</a>, <a href="https://www.youtube.com/backyardgardens" target="_blank">videos</a>, and people.</p>
+          
+          <h4 class="intro-header">Talk to your plant people</h4>
+          <p class="introduction">The interactions and information presented have been shaped by conversations with neighbors at <a href="https://www.seasonsbedstuy.com/" target="_blank">Seasons</a>, <a href="https://www.nattygarden.com/" target="_blank">Natty Garden</a>, <a href="https://livinglotsnyc.org/lot/54260/" target="_blank">Umoja Learning Garden</a>, <a href="https://bushwickdaily.com/news/5819-abandoned-park-space-transformed-into-thriving-urban-learning-garden/" target="_blank">Good Life Garden</a>, <a href="https://www.bkrot.org/" target="_blank">BK Rot</a>. Growing food in New York City has a long history of communities learning together and sharing resources. If you’re interested in growing food in the New York City area, these tools may help you get started:</p>
           <div class="resource-links">
             <div class="tools"><el-button id="ex-resources" round><a id="outward" href="http://grow.nyc/" target="_blank">Grow NYC</a></el-button></div>
             <div class="tools"><el-button id="ex-resources" round><a id="outward" href="http://www.brooklyn.cuny.edu/web/academics/centers/esac/soil.php" target="_blank">Brooklyn College Urban Soils Lab</a></el-button></div>
@@ -15,7 +20,7 @@
         </div>
       </div>
   <div class="load">
-    <p class="level-1 rectangle" id="top"><router-link :to="{name:'Root'}" class="nav-links" id="internal">Find plants<el-icon><el-icon><DArrowRight /></el-icon></el-icon></router-link></p>
+    <p class="level-1 rectangle" id="top"><router-link :to="{path:'/learn'}" class="nav-links" id="internal">Find plants<el-icon><el-icon><DArrowRight /></el-icon></el-icon></router-link></p>
   </div>
 
 
@@ -70,6 +75,7 @@ export default {
   display: flex;
   width: 100%;
   grid-row: span 100;
+  height: 100%;
 }
 
 img {
@@ -84,26 +90,18 @@ img:hover {
 }
 
 #slide-over {
-  height: 650px;
+  height: 100%;
   width: 50%;
   position: absolute;
   background-color: rgba(255,255,255,.9);
-  grid-column: span 4;
+  grid-column: span 2;
 }
 
 #slide-text {
   text-align: left;
   width: 75%;
   position: absolute;
-  padding: 1% 15%;
-}
-
-#outward {
-  color: white;
-}
-
-#outward:hover {
-  color: white;
+  padding: 1% 0% 1% 15%;
 }
 
 .tools {
@@ -115,13 +113,26 @@ img:hover {
 }
 
 #ex-resources {
-  background-color: var(--external);
+  background-color: var(--low-edible);
   color: white;
   stroke: 0;
+  padding: 5px;
 }
+
 #ex-resources:hover {
   background-color: var(--highlight);
   stroke: 0;
+  padding: 5px;
+}
+
+#outward {
+  color: white;
+  padding: 5px;
+}
+
+#outward:hover {
+  color: white;
+  padding: 5px;
 }
 
 .level-1 {
