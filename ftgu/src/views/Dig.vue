@@ -30,7 +30,7 @@
   <section>
     <div class="search-results">
       <div v-for="(p, index) in plantsLoaded" :key="index" :id="p.id">
-        <PlantCard :latinname="p.latinname" :commonname="p.commonname" :synonyms="p.synonyms" :imgthb="p.imgthb" :type="p.type" :hazards="p.hazards" :hardinessuse="p.hardinessuse" :onFilterChange="onFilterChange" @click="drawer = true; plantPass(p)"/>
+        <PlantCard :latinname="p.latinname" :commonname="p.commonname" :synonyms="p.synonyms" :imgthb="p.imgthb" :type="p.type" :hazards="p.hazards" :hardinessuse="p.hardinessuse" :hardiness="p.hardiness" :onFilterChange="onFilterChange" @click="drawer = true; plantPass(p)"/>
       </div>
       <el-drawer v-model="drawer" direction="rtl" size="50%">
         <PlantOverlay v-if="drawer = true"

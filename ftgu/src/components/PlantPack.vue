@@ -94,8 +94,8 @@ export default {
   },
   data() {
     return {
-      width: 1200,
-      height: 1200,
+      width: 900,
+      height: 900,
     }
   }, //close data
   computed: {
@@ -118,7 +118,7 @@ export default {
           return b.usefulness - a.usefulness
         })
       return pack()
-        .size([1200, 1200])
+        .size([900, 900])
         .padding(1)(rootHierarchy)
     } 
   }, //close computed

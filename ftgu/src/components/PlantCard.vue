@@ -11,7 +11,7 @@
         </el-image>
         <div class="card-text">
           <h3 class="scientific-name">
-            {{ this.latinname }} <el-icon v-show="this.hazards !== 'none known'" fill="black" size="10" class="hazards"><Warning /></el-icon>
+            {{ this.latinname }} <el-icon v-show="this.hazards !== 'none known'" fill="black" size="10" class="haz-icon-card"><Warning /></el-icon>
           </h3>
           <p class="other-names">
             <span v-if="this.commonname !== ''">aka</span>
@@ -23,7 +23,12 @@
           </span>
           </p>
             <div class="flag">
-              <p class="tag">{{ this.type }} mostly {{ this.hardinessuse }}</p>
+              <p class="tag">Hardiness: {{ this.hardiness }}
+                <span v-if="this.hardiness > 8 && this.hardiness < 12"> (tropical)</span>
+                <span v-if="this.hardiness > 4 && this.hardiness < 7" > (moderate)</span>
+                <span v-if="this.hardiness > 1 && this.hardiness < 3"> (arctic)</span>
+              </p>
+              <p class="tag">{{ this.type }} - {{ this.hardinessuse }}</p>
             </div>
           </div>
     </el-card>
@@ -48,7 +53,8 @@ export default {
     commonname: String,
     synonyms: String,
     type: String,
-    hardinessuse: Number,
+    hardinessuse: String,
+    hardiness: String,
   },
 }
 
@@ -86,9 +92,12 @@ export default {
 .flag {
   font-size: .7em;
   float: center;
+  margin-top: 5px;
 }
 
 .tag {
+  margin:0;
+  padding:0;
 }
 
 </style>

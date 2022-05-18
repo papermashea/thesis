@@ -408,8 +408,12 @@ export default {
       grid-column: span 1;
       color: black;
       position: static;
-      height: 100px;
+      height: 160px;
       width: 100%;
+  }
+
+  .test-container {
+    margin: 1% 1%;
   }
 
   .rectangle {
@@ -504,9 +508,11 @@ export default {
   }
 
   .circle-pack svg {
-    width: 500px;
-    height: 600px;
-    viewbox: 0, 0, 500 800;
+    max-width: 500px;
+    max-height: 600px;
+    margin: 0;
+    padding: 0;
+    transform: scale(0.75);
   }
 
 }
