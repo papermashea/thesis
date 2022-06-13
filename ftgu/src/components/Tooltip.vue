@@ -52,7 +52,7 @@ export default {
 
       tooltip
         .select('.tt-med')
-        .text(`rated`+`${format(this.details.medicinal)}`+` and `+`${format(this.details.material)}`+` out of 5 for medicinal and material uses.`)
+        .text(`rated `+`${format(this.details.medicinal)}`+` and `+`${format(this.details.material)}`+` out of 5 for medicinal and material uses.`)
 
       tooltip
         .select('.tt-over')
