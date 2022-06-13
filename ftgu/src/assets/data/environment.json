@@ -104,7 +104,7 @@
         {
           "id": 2,
           "type": "Neutral",
-          "description": "Soil holds its shape but will easily break apart.",
+          "description": "If soil does not react to either test, it has a neutral pH.",
           "details": "A pH value of 7 is neutral; plant roots absorb/access nutrients best when the pH is in the 5.5 to 7 range.",
           "infolink": "https://www.almanac.com/plant-ph",
           "testlink": "https://www.almanac.com/content/3-simple-diy-soil-testlink"
